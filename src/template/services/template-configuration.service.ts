@@ -146,7 +146,7 @@ export class TemplateConfigurationService {
         if (value.startsWith('blob:http://') || value.startsWith('blob:https://')) {
           // Extraer el ID del blob de la URL
           const blobId = value.split('/').pop();
-          if (blobId && uploadsCache) {
+          if (blobId && uploadsCache && uploadsCache.length > 0) {
             // Buscar la imagen correspondiente en el cache
             let matchingImage = uploadsCache.find(img => 
               img.fileName.includes(blobId) || 
@@ -182,6 +182,9 @@ export class TemplateConfigurationService {
           } else if (uploadsCache && uploadsCache.length > 0) {
             // Fallback a la primera imagen disponible
             processedData[field] = uploadsCache[0].url;
+          } else {
+            // Si no hay imágenes disponibles, usar un placeholder o mantener el valor original
+            processedData[field] = value;
           }
           continue;
         }
@@ -202,6 +205,10 @@ export class TemplateConfigurationService {
         // Reemplazo de placeholders de ejemplo (/images/...) por una imagen subida del cliente
         if (value.startsWith('/images/') && uploadsCache && uploadsCache.length > 0) {
           processedData[field] = uploadsCache[0].url; // usar la primera imagen disponible como fallback
+          continue;
+        } else if (value.startsWith('/images/')) {
+          // Si no hay imágenes disponibles, mantener el placeholder
+          processedData[field] = value;
           continue;
         }
       }
