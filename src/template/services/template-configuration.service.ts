@@ -648,11 +648,6 @@ export class TemplateConfigurationService {
       }
       return result;
     });
-
-    // Helper para comparaciones de igualdad (eq)
-    Handlebars.registerHelper('eq', function(arg1, arg2, options) {
-      return (arg1 === arg2) ? options.fn(this) : options.inverse(this);
-    });
     
     console.log(`🔧 Handlebars helpers registered`);
     
