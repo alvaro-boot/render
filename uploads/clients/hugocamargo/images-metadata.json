@@ -1,0 +1,40 @@
+{
+  "clientId": "hugocamargo",
+  "images": [
+    {
+      "id": "d19ba23c-95b2-4c35-a18a-c81651993ae4",
+      "originalName": "logo.png",
+      "fileName": "f766de7d-be91-4d2f-bf90-52eea1220302.png",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\hugocamargo\\f766de7d-be91-4d2f-bf90-52eea1220302.png",
+      "url": "/api/v1/storage/images/hugocamargo/f766de7d-be91-4d2f-bf90-52eea1220302.png",
+      "size": 4383,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-20T19:18:57.438Z",
+      "clientId": "hugocamargo"
+    },
+    {
+      "id": "d6769b7c-ae05-4112-9e64-f963d488149e",
+      "originalName": "favicon.png",
+      "fileName": "142a7bef-a0af-442b-81df-7b49708cdd13.png",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\hugocamargo\\142a7bef-a0af-442b-81df-7b49708cdd13.png",
+      "url": "/api/v1/storage/images/hugocamargo/142a7bef-a0af-442b-81df-7b49708cdd13.png",
+      "size": 6678,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-20T19:18:57.475Z",
+      "clientId": "hugocamargo"
+    },
+    {
+      "id": "c5112df3-dbb6-40b9-b434-498364bb5c11",
+      "originalName": "banner.jpeg",
+      "fileName": "4040cbd4-3c53-49e2-9e45-7be8f042a2cd.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\hugocamargo\\4040cbd4-3c53-49e2-9e45-7be8f042a2cd.jpeg",
+      "url": "/api/v1/storage/images/hugocamargo/4040cbd4-3c53-49e2-9e45-7be8f042a2cd.jpeg",
+      "size": 7644,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-20T19:19:06.467Z",
+      "clientId": "hugocamargo"
+    }
+  ],
+  "createdAt": "2025-08-20T19:18:57.440Z",
+  "updatedAt": "2025-08-20T19:18:57.440Z"
+}

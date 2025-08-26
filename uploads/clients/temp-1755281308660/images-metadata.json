@@ -1,0 +1,18 @@
+{
+  "clientId": "temp-1755281308660",
+  "images": [
+    {
+      "id": "e8ba9f9a-05d5-4f30-b7e9-01446ac4b237",
+      "originalName": "image 1.jpg",
+      "fileName": "473b2dd6-a33e-464a-9e78-634ca89d1190.jpg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\temp-1755281308660\\473b2dd6-a33e-464a-9e78-634ca89d1190.jpg",
+      "url": "/api/v1/storage/images/temp-1755281308660/473b2dd6-a33e-464a-9e78-634ca89d1190.jpg",
+      "size": 3627,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-15T18:08:28.692Z",
+      "clientId": "temp-1755281308660"
+    }
+  ],
+  "createdAt": "2025-08-15T18:08:28.693Z",
+  "updatedAt": "2025-08-15T18:08:28.693Z"
+}

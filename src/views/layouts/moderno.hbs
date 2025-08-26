@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{company.name}} | {{company.tagline}}</title>
+    <link rel="icon" href="{{company.favicon}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {{> styles/moderno}}
+</head>
+<body class="font-body">
+    {{> components/navbar sections=sections company=company navigation=navigation}}
+    <main class="space-y-16">
+        {{!-- Moderno: Hero comprimido, Products antes que About, Gallery más densa, Contact, Services, Testimonials, Cart --}}
+        {{#each sections}}
+            {{#if (eq id "index")}}{{> sections/index data=data}}{{/if}}
+            {{#if (eq id "hero")}}{{> sections/hero data=data}}{{/if}}
+            {{#if (eq id "products")}}{{> sections/products data=data}}{{/if}}
+            {{#if (eq id "gallery")}}{{> sections/gallery data=data}}{{/if}}
+            {{#if (eq id "about")}}{{> sections/about data=data}}{{/if}}
+            {{#if (eq id "contact")}}{{> sections/contact data=data}}{{/if}}
+            {{#if (eq id "services")}}{{> sections/services data=data}}{{/if}}
+            {{#if (eq id "testimonials")}}{{> sections/testimonials data=data}}{{/if}}
+            {{#if (eq id "cart")}}{{> sections/cart data=data}}{{/if}}
+        {{/each}}
+    </main>
+    {{> components/footer company=company footer=footer}}
+    {{> scripts/moderno}}
+</body>
+</html>
+
+

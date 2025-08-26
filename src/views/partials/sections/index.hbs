@@ -1,0 +1,58 @@
+{{!-- Sección Índice - Muestra enlaces a todas las secciones habilitadas --}}
+<section id="index" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">{{data.title}}</h1>
+            <p class="text-xl text-gray-600">Navega por las diferentes secciones de {{company.name}}</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {{#each data.links}}
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 capitalize">{{id}}</h3>
+                    <a href="{{href}}" 
+                       class="inline-block bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark transition-colors">
+                        Ver Sección
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        {{!-- Información adicional: Mostrar que tenemos acceso a todos los datos --}}
+        <div class="mt-12 p-6 bg-blue-50 rounded-lg">
+            <h3 class="text-lg font-semibold text-blue-900 mb-4">📊 Datos Disponibles</h3>
+            <p class="text-blue-800 mb-2">
+                <strong>Total de secciones configuradas:</strong> {{allSections.length}}
+            </p>
+            <p class="text-blue-800 mb-2">
+                <strong>Secciones habilitadas:</strong> {{sections.length}}
+            </p>
+            <p class="text-blue-800">
+                <strong>Secciones deshabilitadas:</strong> {{subtract allSections.length sections.length}}
+            </p>
+        </div>
+    </div>
+</section>
+
+{{!-- Ejemplo de cómo acceder a datos de secciones específicas --}}
+<script>
+// Ejemplo de cómo acceder a todos los datos de las secciones desde JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Los datos de todas las secciones están disponibles en la variable global 'allSections'
+    console.log('Todas las secciones:', window.allSections);
+    
+    // Ejemplo: Obtener datos de una sección específica
+    const heroSection = window.allSections?.find(section => section.id === 'hero');
+    if (heroSection) {
+        console.log('Datos de Hero:', heroSection.data);
+    }
+    
+    // Ejemplo: Obtener todas las secciones deshabilitadas
+    const disabledSections = window.allSections?.filter(section => !section.enabled);
+    console.log('Secciones deshabilitadas:', disabledSections);
+});
+</script>
+
+

@@ -1,0 +1,202 @@
+{
+  "clientId": "client_1755709074302_pkw2nk760",
+  "name": "Colibri",
+  "description": "vendemos arandonos uchuas y moras",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Bienvenido a mi sitio web de arandanos",
+        "subtitle": "Descubre nuestros arandanos ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff frghjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "about",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Sobre Nosotros y nuestros arandanos",
+        "content": [
+          "Somos una empresa comprometida con la excelencia y la innovación. y arandanos"
+        ],
+        "imageAlt": "Nuestro equipo trabajando"
+      }
+    },
+    {
+      "id": "products",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Sobre Nosotros y nuestros arandanos",
+        "content": [
+          "Somos una empresa comprometida con la excelencia y la innovación. y arandanos"
+        ],
+        "imageAlt": "Nuestro equipo trabajando",
+        "products": [
+          {
+            "id": "1755710109655",
+            "name": "arandanos",
+            "description": "arandanos frescos",
+            "price": 10000,
+            "image": "",
+            "category": "frutas"
+          },
+          {
+            "id": "1755710203397",
+            "name": "uchuas",
+            "description": "aaaaaaaaaaaaaa",
+            "price": 50000,
+            "image": "",
+            "category": "aaaaaa"
+          },
+          {
+            "id": "1755710275769",
+            "name": "moras",
+            "description": "moras frescas",
+            "price": 200000,
+            "image": "",
+            "category": "frutas"
+          }
+        ],
+        "subtitle": "Descubre nuestra colección"
+      }
+    },
+    {
+      "id": "gallery",
+      "enabled": true,
+      "order": 6,
+      "data": {
+        "title": "Nuestra Galería",
+        "subtitle": "Mira algunos de nuestros trabajos más destacados",
+        "images": [
+          {
+            "id": "proyecto-1",
+            "src": "/images/proyecto-1.jpg",
+            "alt": "Proyecto de diseño web",
+            "title": "Diseño Web Corporativo",
+            "category": "Diseño Web"
+          },
+          {
+            "id": "proyecto-2",
+            "src": "/images/proyecto-2.jpg",
+            "alt": "Aplicación móvil",
+            "title": "App Móvil E-commerce",
+            "category": "Desarrollo Móvil"
+          }
+        ]
+      }
+    },
+    {
+      "id": "contact",
+      "enabled": true,
+      "order": 7,
+      "data": {
+        "title": "Contáctanos",
+        "subtitle": "Estamos aquí para ayudarte",
+        "info": {
+          "address": "Calle Principal 123, Ciudad, País",
+          "phone": "+1 234 567 890",
+          "email": "contacto@miempresa.com",
+          "hours": "Lun-Vie: 9:00 AM - 6:00 PM, Sáb: 10:00 AM - 2:00 PM"
+        },
+        "map": {
+          "latitude": 40.7128,
+          "longitude": -74.006,
+          "zoom": 15
+        },
+        "email": "info@vendes.com",
+        "phone": "+57 3002056789",
+        "address": "empresa de frutas frecsas"
+      }
+    },
+    {
+      "id": "cart",
+      "enabled": true,
+      "order": 8,
+      "data": {
+        "title": "Carrito de Compras",
+        "subtitle": "Revisa tus productos seleccionados",
+        "items": [],
+        "subtotal": "0.00",
+        "shipping": "5.00",
+        "taxes": "0.00",
+        "total": "5.00"
+      }
+    },
+    {
+      "id": "stats",
+      "enabled": true,
+      "order": 10,
+      "data": {
+        "title": "Nuestros Números",
+        "subtitle": "Métricas que hablan por sí solas",
+        "metrics": [
+          {
+            "id": "clientes",
+            "number": "500+",
+            "label": "Clientes Satisfechos",
+            "icon": "👥"
+          },
+          {
+            "id": "proyectos",
+            "number": "1000+",
+            "label": "Proyectos Completados",
+            "icon": "✅"
+          },
+          {
+            "id": "experiencia",
+            "number": "10+",
+            "label": "Años de Experiencia",
+            "icon": "📈"
+          },
+          {
+            "id": "equipo",
+            "number": "25+",
+            "label": "Profesionales",
+            "icon": "👨‍💼"
+          }
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "Colibri",
+    "tagline": "Tu fruta rica",
+    "description": "vendemos arandonos uchuas y moras",
+    "logo": "blob:http://localhost:3000/ae9672d8-f077-4bf2-8a24-3805ed5551d7",
+    "favicon": "blob:http://localhost:3000/359bbb43-dea3-4f42-8f68-186c161244bb"
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2025-08-20T17:20:01.845Z",
+  "updatedAt": "2025-08-20T17:20:01.845Z"
+}

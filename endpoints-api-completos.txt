@@ -1,0 +1,682 @@
+# 📋 DOCUMENTACIÓN COMPLETA DE ENDPOINTS - API TEMPLATE RENDERER SERVICE
+
+## 🌐 **BASE URL**
+```
+http://localhost:3002/api/v1
+```
+
+---
+
+## 📁 **1. ENDPOINTS DE PLANTILLAS TRADICIONALES** 
+### Controlador: `TemplateController` - `/template`
+
+### **GET /template/:project**
+**Descripción:** Renderiza una plantilla específica por nombre de proyecto
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla (ej: "clasico", "moderno", "minimalista")
+**Respuesta:** HTML renderizado (Content-Type: text/html)
+**Ejemplo:** `GET /template/clasico`
+
+### **GET /template/:project/render**
+**Descripción:** Renderiza una plantilla con datos estáticos
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** HTML renderizado con datos estáticos (Content-Type: text/html)
+**Ejemplo:** `GET /template/clasico/render`
+
+### **POST /template/:project/render**
+**Descripción:** Renderiza una plantilla con datos personalizados
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Parámetros del Body (JSON):**
+```typescript
+{
+  // Datos personalizados para la plantilla
+  [key: string]: any; // Cualquier objeto JSON válido
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** HTML renderizado con datos personalizados (Content-Type: text/html)
+**Ejemplo:** `POST /template/clasico/render`
+
+### **PUT /template/:project/custom-data**
+**Descripción:** Actualiza los datos personalizados de una plantilla
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Parámetros del Body (JSON):**
+```typescript
+{
+  // Nuevos datos personalizados
+  [key: string]: any; // Cualquier objeto JSON válido
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** Confirmación de actualización (JSON)
+**Ejemplo:** `PUT /template/clasico/custom-data`
+
+### **GET /template/:project/static-data**
+**Descripción:** Obtiene los datos estáticos de una plantilla
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** Datos estáticos en formato JSON (Content-Type: application/json)
+**Ejemplo:** `GET /template/clasico/static-data`
+
+### **GET /template/:project/custom-data**
+**Descripción:** Obtiene los datos personalizados de una plantilla
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** Datos personalizados en formato JSON (Content-Type: application/json)
+**Ejemplo:** `GET /template/clasico/custom-data`
+
+### **GET /template/:category/:project**
+**Descripción:** Renderiza una plantilla específica por categoría y proyecto
+**Parámetros de URL:**
+- `category` (string, requerido): Categoría de la plantilla (ej: "productos", "servicios", "productos-servicios")
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** HTML renderizado (Content-Type: text/html)
+**Ejemplo:** `GET /template/productos/clasico`
+
+### **GET /template/:category/:project/render**
+**Descripción:** Renderiza una plantilla por categoría con datos estáticos
+**Parámetros de URL:**
+- `category` (string, requerido): Categoría de la plantilla
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** HTML renderizado con datos estáticos (Content-Type: text/html)
+**Ejemplo:** `GET /template/productos/clasico/render`
+
+### **POST /template/:category/:project/render**
+**Descripción:** Renderiza una plantilla por categoría con datos personalizados
+**Parámetros de URL:**
+- `category` (string, requerido): Categoría de la plantilla
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Parámetros del Body (JSON):**
+```typescript
+{
+  // Datos personalizados para la plantilla
+  [key: string]: any; // Cualquier objeto JSON válido
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** HTML renderizado con datos personalizados (Content-Type: text/html)
+**Ejemplo:** `POST /template/productos/clasico/render`
+
+### **PUT /template/:category/:project/custom-data**
+**Descripción:** Actualiza datos personalizados de una plantilla por categoría
+**Parámetros de URL:**
+- `category` (string, requerido): Categoría de la plantilla
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Parámetros del Body (JSON):**
+```typescript
+{
+  // Nuevos datos personalizados
+  [key: string]: any; // Cualquier objeto JSON válido
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** Confirmación de actualización (JSON)
+**Ejemplo:** `PUT /template/productos/clasico/custom-data`
+
+### **GET /template/:category/:project/static-data**
+**Descripción:** Obtiene datos estáticos de una plantilla por categoría
+**Parámetros de URL:**
+- `category` (string, requerido): Categoría de la plantilla
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** Datos estáticos en formato JSON (Content-Type: application/json)
+**Ejemplo:** `GET /template/productos/clasico/static-data`
+
+### **GET /template/:category/:project/custom-data**
+**Descripción:** Obtiene datos personalizados de una plantilla por categoría
+**Parámetros de URL:**
+- `category` (string, requerido): Categoría de la plantilla
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** Datos personalizados en formato JSON (Content-Type: application/json)
+**Ejemplo:** `GET /template/productos/clasico/custom-data`
+
+---
+
+## 🎯 **2. ENDPOINTS DE PLANTILLAS MODULARES (CLIENTES)**
+### Controlador: `ClientTemplateController` - `/client-templates`
+
+### **GET /client-templates/:clientId**
+**Descripción:** Renderiza la plantilla completa de un cliente específico
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente (ej: "client-001", "mi-empresa")
+**Respuesta:** HTML renderizado de la página completa del cliente (Content-Type: text/html)
+**Ejemplo:** `GET /client-templates/client-001`
+
+### **POST /client-templates/:clientId/render**
+**Descripción:** Renderiza la plantilla de un cliente con datos adicionales
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Parámetros del Body (JSON):**
+```typescript
+{
+  // Datos adicionales para el renderizado
+  [key: string]: any; // Cualquier objeto JSON válido
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** HTML renderizado con datos adicionales (Content-Type: text/html)
+**Ejemplo:** `POST /client-templates/client-001/render`
+
+### **POST /client-templates**
+**Descripción:** Crea una nueva configuración de cliente
+**Parámetros del Body (JSON):**
+```typescript
+{
+  clientId: string; // ID único del cliente (requerido)
+  name: string; // Nombre del cliente (requerido)
+  description?: string; // Descripción opcional
+  style: 'clasico' | 'moderno' | 'minimalista'; // Estilo visual (requerido)
+  sections: SectionConfigurationDto[]; // Array de secciones (requerido)
+  company: CompanyDto; // Datos de la empresa (requerido)
+  theme: ThemeDto; // Configuración del tema (requerido)
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** Configuración creada (JSON)
+**Ejemplo:** `POST /client-templates`
+
+### **GET /client-templates/:clientId/configuration**
+**Descripción:** Obtiene la configuración completa de un cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Respuesta:** Configuración completa del cliente (JSON)
+**Ejemplo:** `GET /client-templates/client-001/configuration`
+
+### **PUT /client-templates/:clientId/configuration**
+**Descripción:** Actualiza la configuración de un cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Parámetros del Body (JSON):**
+```typescript
+{
+  // Campos opcionales - solo se actualizan los proporcionados
+  name?: string; // Nuevo nombre del cliente
+  description?: string; // Nueva descripción
+  style?: 'clasico' | 'moderno' | 'minimalista'; // Nuevo estilo
+  sections?: SectionConfigurationDto[]; // Nuevas secciones
+  company?: Partial<CompanyDto>; // Datos de empresa parciales
+  theme?: Partial<ThemeDto>; // Configuración de tema parcial
+}
+```
+**Headers requeridos:** `Content-Type: application/json`
+**Respuesta:** Configuración actualizada (JSON)
+**Ejemplo:** `PUT /client-templates/client-001/configuration`
+
+### **GET /client-templates**
+**Descripción:** Lista todas las configuraciones de clientes
+**Parámetros:** Ninguno
+**Respuesta:** Lista de todas las configuraciones (JSON)
+**Ejemplo:** `GET /client-templates`
+
+### **DELETE /client-templates/:clientId**
+**Descripción:** Elimina una configuración de cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Respuesta:** Confirmación de eliminación (JSON)
+**Ejemplo:** `DELETE /client-templates/client-001`
+
+### **GET /client-templates/available-sections**
+**Descripción:** Obtiene todas las secciones disponibles para configurar
+**Parámetros:** Ninguno
+**Respuesta:** Lista de secciones disponibles con sus propiedades (JSON)
+**Ejemplo:** `GET /client-templates/available-sections`
+
+### **GET /client-templates/:clientId/preview**
+**Descripción:** Previsualiza la plantilla de un cliente con datos de ejemplo
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Respuesta:** HTML de previsualización (Content-Type: text/html)
+**Ejemplo:** `GET /client-templates/client-001/preview`
+
+---
+
+## 📁 **3. ENDPOINTS DE ALMACENAMIENTO DE ARCHIVOS**
+### Controlador: `StorageController` - `/storage`
+
+### **GET /storage/templates**
+**Descripción:** Lista todas las plantillas disponibles en el sistema
+**Parámetros:** Ninguno
+**Respuesta:** Lista de plantillas con información básica (JSON)
+**Ejemplo:** `GET /storage/templates`
+
+### **GET /storage/template/:project/info**
+**Descripción:** Obtiene información detallada de una plantilla específica
+**Parámetros de URL:**
+- `project` (string, requerido): Nombre del proyecto/plantilla
+**Respuesta:** Información detallada de la plantilla (JSON)
+**Ejemplo:** `GET /storage/template/clasico/info`
+
+---
+
+## 🖼️ **4. ENDPOINTS DE GESTIÓN DE IMÁGENES**
+### Controlador: `ImageStorageController` - `/storage/images`
+
+### **POST /storage/images/:clientId/upload**
+**Descripción:** Sube una imagen para un cliente específico
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Parámetros del Form (multipart/form-data):**
+- `image` (file, requerido): Archivo de imagen (tipos permitidos: jpg, jpeg, png, gif, webp, svg, tamaño máximo: 5MB)
+- `category` (string, opcional): Categoría de la imagen (ej: "logos", "productos", "galeria")
+**Headers requeridos:** `Content-Type: multipart/form-data`
+**Respuesta:** Información de la imagen subida (JSON)
+**Ejemplo:** `POST /storage/images/client-001/upload`
+
+### **GET /storage/images/:clientId**
+**Descripción:** Obtiene todas las imágenes de un cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Parámetros de Query:**
+- `category` (string, opcional): Filtrar por categoría específica
+**Respuesta:** Lista de imágenes del cliente (JSON)
+**Ejemplo:** `GET /storage/images/client-001?category=logos`
+
+### **GET /storage/images/:clientId/:fileName**
+**Descripción:** Sirve una imagen específica (acceso directo al archivo)
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+- `fileName` (string, requerido): Nombre del archivo de imagen (ej: "abc123.jpg")
+**Respuesta:** Archivo de imagen (binary, Content-Type según tipo de imagen)
+**Ejemplo:** `GET /storage/images/client-001/abc123.jpg`
+
+### **GET /storage/images/:clientId/image/:imageId**
+**Descripción:** Obtiene información detallada de una imagen específica
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+- `imageId` (string, requerido): ID único de la imagen (UUID)
+**Respuesta:** Información detallada de la imagen (JSON)
+**Ejemplo:** `GET /storage/images/client-001/image/img-123`
+
+### **DELETE /storage/images/:clientId/image/:imageId**
+**Descripción:** Elimina una imagen específica
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+- `imageId` (string, requerido): ID único de la imagen (UUID)
+**Respuesta:** Confirmación de eliminación (JSON)
+**Ejemplo:** `DELETE /storage/images/client-001/image/img-123`
+
+### **DELETE /storage/images/:clientId**
+**Descripción:** Elimina todas las imágenes de un cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Respuesta:** Confirmación de eliminación (JSON)
+**Ejemplo:** `DELETE /storage/images/client-001`
+
+### **GET /storage/images/:clientId/stats**
+**Descripción:** Obtiene estadísticas de imágenes de un cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Respuesta:** Estadísticas de uso de imágenes (JSON)
+**Ejemplo:** `GET /storage/images/client-001/stats`
+
+### **GET /storage/images/:clientId/categories**
+**Descripción:** Obtiene las categorías de imágenes de un cliente
+**Parámetros de URL:**
+- `clientId` (string, requerido): ID único del cliente
+**Respuesta:** Lista de categorías de imágenes (JSON)
+**Ejemplo:** `GET /storage/images/client-001/categories`
+
+---
+
+## 📊 **ESTRUCTURA DE DATOS DETALLADA**
+
+### **CreateClientConfigurationDto**
+```typescript
+{
+  clientId: string; // ID único del cliente (requerido, sin espacios ni caracteres especiales)
+  name: string; // Nombre del cliente (requerido, máximo 100 caracteres)
+  description?: string; // Descripción opcional (máximo 500 caracteres)
+  style: 'clasico' | 'moderno' | 'minimalista'; // Estilo visual (requerido)
+  sections: SectionConfigurationDto[]; // Array de secciones (requerido, mínimo 1)
+  company: CompanyDto; // Datos de la empresa (requerido)
+  theme: ThemeDto; // Configuración del tema (requerido)
+}
+```
+
+### **SectionConfigurationDto**
+```typescript
+{
+  id: string; // ID de la sección (requerido, debe ser uno de los disponibles)
+  enabled: boolean; // Si la sección está habilitada (requerido)
+  order: number; // Orden de aparición (requerido, número entero positivo)
+  data?: any; // Datos específicos de la sección (opcional, objeto JSON)
+}
+```
+
+### **CompanyDto**
+```typescript
+{
+  name: string; // Nombre de la empresa (requerido, máximo 100 caracteres)
+  tagline: string; // Slogan o frase de la empresa (requerido, máximo 200 caracteres)
+  description: string; // Descripción de la empresa (requerido, máximo 1000 caracteres)
+  logo?: string; // URL del logo (opcional, debe ser URL válida)
+  favicon?: string; // URL del favicon (opcional, debe ser URL válida)
+  email?: string; // Email de contacto (opcional, debe ser email válido)
+  phone?: string; // Teléfono de contacto (opcional)
+  address?: string; // Dirección física (opcional, máximo 300 caracteres)
+  website?: string; // Sitio web (opcional, debe ser URL válida)
+  socialMedia?: {
+    facebook?: string; // URL de Facebook (opcional)
+    twitter?: string; // URL de Twitter (opcional)
+    instagram?: string; // URL de Instagram (opcional)
+    linkedin?: string; // URL de LinkedIn (opcional)
+  };
+}
+```
+
+### **ThemeDto**
+```typescript
+{
+  colors: {
+    primary: string; // Color primario (requerido, formato hex: #RRGGBB)
+    primaryForeground: string; // Color de texto sobre primario (requerido, formato hex)
+    secondary: string; // Color secundario (requerido, formato hex)
+    secondaryForeground: string; // Color de texto sobre secundario (requerido, formato hex)
+    background: string; // Color de fondo (requerido, formato hex)
+    foreground: string; // Color de texto principal (requerido, formato hex)
+    accent: string; // Color de acento (requerido, formato hex)
+    accentForeground: string; // Color de texto sobre acento (requerido, formato hex)
+  };
+  fonts: {
+    heading: string; // Fuente para títulos (requerido, ej: "Inter, sans-serif")
+    body: string; // Fuente para texto (requerido, ej: "Inter, sans-serif")
+  };
+}
+```
+
+### **UpdateClientConfigurationDto**
+```typescript
+{
+  // Todos los campos son opcionales - solo se actualizan los proporcionados
+  name?: string; // Nuevo nombre del cliente
+  description?: string; // Nueva descripción
+  style?: 'clasico' | 'moderno' | 'minimalista'; // Nuevo estilo
+  sections?: SectionConfigurationDto[]; // Nuevas secciones
+  company?: Partial<CompanyDto>; // Datos de empresa parciales
+  theme?: Partial<ThemeDto>; // Configuración de tema parcial
+}
+```
+
+### **UploadedImage**
+```typescript
+{
+  id: string; // ID único de la imagen (UUID, generado automáticamente)
+  originalName: string; // Nombre original del archivo (ej: "logo.png")
+  fileName: string; // Nombre único del archivo (ej: "abc123-def456.png")
+  filePath: string; // Ruta completa del archivo en el servidor
+  url: string; // URL pública para acceder a la imagen
+  size: number; // Tamaño del archivo en bytes
+  mimeType: string; // Tipo MIME (ej: "image/png", "image/jpeg")
+  uploadedAt: Date; // Fecha y hora de subida (ISO 8601)
+  clientId: string; // ID del cliente propietario
+}
+```
+
+### **Secciones Disponibles (AVAILABLE_SECTIONS)**
+```typescript
+[
+  {
+    id: 'hero'; // Sección de banner principal
+    name: 'Banner Principal';
+    description: 'Sección de bienvenida con imagen de fondo';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'about'; // Sección sobre nosotros
+    name: 'Sobre Nosotros';
+    description: 'Información sobre la empresa';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'products'; // Sección de productos
+    name: 'Productos';
+    description: 'Catálogo de productos';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'services'; // Sección de servicios
+    name: 'Servicios';
+    description: 'Lista de servicios ofrecidos';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'cart'; // Sección de carrito
+    name: 'Carrito de Compras';
+    description: 'Funcionalidad de carrito de compras';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'appointments'; // Sección de citas
+    name: 'Citas';
+    description: 'Sistema de reserva de citas';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'testimonials'; // Sección de testimonios
+    name: 'Testimonios';
+    description: 'Opiniones de clientes';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'gallery'; // Sección de galería
+    name: 'Galería';
+    description: 'Galería de imágenes';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'contact'; // Sección de contacto
+    name: 'Contacto';
+    description: 'Información de contacto y formulario';
+    defaultData: { /* datos por defecto */ };
+  },
+  {
+    id: 'stats'; // Sección de estadísticas
+    name: 'Estadísticas';
+    description: 'Números y estadísticas de la empresa';
+    defaultData: { /* datos por defecto */ };
+  }
+]
+```
+
+---
+
+## 🔧 **CONFIGURACIÓN DE IMÁGENES**
+
+### **Tipos de archivo permitidos:**
+- JPEG (.jpg, .jpeg) - `image/jpeg`
+- PNG (.png) - `image/png`
+- GIF (.gif) - `image/gif`
+- WebP (.webp) - `image/webp`
+- SVG (.svg) - `image/svg+xml`
+
+### **Límites y validaciones:**
+- Tamaño máximo: 5MB por archivo
+- Organización: `/uploads/clients/{clientId}/{category}/`
+- Nombres de archivo: Se generan automáticamente con UUID para evitar conflictos
+- Validación de tipo MIME: Se verifica el tipo real del archivo
+
+### **URLs de acceso:**
+- Directo: `http://localhost:3002/api/v1/storage/images/{clientId}/{fileName}`
+- En plantillas: Las URLs se procesan automáticamente para convertirlas en URLs completas
+
+### **Metadatos almacenados:**
+- Archivo: `uploads/clients/{clientId}/images-metadata.json`
+- Contenido: Información completa de todas las imágenes del cliente
+- Actualización: Automática en cada operación de subida/eliminación
+
+---
+
+## 🚀 **EJEMPLOS DE USO DETALLADOS**
+
+### **1. Crear un nuevo cliente:**
+```bash
+curl -X POST http://localhost:3002/api/v1/client-templates \
+  -H "Content-Type: application/json" \
+  -d '{
+    "clientId": "mi-empresa",
+    "name": "Mi Empresa S.A.",
+    "description": "Empresa dedicada a soluciones tecnológicas",
+    "style": "moderno",
+    "sections": [
+      {
+        "id": "hero",
+        "enabled": true,
+        "order": 1,
+        "data": {
+          "title": "Bienvenidos a Mi Empresa",
+          "subtitle": "Soluciones innovadoras para tu negocio"
+        }
+      },
+      {
+        "id": "about",
+        "enabled": true,
+        "order": 2
+      },
+      {
+        "id": "services",
+        "enabled": true,
+        "order": 3,
+        "data": {
+          "services": [
+            {
+              "name": "Desarrollo Web",
+              "description": "Sitios web modernos y responsivos",
+              "price": "$500"
+            }
+          ]
+        }
+      }
+    ],
+    "company": {
+      "name": "Mi Empresa S.A.",
+      "tagline": "Innovación y calidad",
+      "description": "Somos una empresa líder en soluciones tecnológicas",
+      "email": "contacto@miempresa.com",
+      "phone": "+1 234 567 8900",
+      "address": "Calle Principal 123, Ciudad",
+      "website": "https://miempresa.com",
+      "socialMedia": {
+        "facebook": "https://facebook.com/miempresa",
+        "instagram": "https://instagram.com/miempresa"
+      }
+    },
+    "theme": {
+      "colors": {
+        "primary": "#3B82F6",
+        "primaryForeground": "#FFFFFF",
+        "secondary": "#1F2937",
+        "secondaryForeground": "#F9FAFB",
+        "background": "#FFFFFF",
+        "foreground": "#1F2937",
+        "accent": "#10B981",
+        "accentForeground": "#FFFFFF"
+      },
+      "fonts": {
+        "heading": "Inter, sans-serif",
+        "body": "Inter, sans-serif"
+      }
+    }
+  }'
+```
+
+### **2. Subir una imagen:**
+```bash
+curl -X POST http://localhost:3002/api/v1/storage/images/mi-empresa/upload \
+  -F "image=@logo.png" \
+  -F "category=logos"
+```
+
+**Respuesta esperada:**
+```json
+{
+  "success": true,
+  "message": "Imagen subida exitosamente",
+  "image": {
+    "id": "abc123-def456-ghi789",
+    "originalName": "logo.png",
+    "fileName": "jkl012-mno345-pqr678.png",
+    "url": "/api/v1/storage/images/mi-empresa/jkl012-mno345-pqr678.png",
+    "size": 24576,
+    "mimeType": "image/png",
+    "uploadedAt": "2024-01-15T10:30:00.000Z"
+  }
+}
+```
+
+### **3. Renderizar la página del cliente:**
+```bash
+curl http://localhost:3002/api/v1/client-templates/mi-empresa
+```
+
+### **4. Obtener secciones disponibles:**
+```bash
+curl http://localhost:3002/api/v1/client-templates/available-sections
+```
+
+**Respuesta esperada:**
+```json
+{
+  "success": true,
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Banner Principal",
+      "description": "Sección de bienvenida con imagen de fondo",
+      "defaultData": { /* datos por defecto */ }
+    },
+    // ... más secciones
+  ]
+}
+```
+
+### **5. Actualizar configuración parcial:**
+```bash
+curl -X PUT http://localhost:3002/api/v1/client-templates/mi-empresa/configuration \
+  -H "Content-Type: application/json" \
+  -d '{
+    "style": "minimalista",
+    "company": {
+      "name": "Mi Empresa Actualizada S.A.",
+      "tagline": "Nuevo slogan de la empresa"
+    }
+  }'
+```
+
+---
+
+## 📝 **NOTAS IMPORTANTES**
+
+1. **Autenticación:** Actualmente no implementada - todos los endpoints son públicos
+2. **Validación:** Todos los endpoints incluyen validación de datos con mensajes de error descriptivos
+3. **Errores:** Respuestas consistentes con códigos HTTP apropiados y mensajes en español
+4. **CORS:** Configurado para desarrollo local con origen `http://localhost:3000`
+5. **Imágenes:** Almacenamiento local organizado por cliente y categoría con metadatos JSON
+6. **Plantillas:** Sistema modular con secciones configurables y orden personalizable
+7. **Estilos:** Tres estilos disponibles: clásico, moderno, minimalista
+8. **URLs de imagen:** Se procesan automáticamente para convertirlas en URLs completas en las plantillas
+
+---
+
+## 🔍 **CÓDIGOS DE RESPUESTA**
+
+- **200:** Operación exitosa
+- **201:** Recurso creado exitosamente
+- **400:** Error en los datos de entrada (Bad Request)
+- **404:** Recurso no encontrado (Not Found)
+- **413:** Archivo demasiado grande (Payload Too Large)
+- **415:** Tipo de archivo no soportado (Unsupported Media Type)
+- **500:** Error interno del servidor (Internal Server Error)
+
+---
+
+## 📚 **RECURSOS ADICIONALES**
+
+- **Documentación completa:** README.md
+- **Configuración:** src/config/
+- **Plantillas:** src/views/
+- **Lógica de negocio:** src/template/services/
+- **Almacenamiento:** src/storage/services/
+- **Interfaces:** src/template/interfaces/
+- **DTOs:** src/template/dto/

@@ -1,0 +1,55 @@
+{
+  "clientId": "client_1755294976805_q2vvsjq37",
+  "name": "hola",
+  "description": "hdhdhdhdhd",
+  "style": "minimalista",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Bienvenido a mi sitio web",
+        "subtitle": "Descubre nuestros productos y servicios",
+        "backgroundImage": "/images/hero-bg.jpg",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "hola",
+    "tagline": "sjsjsjsjsj",
+    "description": "hdhdhdhdhd",
+    "logo": "",
+    "favicon": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 9% 46%",
+      "primaryForeground": "0 0% 100%",
+      "secondary": "220 9% 46%",
+      "secondaryForeground": "0 0% 100%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 9% 46%",
+      "accentForeground": "0 0% 100%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2025-08-15T22:00:52.872Z",
+  "updatedAt": "2025-08-15T22:00:52.872Z"
+}

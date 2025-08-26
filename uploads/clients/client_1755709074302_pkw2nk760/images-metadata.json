@@ -1,0 +1,73 @@
+{
+  "clientId": "client_1755709074302_pkw2nk760",
+  "images": [
+    {
+      "id": "65e17c3e-4b58-456d-addf-aa517d8b4392",
+      "originalName": "banere.jpeg",
+      "fileName": "76b0a011-1309-4b60-90b3-32668d8055f2.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755709074302_pkw2nk760\\76b0a011-1309-4b60-90b3-32668d8055f2.jpeg",
+      "url": "/api/v1/storage/images/client_1755709074302_pkw2nk760/76b0a011-1309-4b60-90b3-32668d8055f2.jpeg",
+      "size": 4573,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-20T17:13:47.270Z",
+      "clientId": "client_1755709074302_pkw2nk760"
+    },
+    {
+      "id": "c239cba6-4e14-4833-9dc9-62b70d317f0c",
+      "originalName": "arandano.png",
+      "fileName": "ac1bd21e-a49b-4357-bd4e-9c5e0c330d24.png",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755709074302_pkw2nk760\\ac1bd21e-a49b-4357-bd4e-9c5e0c330d24.png",
+      "url": "/api/v1/storage/images/client_1755709074302_pkw2nk760/ac1bd21e-a49b-4357-bd4e-9c5e0c330d24.png",
+      "size": 4383,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-20T17:14:30.571Z",
+      "clientId": "client_1755709074302_pkw2nk760"
+    },
+    {
+      "id": "ce2b9efb-8434-47e7-aa45-a21aec509a51",
+      "originalName": "arandano.png",
+      "fileName": "04e02120-375f-46e0-8255-a14c996c77fa.png",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755709074302_pkw2nk760\\04e02120-375f-46e0-8255-a14c996c77fa.png",
+      "url": "/api/v1/storage/images/client_1755709074302_pkw2nk760/04e02120-375f-46e0-8255-a14c996c77fa.png",
+      "size": 4383,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-20T17:18:03.623Z",
+      "clientId": "client_1755709074302_pkw2nk760"
+    },
+    {
+      "id": "876e6fbd-303b-4fc2-aee0-1b40c064dc87",
+      "originalName": "descarga.jpeg",
+      "fileName": "167374b8-8154-46ee-8eee-66e6fc17bbfd.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755709074302_pkw2nk760\\167374b8-8154-46ee-8eee-66e6fc17bbfd.jpeg",
+      "url": "/api/v1/storage/images/client_1755709074302_pkw2nk760/167374b8-8154-46ee-8eee-66e6fc17bbfd.jpeg",
+      "size": 7644,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-20T17:18:03.658Z",
+      "clientId": "client_1755709074302_pkw2nk760"
+    },
+    {
+      "id": "a1745181-1bab-48ca-8b43-42cdddb7b7a8",
+      "originalName": "descarga (1).jpeg",
+      "fileName": "e2db8bf8-8bca-44a2-9c6a-fd971c05740b.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755709074302_pkw2nk760\\e2db8bf8-8bca-44a2-9c6a-fd971c05740b.jpeg",
+      "url": "/api/v1/storage/images/client_1755709074302_pkw2nk760/e2db8bf8-8bca-44a2-9c6a-fd971c05740b.jpeg",
+      "size": 6251,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-20T17:18:03.768Z",
+      "clientId": "client_1755709074302_pkw2nk760"
+    },
+    {
+      "id": "65d74a2f-ff13-47be-acf9-3f3f993d720e",
+      "originalName": "alvaro.png",
+      "fileName": "02607589-2717-48b7-b7b0-f0fc96c7a4e8.png",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755709074302_pkw2nk760\\02607589-2717-48b7-b7b0-f0fc96c7a4e8.png",
+      "url": "/api/v1/storage/images/client_1755709074302_pkw2nk760/02607589-2717-48b7-b7b0-f0fc96c7a4e8.png",
+      "size": 105516,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-20T17:18:46.179Z",
+      "clientId": "client_1755709074302_pkw2nk760"
+    }
+  ],
+  "createdAt": "2025-08-20T17:13:47.270Z",
+  "updatedAt": "2025-08-20T17:13:47.270Z"
+}

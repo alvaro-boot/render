@@ -1,0 +1,36 @@
+{{!-- Sección de Estadísticas --}}
+<section id="stats" class="py-16 bg-primary text-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">{{data.title}}</h2>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto">{{data.subtitle}}</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {{#each data.metrics}}
+            <div class="text-center">
+                <div class="text-4xl font-bold mb-2">{{number}}</div>
+                <div class="text-lg opacity-90">{{label}}</div>
+                {{#if icon}}
+                <div class="text-2xl mt-2">{{icon}}</div>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        
+        {{#if data.achievements}}
+        <div class="mt-12">
+            <h3 class="text-2xl font-semibold text-center mb-8">Logros Destacados</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {{#each data.achievements}}
+                <div class="bg-white bg-opacity-10 rounded-lg p-6 text-center">
+                    <div class="text-3xl mb-3">{{icon}}</div>
+                    <h4 class="text-lg font-semibold mb-2">{{title}}</h4>
+                    <p class="text-sm opacity-90">{{description}}</p>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</section>

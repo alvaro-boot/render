@@ -1,0 +1,164 @@
+<script>
+    // Navbar scroll effect with colorful border
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('colorful-navbar');
+        } else {
+            navbar.classList.remove('colorful-navbar');
+        }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Create floating bubbles effect
+    function createBubble() {
+        const bubble = document.createElement('div');
+        bubble.className = 'floating-bubble';
+        bubble.style.left = Math.random() * 100 + 'vw';
+        bubble.style.width = (Math.random() * 30 + 20) + 'px';
+        bubble.style.height = bubble.style.width;
+        bubble.style.animationDelay = Math.random() * 8 + 's';
+        bubble.style.animationDuration = (Math.random() * 4 + 8) + 's';
+        document.body.appendChild(bubble);
+        
+        setTimeout(() => {
+            bubble.remove();
+        }, 12000);
+    }
+
+    // Create bubbles periodically
+    setInterval(createBubble, 3000);
+
+    // Add rainbow effect to cards on hover
+    document.querySelectorAll('.colorful-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.background = 'white';
+        });
+    });
+
+    // Add bouncing effect to elements with class 'bouncing-element'
+    document.querySelectorAll('.bouncing-element').forEach(element => {
+        element.addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'bounce 2s ease-in-out infinite';
+            }, 10);
+        });
+    });
+
+    // Add pulse glow effect to buttons
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.classList.add('pulse-glow');
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.classList.remove('pulse-glow');
+        });
+    });
+
+    // Create rainbow text effect for headings
+    document.querySelectorAll('h1, h2, h3').forEach(heading => {
+        heading.addEventListener('mouseenter', function() {
+            this.classList.add('colorful-text');
+        });
+        
+        heading.addEventListener('mouseleave', function() {
+            this.classList.remove('colorful-text');
+        });
+    });
+
+    // Add section sweep effect
+    document.querySelectorAll('.colorful-section').forEach(section => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        observer.observe(section);
+    });
+
+    // Mobile menu toggle with colorful effect
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+        
+        // Add rainbow effect to menu items
+        const menuItems = menu.querySelectorAll('a');
+        menuItems.forEach((item, index) => {
+            item.style.animationDelay = (index * 0.1) + 's';
+            item.classList.add('bouncing-element');
+        });
+    }
+
+    // Expose function globally
+    window.toggleMobileMenu = toggleMobileMenu;
+
+    // Add rainbow gradient to hero section
+    document.addEventListener('DOMContentLoaded', function() {
+        const hero = document.querySelector('.hero-colorful');
+        if (hero) {
+            hero.classList.add('rainbow-gradient');
+        }
+    });
+
+    // Create confetti effect on button clicks
+    function createConfetti() {
+        const colors = [
+            'hsl(var(--primary))',
+            'hsl(var(--secondary))',
+            'hsl(var(--accent))'
+        ];
+        
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.borderRadius = '50%';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            
+            document.body.appendChild(confetti);
+            
+            const animation = confetti.animate([
+                { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            });
+            
+            animation.onfinish = () => confetti.remove();
+        }
+    }
+
+    // Add confetti effect to primary buttons
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        button.addEventListener('click', createConfetti);
+    });
+</script>

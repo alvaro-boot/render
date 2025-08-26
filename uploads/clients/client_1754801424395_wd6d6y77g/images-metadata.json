@@ -1,0 +1,29 @@
+{
+  "clientId": "client_1754801424395_wd6d6y77g",
+  "images": [
+    {
+      "id": "b16aae00-f3f0-4267-bb5e-4fc2f995082f",
+      "originalName": "icono.png",
+      "fileName": "c5f681f0-f520-44aa-b39d-a05ea6a41c44.png",
+      "filePath": "C:\\Users\\SP00135\\Documents\\render\\project-bolt-sb1-rqjp5cp4\\project\\uploads\\clients\\client_1754801424395_wd6d6y77g\\c5f681f0-f520-44aa-b39d-a05ea6a41c44.png",
+      "url": "/api/v1/storage/images/client_1754801424395_wd6d6y77g/c5f681f0-f520-44aa-b39d-a05ea6a41c44.png",
+      "size": 2330,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-10T04:50:56.789Z",
+      "clientId": "client_1754801424395_wd6d6y77g"
+    },
+    {
+      "id": "894ed513-9910-4f9e-80b1-6f839a468e36",
+      "originalName": "icono.png",
+      "fileName": "68883114-08da-4521-8f73-ef68cdf3ff6e.png",
+      "filePath": "C:\\Users\\SP00135\\Documents\\render\\project-bolt-sb1-rqjp5cp4\\project\\uploads\\clients\\client_1754801424395_wd6d6y77g\\68883114-08da-4521-8f73-ef68cdf3ff6e.png",
+      "url": "/api/v1/storage/images/client_1754801424395_wd6d6y77g/68883114-08da-4521-8f73-ef68cdf3ff6e.png",
+      "size": 2330,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-10T04:51:20.363Z",
+      "clientId": "client_1754801424395_wd6d6y77g"
+    }
+  ],
+  "createdAt": "2025-08-10T04:50:56.789Z",
+  "updatedAt": "2025-08-10T04:50:56.789Z"
+}

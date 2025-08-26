@@ -1,0 +1,129 @@
+{
+  "clientId": "client_1755448655276_fkkfh7z2a",
+  "name": "alvaro 123",
+  "description": "ggggggggggggggggggggggggggggggggggggggggggggg",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Bienvenido a mi sitio web",
+        "subtitle": "Descubre nuestros productos y servicios",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ],
+        "ctaText": "Ver productos"
+      }
+    },
+    {
+      "id": "products",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Nuestros Productos",
+        "subtitle": "Descubre nuestra colección",
+        "featuredProducts": [
+          {
+            "id": "producto-1",
+            "name": "Producto Premium",
+            "description": "Descripción detallada del producto premium con todas sus características.",
+            "price": 199.99,
+            "image": "/images/producto-premium.jpg",
+            "imageAlt": "Producto Premium",
+            "category": "Premium",
+            "features": [
+              "Calidad superior",
+              "Garantía de 2 años",
+              "Envío gratuito",
+              "Soporte 24/7"
+            ]
+          }
+        ],
+        "categories": [
+          "Básico",
+          "Premium",
+          "Profesional"
+        ],
+        "products": [
+          {
+            "id": "1755452849759",
+            "name": "laptop",
+            "description": "ssssssssssssssssssssssssssssssssssssss",
+            "price": 52220000,
+            "image": "",
+            "category": "dispositivos"
+          },
+          {
+            "id": "1755452885337",
+            "name": "hp",
+            "description": "vvvvvvvvvvvv",
+            "price": 4444,
+            "image": "",
+            "category": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "gallery",
+      "enabled": true,
+      "order": 6,
+      "data": {
+        "title": "Nuestra Galería",
+        "subtitle": "Mira algunos de nuestros trabajos más destacados",
+        "images": [
+          {
+            "id": "proyecto-1",
+            "src": "/images/proyecto-1.jpg",
+            "alt": "Proyecto de diseño web",
+            "title": "Diseño Web Corporativo",
+            "category": "Diseño Web"
+          },
+          {
+            "id": "proyecto-2",
+            "src": "/images/proyecto-2.jpg",
+            "alt": "Aplicación móvil",
+            "title": "App Móvil E-commerce",
+            "category": "Desarrollo Móvil"
+          }
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "alvaro 123",
+    "tagline": "hola",
+    "description": "ggggggggggggggggggggggggggggggggggggggggggggg",
+    "logo": "",
+    "favicon": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2025-08-17T17:48:25.562Z",
+  "updatedAt": "2025-08-17T17:48:25.562Z"
+}

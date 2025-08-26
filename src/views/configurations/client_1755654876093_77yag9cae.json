@@ -1,0 +1,70 @@
+{
+  "clientId": "client_1755654876093_77yag9cae",
+  "name": "ssssssssssssssssss",
+  "description": "s",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Bienvenido a mi sitio web",
+        "subtitle": "Descubre nuestros productos y servicios",
+        "backgroundImage": "/images/hero-bg.jpg",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "about",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Sobre Nosotros",
+        "content": [
+          "Somos una empresa comprometida con la excelencia y la innovación.",
+          "Nuestro equipo está formado por profesionales altamente calificados.",
+          "Ofrecemos soluciones personalizadas que se adaptan a tus necesidades."
+        ],
+        "image": "/images/about-us.jpg",
+        "imageAlt": "Nuestro equipo trabajando"
+      }
+    }
+  ],
+  "company": {
+    "name": "ssssssssssssssssss",
+    "tagline": "ss",
+    "description": "s",
+    "logo": "blob:http://localhost:3000/1fee0db2-005d-4484-b34b-f6497f25a712",
+    "favicon": "blob:http://localhost:3000/21fe252b-83cd-4d79-a07c-26dd946f6817"
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2025-08-20T01:59:00.623Z",
+  "updatedAt": "2025-08-20T01:59:00.623Z"
+}

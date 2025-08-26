@@ -1,0 +1,110 @@
+<section id="products" class="py-24 {{#if (eq style 'clasico')}}bg-gradient-to-br from-pink-50 to-green-50{{/if}}{{#if (eq style 'moderno')}} bg-white{{/if}}{{#if (eq style 'minimalista')}} bg-gray-50{{/if}}{{#if (eq style 'colorido')}} rainbow-gradient{{/if}}">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {{#if isMultiPage}}
+        <div class="mb-6">
+            <a href="/api/v1/client-templates/{{../clientId}}/pages" class="btn btn-outline">← Índice</a>
+        </div>
+        {{/if}}
+        <div class="text-center mb-20 section-header">
+            <h2 class="section-title">{{data.title}}</h2>
+            <p class="section-subtitle max-w-3xl mx-auto">
+                {{data.subtitle}}
+            </p>
+        </div>
+
+        {{#if data.featuredProducts}}
+        <div class="grid {{#if (eq style 'moderno')}}md:grid-cols-3 lg:grid-cols-4 gap-6 container-tight{{else if (eq style 'minimalista')}}md:grid-cols-1 lg:grid-cols-2 gap-10 minimal-container{{else if (eq style 'colorido')}}card-grid{{else}}md:grid-cols-2 lg:grid-cols-3 gap-10{{/if}} mb-20">
+            {{#each data.featuredProducts}}
+            <div class="{{#if (eq style 'clasico')}}flower-card{{/if}}{{#if (eq style 'moderno')}} modern-card glass-card{{/if}}{{#if (eq style 'minimalista')}} minimal-card md:flex items-start gap-6{{/if}}{{#if (eq style 'colorido')}} colorful-card card-padded gradient-border{{/if}} group">
+                <div class="relative overflow-hidden">
+                    <img src="{{image}}" alt="{{imageAlt}}" class="w-full {{#if (eq style 'minimalista')}}h-56 md:h-64{{else if (eq style 'moderno')}}h-56 md:h-64 lg:h-48{{else}}h-72{{/if}} object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-semibold text-[hsl(var(--primary))] {{#if (eq style 'colorido')}}shadow-glow{{/if}}">
+                        {{category}}
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">{{name}}</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        {{description}}
+                    </p>
+                    {{#if features}}
+                    <div class="space-y-3 mb-8">
+                        {{#each features}}
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] rounded-full mr-3"></div>
+                            <span class="text-gray-700">{{this}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                    <div class="flex justify-between items-center">
+                        <span class="text-3xl font-bold {{#if (eq style 'moderno')}}modern-text-gradient{{else if (eq style 'colorido')}}colorful-text{{else}}elegant-text{{/if}}">${{price}}</span>
+                        <a href="#contact" class="btn btn-primary">Pedir Ahora</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if data.products}}
+        <!-- Todos los productos dinámicos -->
+        <div class="grid {{#if (eq style 'moderno')}}md:grid-cols-3 lg:grid-cols-4 gap-6 container-tight{{else if (eq style 'minimalista')}}md:grid-cols-1 lg:grid-cols-2 gap-10 minimal-container{{else if (eq style 'colorido')}}card-grid{{else}}md:grid-cols-2 lg:grid-cols-3 gap-10{{/if}} mb-20">
+            {{#each data.products}}
+            <div class="{{#if (eq style 'clasico')}}flower-card{{/if}}{{#if (eq style 'moderno')}} modern-card glass-card{{/if}}{{#if (eq style 'minimalista')}} minimal-card md:flex items-start gap-6{{/if}}{{#if (eq style 'colorido')}} colorful-card card-padded gradient-border{{/if}} group">
+                <div class="relative overflow-hidden">
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}" class="w-full {{#if (eq style 'minimalista')}}h-56 md:h-64{{else if (eq style 'moderno')}}h-56 md:h-64 lg:h-48{{else}}h-72{{/if}} object-cover transition-transform duration-500 group-hover:scale-110">
+                    {{else}}
+                    <div class="w-full {{#if (eq style 'minimalista')}}h-56 md:h-64{{else if (eq style 'moderno')}}h-56 md:h-64 lg:h-48{{else}}h-72{{/if}} bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-400 text-lg">Sin imagen</span>
+                    </div>
+                    {{/if}}
+                    {{#if category}}
+                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-semibold text-[hsl(var(--primary))] {{#if (eq style 'colorido')}}shadow-glow{{/if}}">
+                        {{category}}
+                    </div>
+                    {{/if}}
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">{{name}}</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        {{description}}
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-3xl font-bold {{#if (eq style 'moderno')}}modern-text-gradient{{else if (eq style 'colorido')}}colorful-text{{else}}elegant-text{{/if}}">${{price}}</span>
+                        <a href="#contact" class="btn btn-primary">Pedir Ahora</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        {{#if data.categories}}
+        <!-- Product Categories -->
+        {{#each data.categories}}
+        <div class="mb-20">
+            <h3 class="text-4xl font-bold text-gray-900 mb-12 text-center">{{name}}</h3>
+            <div class="grid md:grid-cols-2 gap-10">
+                {{#each products}}
+                <div class="flower-card group">
+                    <div class="relative overflow-hidden">
+                        <img src="{{image}}" alt="{{name}}" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">{{name}}</h4>
+                        <p class="text-gray-600 mb-4 leading-relaxed">{{description}}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold elegant-text">${{price}}</span>
+                            <a href="#contact" class="btn btn-outline">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</section>

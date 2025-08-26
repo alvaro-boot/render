@@ -1,0 +1,67 @@
+<footer class="{{#if (eq style 'clasico')}}elegant-footer{{/if}}{{#if (eq style 'moderno')}} modern-footer{{/if}}{{#if (eq style 'minimalista')}} minimal-footer{{/if}}{{#if (eq style 'colorido')}} colorful-footer{{/if}} text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="footer-wave"></div>
+        <div class="grid md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center space-x-3 mb-8">
+                    {{#if company.logo}}
+                    <img src="{{company.logo}}" alt="{{company.name}}" class="w-12 h-12">
+                    {{else}}
+                    <div class="organic-shape w-12 h-12 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--secondary))] flex items-center justify-center">
+                        <i class="text-2xl text-white">🌸</i>
+                    </div>
+                    {{/if}}
+                    <span class="text-3xl font-bold">{{company.name}}</span>
+                </div>
+                <p class="text-gray-300 mb-8 max-w-md leading-relaxed">{{company.description}}</p>
+                <div class="flex space-x-4">
+                    {{#if footer.social}}
+                        {{#each footer.social}}
+                        <a href="{{href}}" class="organic-shape w-14 h-14 bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 group">
+                            <i class="text-xl group-hover:scale-110 transition-transform">{{name}}</i>
+                        </a>
+                        {{/each}}
+                    {{/if}}
+                </div>
+            </div>
+            
+            {{#if footer.products}}
+            <div>
+                <h3 class="font-bold text-xl mb-6">Productos</h3>
+                <ul class="space-y-3 text-gray-300">
+                    {{#each footer.products}}
+                    <li><a href="#" class="hover:text-white transition-colors">{{this}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+            {{/if}}
+            
+            {{#if footer.contact}}
+            <div>
+                <h3 class="font-bold text-xl mb-6">Contacto</h3>
+                <ul class="space-y-3 text-gray-300">
+                    {{#if footer.contact.phone}}
+                    <li>{{footer.contact.phone}}</li>
+                    {{/if}}
+                    {{#if footer.contact.email}}
+                    <li>{{footer.contact.email}}</li>
+                    {{/if}}
+                    {{#if footer.contact.address}}
+                    <li class="text-sm">{{footer.contact.address}}</li>
+                    {{/if}}
+                </ul>
+            </div>
+            {{/if}}
+        </div>
+        
+        <div class="border-t border-white/20 mt-16 pt-8 text-center">
+            <p class="text-gray-400">
+                {{#if footer.copyright}}
+                    {{footer.copyright}}
+                {{else}}
+                    © {{currentYear}} {{company.name}}. Todos los derechos reservados.
+                {{/if}}
+            </p>
+        </div>
+    </div>
+</footer>

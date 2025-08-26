@@ -1,0 +1,76 @@
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 {{#if (eq style 'clasico')}}navbar-elegant{{/if}}{{#if (eq style 'moderno')}} navbar-modern{{/if}}{{#if (eq style 'minimalista')}} navbar-minimal{{/if}}{{#if (eq style 'colorido')}} colorful-navbar{{/if}}">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <a href="#" class="flex items-center space-x-3 group">
+                {{#if company.logo}}
+                <img src="{{company.logo}}" alt="{{company.name}}" class="w-10 h-10">
+                {{else}}
+                <div class="organic-shape w-12 h-12 flex items-center justify-center">
+                    <i class="text-2xl text-white">🌸</i>
+                </div>
+                {{/if}}
+                <span class="text-2xl font-bold elegant-text group-hover:scale-105 transition-transform">{{company.name}}</span>
+            </a>
+
+            <div class="hidden lg:flex items-center space-x-8">
+                {{#each sections}}
+                <a href="{{#if isMultiPage}}/api/v1/client-templates/{{../clientId}}/section/{{id}}{{else}}#{{id}}{{/if}}" class="text-gray-700 hover:text-[hsl(var(--primary))] transition-all duration-300 font-medium relative group">
+                    {{#if (eq id 'hero')}}Inicio{{/if}}
+                    {{#if (eq id 'about')}}Nosotros{{/if}}
+                    {{#if (eq id 'products')}}Productos{{/if}}
+                    {{#if (eq id 'services')}}Servicios{{/if}}
+                    {{#if (eq id 'testimonials')}}Testimonios{{/if}}
+                    {{#if (eq id 'gallery')}}Galería{{/if}}
+                    {{#if (eq id 'contact')}}Contacto{{/if}}
+                    {{#if (eq id 'cart')}}Carrito{{/if}}
+                    {{#if (eq id 'appointments')}}Citas{{/if}}
+                    {{#if (eq id 'stats')}}Estadísticas{{/if}}
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                {{/each}}
+            </div>
+
+            <div class="hidden lg:flex items-center space-x-4">
+                {{#each sections}}
+                    {{#if (eq id 'contact')}}
+                    <a href="#contact" class="btn btn-primary">Contactar</a>
+                    {{/if}}
+                    {{#if (eq id 'cart')}}
+                    <a href="#cart" class="btn btn-outline">🛒</a>
+                    {{/if}}
+                {{/each}}
+            </div>
+
+            <div class="lg:hidden">
+                <button class="btn btn-ghost w-10 h-10" onclick="toggleMobileMenu()">☰</button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                {{#each sections}}
+                <a href="{{#if isMultiPage}}/api/v1/client-templates/{{../clientId}}/section/{{id}}{{else}}#{{id}}{{/if}}" class="block px-3 py-2 text-gray-700 hover:text-[hsl(var(--primary))] transition-colors">
+                    {{#if (eq id 'hero')}}Inicio{{/if}}
+                    {{#if (eq id 'about')}}Nosotros{{/if}}
+                    {{#if (eq id 'products')}}Productos{{/if}}
+                    {{#if (eq id 'services')}}Servicios{{/if}}
+                    {{#if (eq id 'testimonials')}}Testimonios{{/if}}
+                    {{#if (eq id 'gallery')}}Galería{{/if}}
+                    {{#if (eq id 'contact')}}Contacto{{/if}}
+                    {{#if (eq id 'cart')}}Carrito{{/if}}
+                    {{#if (eq id 'appointments')}}Citas{{/if}}
+                    {{#if (eq id 'stats')}}Estadísticas{{/if}}
+                </a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+}
+</script>

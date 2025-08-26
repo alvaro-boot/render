@@ -1,0 +1,112 @@
+{
+  "clientId": "client_1754801424395_wd6d6y77g",
+  "name": "Demo Colorido",
+  "description": "Sitio demo con estilo colorido",
+  "style": "colorido",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Vibrante",
+        "subtitle": "Lleno de color",
+        "backgroundImage": ""
+      }
+    },
+    {
+      "id": "products",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Productos",
+        "subtitle": "Colores y energía",
+        "featuredProducts": [
+          {
+            "id": "c1",
+            "name": "Color 1",
+            "description": "Producto vibrante",
+            "price": 69.99,
+            "image": "c5f681f0-f520-44aa-b39d-a05ea6a41c44.png",
+            "imageAlt": "Color 1",
+            "category": "Top"
+          }
+        ]
+      }
+    },
+    {
+      "id": "services",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Servicios",
+        "subtitle": "Creatividad y ritmo",
+        "services": [
+          {
+            "id": "cs1",
+            "name": "Branding",
+            "icon": "🎉",
+            "description": "Marca con personalidad"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gallery",
+      "enabled": true,
+      "order": 4,
+      "data": {
+        "title": "Galería",
+        "subtitle": "Momentos",
+        "images": [
+          {
+            "src": "68883114-08da-4521-8f73-ef68cdf3ff6e.png",
+            "alt": "Momento",
+            "title": "Momento",
+            "description": "Color"
+          }
+        ]
+      }
+    },
+    {
+      "id": "contact",
+      "enabled": true,
+      "order": 5,
+      "data": {
+        "title": "Contacto",
+        "subtitle": "Hablemos"
+      }
+    },
+    {
+      "id": "cart",
+      "enabled": true,
+      "order": 6,
+      "data": {
+        "title": "Carrito",
+        "subtitle": "Resumen"
+      }
+    }
+  ],
+  "company": {
+    "name": "Demo Colorido",
+    "tagline": "Energía",
+    "description": "Sitio de demostración",
+    "logo": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "340 82% 52%",
+      "primaryForeground": "0 0% 100%",
+      "secondary": "120 61% 34%",
+      "secondaryForeground": "0 0% 100%",
+      "background": "0 0% 100%",
+      "foreground": "222.2 84% 4.9%",
+      "accent": "340 82% 52%",
+      "accentForeground": "0 0% 100%"
+    },
+    "fonts": {
+      "heading": "'Dancing Script', cursive",
+      "body": "'Poppins', sans-serif"
+    }
+  }
+}

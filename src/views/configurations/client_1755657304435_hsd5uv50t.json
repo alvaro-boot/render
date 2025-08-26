@@ -1,0 +1,55 @@
+{
+  "clientId": "client_1755657304435_hsd5uv50t",
+  "name": "ssssssssssssssssss",
+  "description": "ssssssssssdddccvvfdc",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Bienvenido a mi sitio web",
+        "subtitle": "Descubre nuestros productos y servicios",
+        "backgroundImage": "/images/hero-bg.jpg",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "ssssssssssssssssss",
+    "tagline": "sssssssssssssss",
+    "description": "ssssssssssdddccvvfdc",
+    "logo": "",
+    "favicon": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2025-08-20T02:52:06.123Z",
+  "updatedAt": "2025-08-20T02:52:06.123Z"
+}

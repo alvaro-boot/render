@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{company.name}} | {{company.tagline}}</title>
+    <link rel="icon" href="{{company.favicon}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    {{!-- Incluir estilos según el estilo elegido --}}
+    {{#if (eq style "clasico")}}
+        {{> styles/clasico}}
+    {{else if (eq style "moderno")}}
+        {{> styles/moderno}}
+    {{else if (eq style "minimalista")}}
+        {{> styles/minimalista}}
+    {{/if}}
+</head>
+<body class="font-body">
+    <div class="min-h-screen flex flex-col">
+        {{!-- Navegación dinámica basada en secciones habilitadas --}}
+        {{> components/navbar sections=sections company=company navigation=navigation}}
+        
+        <main class="flex-1">
+            {{!-- Renderizar TODAS las secciones seleccionadas por el usuario en orden --}}
+            {{#each sections}}
+                {{#if (eq id "hero")}}
+                    {{> sections/hero data=data}}
+                {{else if (eq id "about")}}
+                    {{> sections/about data=data}}
+                {{else if (eq id "products")}}
+                    {{> sections/products data=data}}
+                {{else if (eq id "services")}}
+                    {{> sections/services data=data}}
+                {{else if (eq id "testimonials")}}
+                    {{> sections/testimonials data=data}}
+                {{else if (eq id "gallery")}}
+                    {{> sections/gallery data=data}}
+                {{else if (eq id "contact")}}
+                    {{> sections/contact data=data}}
+                {{else if (eq id "cart")}}
+                    {{> sections/cart data=data}}
+                {{else if (eq id "appointments")}}
+                    {{> sections/appointments data=data}}
+                {{else if (eq id "stats")}}
+                    {{> sections/stats data=data}}
+                {{/if}}
+            {{/each}}
+        </main>
+        
+        {{!-- Footer con información de contacto --}}
+        {{> components/footer company=company footer=footer}}
+    </div>
+    
+    {{!-- Scripts según el estilo --}}
+    {{#if (eq style "clasico")}}
+        {{> scripts/clasico}}
+    {{else if (eq style "moderno")}}
+        {{> scripts/moderno}}
+    {{else if (eq style "minimalista")}}
+        {{> scripts/minimalista}}
+    {{/if}}
+    
+    {{!-- Script para acceder a todos los datos de las secciones --}}
+    <script>
+    // Hacer disponibles todos los datos de las secciones globalmente
+    window.allSections = {{{json allSections}}};
+    window.clientId = "{{clientId}}";
+    window.company = {{{json company}}};
+    
+    // Función para obtener datos de una sección específica
+    window.getSectionData = function(sectionId) {
+        const section = window.allSections?.find(s => s.id === sectionId);
+        return section ? section.data : null;
+    };
+    
+    // Función para obtener todas las secciones habilitadas
+    window.getEnabledSections = function() {
+        return window.allSections?.filter(s => s.enabled) || [];
+    };
+    
+    // Función para obtener todas las secciones deshabilitadas
+    window.getDisabledSections = function() {
+        return window.allSections?.filter(s => !s.enabled) || [];
+    };
+    
+    // Ejemplo de uso en consola
+    console.log('🔍 Datos disponibles para el cliente:', window.clientId);
+    console.log('📊 Todas las secciones:', window.allSections);
+    console.log('✅ Secciones habilitadas:', window.getEnabledSections());
+    console.log('❌ Secciones deshabilitadas:', window.getDisabledSections());
+    console.log('🏢 Datos de la empresa:', window.company);
+    
+    // Ejemplo: Obtener datos de una sección específica
+    const heroData = window.getSectionData('hero');
+    if (heroData) {
+        console.log('🎯 Datos de Hero:', heroData);
+    }
+    </script>
+</body>
+</html>

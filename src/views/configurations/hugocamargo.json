@@ -1,0 +1,54 @@
+{
+  "clientId": "hugocamargo",
+  "name": "Colibri",
+  "description": "ssssssssssssssssssssss",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Bienvenido a mi sitio web",
+        "subtitle": "Descubre nuestros productos y servicios",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "Colibri",
+    "tagline": "Tu fruta rica",
+    "description": "ssssssssssssssssssssss",
+    "logo": "",
+    "favicon": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2025-08-20T19:19:10.330Z",
+  "updatedAt": "2025-08-20T19:19:10.330Z"
+}

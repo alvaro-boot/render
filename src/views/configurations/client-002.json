@@ -1,0 +1,118 @@
+{
+  "clientId": "client-002",
+  "name": "Servicios Profesionales García",
+  "description": "Consultoría y servicios profesionales de alta calidad",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Servicios Profesionales García",
+        "subtitle": "Soluciones integrales para tu negocio",
+        "backgroundImage": "/images/office-bg.jpg",
+        "ctaButtons": [
+          {
+            "text": "Nuestros Servicios",
+            "href": "#services",
+            "style": "primary"
+          },
+          {
+            "text": "Agendar Cita",
+            "href": "#appointments",
+            "style": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "services",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Nuestros Servicios",
+        "subtitle": "Ofrecemos servicios especializados para hacer crecer tu negocio",
+        "services": [
+          {
+            "id": "consultoria",
+            "name": "Consultoría Empresarial",
+            "description": "Análisis estratégico y planificación para optimizar tu negocio.",
+            "icon": "📊",
+            "price": "Desde $500.00"
+          },
+          {
+            "id": "marketing",
+            "name": "Marketing Digital",
+            "description": "Estrategias de marketing online para aumentar tu presencia digital.",
+            "icon": "📱",
+            "price": "Desde $300.00"
+          },
+          {
+            "id": "finanzas",
+            "name": "Asesoría Financiera",
+            "description": "Optimización financiera y planificación fiscal para tu empresa.",
+            "icon": "💰",
+            "price": "Desde $400.00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "appointments",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Agenda tu Consulta",
+        "subtitle": "Reserva una cita personalizada para discutir tus necesidades",
+        "availableSlots": [
+          "09:00 AM",
+          "10:00 AM",
+          "11:00 AM",
+          "02:00 PM",
+          "03:00 PM",
+          "04:00 PM"
+        ]
+      }
+    },
+    {
+      "id": "about",
+      "enabled": true,
+      "order": 4,
+      "data": {
+        "title": "Sobre Nosotros",
+        "content": [
+          "Con más de 15 años de experiencia en el sector empresarial, nuestro equipo de profesionales está comprometido con el éxito de nuestros clientes.",
+          "Ofrecemos soluciones personalizadas que se adaptan a las necesidades específicas de cada empresa."
+        ],
+        "image": "/images/team.jpg",
+        "imageAlt": "Nuestro equipo de profesionales"
+      }
+    }
+  ],
+  "company": {
+    "name": "Servicios Profesionales García",
+    "tagline": "Soluciones integrales para tu negocio",
+    "description": "Somos una empresa de consultoría especializada en ofrecer soluciones integrales para el crecimiento y desarrollo de negocios. Nuestro equipo de expertos está comprometido con la excelencia y la satisfacción del cliente.",
+    "logo": "/images/logo-garcia.png",
+    "favicon": "/favicon-garcia.ico"
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2024-01-15T11:00:00.000Z",
+  "updatedAt": "2024-01-15T11:00:00.000Z"
+}

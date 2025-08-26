@@ -1,0 +1,18 @@
+{
+  "clientId": "temp-1755452540068",
+  "images": [
+    {
+      "id": "265f00cf-32f8-4faa-a446-b5af0532e083",
+      "originalName": "placeholder-logo.png",
+      "fileName": "f0021078-6362-4bbf-ac3f-051fb299a5e2.png",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\temp-1755452540068\\f0021078-6362-4bbf-ac3f-051fb299a5e2.png",
+      "url": "/api/v1/storage/images/temp-1755452540068/f0021078-6362-4bbf-ac3f-051fb299a5e2.png",
+      "size": 568,
+      "mimeType": "image/png",
+      "uploadedAt": "2025-08-17T17:42:20.094Z",
+      "clientId": "temp-1755452540068"
+    }
+  ],
+  "createdAt": "2025-08-17T17:42:20.095Z",
+  "updatedAt": "2025-08-17T17:42:20.095Z"
+}

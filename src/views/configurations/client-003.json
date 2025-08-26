@@ -1,0 +1,151 @@
+{
+  "clientId": "client-003",
+  "name": "Fiesta Colorida",
+  "description": "Eventos y fiestas con el estilo más vibrante",
+  "style": "colorido",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Fiesta Colorida",
+        "subtitle": "Donde cada momento es una celebración vibrante",
+        "backgroundImage": "/images/party-bg.jpg",
+        "ctaButtons": [
+          {
+            "text": "Ver Eventos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Reservar Ahora",
+            "href": "#appointments",
+            "style": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "products",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Nuestros Eventos",
+        "subtitle": "Experiencias únicas y memorables",
+        "featuredProducts": [
+          {
+            "id": "fiesta-cumpleanos",
+            "name": "Fiesta de Cumpleaños",
+            "description": "Celebración completa con decoración temática, música y entretenimiento.",
+            "price": 299.99,
+            "image": "/images/birthday-party.jpg",
+            "imageAlt": "Fiesta de Cumpleaños",
+            "category": "Eventos Sociales",
+            "features": [
+              "Decoración temática completa",
+              "Música y DJ",
+              "Fotógrafo profesional",
+              "Catering incluido"
+            ]
+          },
+          {
+            "id": "evento-corporativo",
+            "name": "Evento Corporativo",
+            "description": "Eventos empresariales con el toque colorido que necesitas.",
+            "price": 599.99,
+            "image": "/images/corporate-event.jpg",
+            "imageAlt": "Evento Corporativo",
+            "category": "Eventos Corporativos",
+            "features": [
+              "Audiovisual profesional",
+              "Catering gourmet",
+              "Coordinador de eventos",
+              "Material promocional"
+            ]
+          }
+        ],
+        "categories": [
+          "Eventos Sociales",
+          "Eventos Corporativos",
+          "Bodas",
+          "Graduaciones"
+        ]
+      }
+    },
+    {
+      "id": "services",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Servicios Especiales",
+        "subtitle": "Todo lo que necesitas para tu evento perfecto",
+        "services": [
+          {
+            "id": "decoracion",
+            "name": "Decoración Temática",
+            "description": "Transformamos cualquier espacio en un mundo de colores y fantasía.",
+            "icon": "🎨",
+            "price": "Desde $150.00"
+          },
+          {
+            "id": "entretenimiento",
+            "name": "Entretenimiento",
+            "description": "DJs, músicos y animadores para mantener la energía alta.",
+            "icon": "🎵",
+            "price": "Desde $200.00"
+          },
+          {
+            "id": "fotografia",
+            "name": "Fotografía Profesional",
+            "description": "Capturamos cada momento especial de tu celebración.",
+            "icon": "📸",
+            "price": "Desde $300.00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "appointments",
+      "enabled": true,
+      "order": 4,
+      "data": {
+        "title": "Reserva tu Evento",
+        "subtitle": "Agenda una consulta personalizada",
+        "availableSlots": [
+          "10:00 AM",
+          "11:00 AM",
+          "02:00 PM",
+          "03:00 PM",
+          "04:00 PM",
+          "05:00 PM"
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "Fiesta Colorida",
+    "tagline": "Donde cada momento es una celebración vibrante",
+    "description": "Somos especialistas en crear eventos únicos y memorables. Con más de 10 años de experiencia, transformamos espacios ordinarios en celebraciones extraordinarias llenas de color, música y alegría.",
+    "logo": "/images/logo-colorido.png",
+    "favicon": "/favicon-colorido.ico"
+  },
+  "theme": {
+    "colors": {
+      "primary": "45 100% 51%",
+      "primaryForeground": "0 0% 100%",
+      "secondary": "142 76% 36%",
+      "secondaryForeground": "0 0% 100%",
+      "background": "0 0% 100%",
+      "foreground": "222.2 84% 4.9%",
+      "accent": "330 100% 50%",
+      "accentForeground": "0 0% 100%"
+    },
+    "fonts": {
+      "heading": "'Fredoka One', cursive",
+      "body": "'Nunito', sans-serif"
+    }
+  },
+  "createdAt": "2024-01-15T12:00:00.000Z",
+  "updatedAt": "2024-01-15T12:00:00.000Z"
+}

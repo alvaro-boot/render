@@ -1,0 +1,96 @@
+{
+  "clientId": "client-001",
+  "name": "Floristería María",
+  "description": "Floristería artesanal con más de 20 años de experiencia",
+  "style": "colorido",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Floristería María",
+        "subtitle": "Donde cada flor cuenta una historia de amor",
+        "backgroundImage": "/images/flower-bg.jpg",
+        "ctaButtons": [
+          {
+            "text": "Ver Catálogo",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Hacer Pedido",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "products",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Nuestro Catálogo",
+        "subtitle": "Descubre nuestra colección de arreglos florales únicos y personalizados",
+        "featuredProducts": [
+          {
+            "id": "ramo-rosas",
+            "name": "Ramo de Rosas Rojas",
+            "description": "Hermoso ramo de 24 rosas rojas, símbolo del amor apasionado.",
+            "price": 89.99,
+            "image": "/images/roses.jpg",
+            "imageAlt": "Ramo de Rosas Rojas",
+            "category": "Ramos",
+            "features": [
+              "24 rosas rojas premium",
+              "Envoltura elegante",
+              "Cinta decorativa",
+              "Tarjeta personalizada"
+            ]
+          }
+        ],
+        "categories": []
+      }
+    },
+    {
+      "id": "cart",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Carrito de Compras",
+        "subtitle": "Revisa tus productos seleccionados",
+        "items": [],
+        "subtotal": "0.00",
+        "shipping": "5.00",
+        "taxes": "0.00",
+        "total": "5.00"
+      }
+    }
+  ],
+  "company": {
+    "name": "Floristería María",
+    "tagline": "Donde cada flor cuenta una historia de amor",
+    "description": "Somos una floristería artesanal que transforma momentos especiales en experiencias inolvidables. Con más de 20 años de experiencia, creamos arreglos únicos que expresan emociones y celebran la vida.",
+    "logo": "/images/logo.png",
+    "favicon": "/favicon.ico"
+  },
+  "theme": {
+    "colors": {
+      "primary": "340 82% 52%",
+      "primaryForeground": "0 0% 100%",
+      "secondary": "120 61% 34%",
+      "secondaryForeground": "0 0% 100%",
+      "background": "0 0% 100%",
+      "foreground": "222.2 84% 4.9%",
+      "accent": "340 82% 52%",
+      "accentForeground": "0 0% 100%"
+    },
+    "fonts": {
+      "heading": "'Dancing Script', cursive",
+      "body": "'Poppins', sans-serif"
+    }
+  },
+  "createdAt": "2024-01-15T10:00:00.000Z",
+  "updatedAt": "2024-01-15T10:00:00.000Z"
+}

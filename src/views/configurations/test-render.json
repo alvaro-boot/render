@@ -1,0 +1,148 @@
+{
+  "clientId": "test-render",
+  "name": "Test Render",
+  "description": "Configuración de prueba para verificar el renderizado",
+  "style": "moderno",
+  "sections": [
+    {
+      "id": "hero",
+      "enabled": true,
+      "order": 1,
+      "data": {
+        "title": "Página de Prueba",
+        "subtitle": "Verificando el renderizado",
+        "backgroundImage": "",
+        "ctaButtons": [
+          {
+            "text": "Ver Productos",
+            "href": "#products",
+            "style": "primary"
+          },
+          {
+            "text": "Contactar",
+            "href": "#contact",
+            "style": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "about",
+      "enabled": true,
+      "order": 2,
+      "data": {
+        "title": "Sobre Nosotros",
+        "content": [
+          "Esta es una página de prueba para verificar que el renderizado funciona correctamente.",
+          "Si puedes ver este contenido, el sistema está funcionando bien."
+        ],
+        "image": "",
+        "imageAlt": "Sobre nosotros"
+      }
+    },
+    {
+      "id": "products",
+      "enabled": true,
+      "order": 3,
+      "data": {
+        "title": "Productos de Prueba",
+        "subtitle": "Catálogo de ejemplo",
+        "featuredProducts": [
+          {
+            "id": "prod1",
+            "name": "Producto 1",
+            "description": "Descripción del producto 1",
+            "price": 99.99,
+            "image": "",
+            "imageAlt": "Producto 1",
+            "category": "Categoría 1"
+          },
+          {
+            "id": "prod2",
+            "name": "Producto 2",
+            "description": "Descripción del producto 2",
+            "price": 149.99,
+            "image": "",
+            "imageAlt": "Producto 2",
+            "category": "Categoría 2"
+          }
+        ],
+        "categories": [
+          {
+            "name": "Categoría 1",
+            "description": "Descripción de la categoría 1"
+          },
+          {
+            "name": "Categoría 2",
+            "description": "Descripción de la categoría 2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "contact",
+      "enabled": true,
+      "order": 4,
+      "data": {
+        "title": "Contacto",
+        "subtitle": "Ponte en contacto con nosotros",
+        "contactInfo": [
+          {
+            "icon": "📞",
+            "title": "Teléfono",
+            "value": "+52 (55) 1234-5678"
+          },
+          {
+            "icon": "📧",
+            "title": "Email",
+            "value": "info@test.com"
+          },
+          {
+            "icon": "📍",
+            "title": "Dirección",
+            "value": "Calle de Prueba 123, Ciudad"
+          }
+        ],
+        "socialMedia": [
+          {
+            "icon": "📘",
+            "url": "#"
+          },
+          {
+            "icon": "📷",
+            "url": "#"
+          },
+          {
+            "icon": "🐦",
+            "url": "#"
+          }
+        ]
+      }
+    }
+  ],
+  "company": {
+    "name": "Empresa de Prueba",
+    "tagline": "Renderizado Funcionando",
+    "description": "Empresa de prueba para verificar el renderizado",
+    "logo": "",
+    "favicon": ""
+  },
+  "theme": {
+    "colors": {
+      "primary": "220 14% 96%",
+      "primaryForeground": "220 9% 46%",
+      "secondary": "220 14% 96%",
+      "secondaryForeground": "220 9% 46%",
+      "background": "0 0% 100%",
+      "foreground": "220 9% 46%",
+      "accent": "220 14% 96%",
+      "accentForeground": "220 9% 46%"
+    },
+    "fonts": {
+      "heading": "'Inter', sans-serif",
+      "body": "'Inter', sans-serif"
+    }
+  },
+  "createdAt": "2024-01-20T00:00:00.000Z",
+  "updatedAt": "2024-01-20T00:00:00.000Z"
+}

@@ -1,0 +1,51 @@
+{
+  "clientId": "client_1755448655276_fkkfh7z2a",
+  "images": [
+    {
+      "id": "9360e047-74e8-47fd-b5f7-67317aef017b",
+      "originalName": "image 1.jpg",
+      "fileName": "df2d4fee-7c6c-45d9-98fe-1b9c79785bd7.jpg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755448655276_fkkfh7z2a\\df2d4fee-7c6c-45d9-98fe-1b9c79785bd7.jpg",
+      "url": "/api/v1/storage/images/client_1755448655276_fkkfh7z2a/df2d4fee-7c6c-45d9-98fe-1b9c79785bd7.jpg",
+      "size": 3627,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-17T17:46:35.753Z",
+      "clientId": "client_1755448655276_fkkfh7z2a"
+    },
+    {
+      "id": "2fa2642a-fc07-43b7-8977-8a90b74a4d85",
+      "originalName": "descarga (1).jpeg",
+      "fileName": "f1c484b6-7b7c-4dae-85b0-b5fb7956ce54.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755448655276_fkkfh7z2a\\f1c484b6-7b7c-4dae-85b0-b5fb7956ce54.jpeg",
+      "url": "/api/v1/storage/images/client_1755448655276_fkkfh7z2a/f1c484b6-7b7c-4dae-85b0-b5fb7956ce54.jpeg",
+      "size": 8968,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-17T17:48:12.829Z",
+      "clientId": "client_1755448655276_fkkfh7z2a"
+    },
+    {
+      "id": "0688d052-ddf3-4538-8bd9-e67d50ce1ca5",
+      "originalName": "descarga (2).jpeg",
+      "fileName": "8b35b35a-a03d-487e-8c83-e25fb1510312.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755448655276_fkkfh7z2a\\8b35b35a-a03d-487e-8c83-e25fb1510312.jpeg",
+      "url": "/api/v1/storage/images/client_1755448655276_fkkfh7z2a/8b35b35a-a03d-487e-8c83-e25fb1510312.jpeg",
+      "size": 9474,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-17T17:48:12.865Z",
+      "clientId": "client_1755448655276_fkkfh7z2a"
+    },
+    {
+      "id": "105e696e-5c2d-458b-bcc0-d570ba4a67f7",
+      "originalName": "descarga (2).jpeg",
+      "fileName": "e7fff52e-4d12-4fce-ae61-8ab99cc27b30.jpeg",
+      "filePath": "C:\\Users\\Alvaro Cotes\\Documents\\vendes\\project\\uploads\\clients\\client_1755448655276_fkkfh7z2a\\e7fff52e-4d12-4fce-ae61-8ab99cc27b30.jpeg",
+      "url": "/api/v1/storage/images/client_1755448655276_fkkfh7z2a/e7fff52e-4d12-4fce-ae61-8ab99cc27b30.jpeg",
+      "size": 9474,
+      "mimeType": "image/jpeg",
+      "uploadedAt": "2025-08-17T17:48:12.935Z",
+      "clientId": "client_1755448655276_fkkfh7z2a"
+    }
+  ],
+  "createdAt": "2025-08-17T17:46:35.754Z",
+  "updatedAt": "2025-08-17T17:46:35.754Z"
+}
