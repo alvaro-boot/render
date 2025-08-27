@@ -119,16 +119,16 @@ export class ClientTemplateController {
       const config = await this.templateConfigurationService.getClientConfiguration(clientId);
       const uploadedImages = await this.templateConfigurationService['imageStorageService'].getClientImages(clientId);
       
-             // Procesar todas las secciones con sus datos
-       const allSections = config.sections
-         .sort((a, b) => a.order - b.order)
-         .map(section => ({
-           id: section.id,
-           name: section.id, // SectionConfiguration no tiene name, usar id
-           enabled: section.enabled,
-           order: section.order,
-           data: section.data
-         }));
+      // Procesar todas las secciones con sus datos
+      const allSections = config.sections
+        .sort((a, b) => a.order - b.order)
+        .map(section => ({
+          id: section.id,
+          name: section.id, // SectionConfiguration no tiene name, usar id
+          enabled: section.enabled,
+          order: section.order,
+          data: section.data
+        }));
 
       res.status(HttpStatus.OK).json({
         clientId,
@@ -136,17 +136,94 @@ export class ClientTemplateController {
         style: config.style,
         theme: config.theme,
         sections: allSections,
-                 uploadedImages: uploadedImages.map(img => ({
-           filename: img.fileName, // Cambiar filename por fileName
-           url: img.url,
-           originalName: img.originalName
-         }))
+        uploadedImages: uploadedImages.map(img => ({
+          filename: img.fileName, // Cambiar filename por fileName
+          url: img.url,
+          originalName: img.originalName
+        }))
       });
     } catch (error) {
       res.status(HttpStatus.NOT_FOUND).json({
         message: error.message
       });
     }
+  }
+
+  /**
+   * GET /client-templates/:clientId/pages-info
+   * Obtiene información sobre las páginas disponibles del cliente
+   */
+  @Get(':clientId/pages-info')
+  async getClientPagesInfo(
+    @Param('clientId') clientId: string
+  ) {
+    try {
+      const config = await this.templateConfigurationService.getClientConfiguration(clientId);
+      
+      // Obtener solo las secciones habilitadas
+      const enabledSections = config.sections
+        .filter(section => section.enabled)
+        .sort((a, b) => a.order - b.order);
+      
+      const pages = enabledSections.map(section => ({
+        id: section.id,
+        name: this.getSectionDisplayName(section.id),
+        order: section.order,
+        url: `/api/v1/client-templates/${clientId}/section/${section.id}`,
+        description: this.getSectionDescription(section.id)
+      }));
+
+      return {
+        clientId,
+        clientName: config.name,
+        style: config.style,
+        totalPages: pages.length,
+        pages: pages,
+        indexUrl: `/api/v1/client-templates/${clientId}/pages`,
+        fullSiteUrl: `/api/v1/client-templates/${clientId}`,
+        configurationUrl: `/api/v1/client-templates/${clientId}/configuration`
+      };
+    } catch (error) {
+      throw new BadRequestException(`Error getting pages info: ${error.message}`);
+    }
+  }
+
+  /**
+   * Obtiene el nombre de visualización de una sección
+   */
+  private getSectionDisplayName(sectionId: string): string {
+    const displayNames = {
+      hero: "Inicio",
+      about: "Nosotros",
+      products: "Productos",
+      services: "Servicios",
+      testimonials: "Testimonios",
+      gallery: "Galería",
+      contact: "Contacto",
+      cart: "Carrito",
+      appointments: "Citas",
+      stats: "Estadísticas"
+    };
+    return displayNames[sectionId] || sectionId;
+  }
+
+  /**
+   * Obtiene la descripción de una sección
+   */
+  private getSectionDescription(sectionId: string): string {
+    const descriptions = {
+      hero: "Página principal con información destacada de la empresa",
+      about: "Conoce más sobre nosotros y nuestra historia",
+      products: "Explora nuestro catálogo de productos",
+      services: "Descubre los servicios que ofrecemos",
+      testimonials: "Opiniones y experiencias de nuestros clientes",
+      gallery: "Galería de imágenes de nuestros trabajos",
+      contact: "Información de contacto y formularios",
+      cart: "Carrito de compras y gestión de pedidos",
+      appointments: "Reserva de citas y agendamiento",
+      stats: "Estadísticas y logros de la empresa"
+    };
+    return descriptions[sectionId] || "Contenido personalizado de la sección";
   }
 
   /**
