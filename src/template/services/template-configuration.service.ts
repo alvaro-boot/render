@@ -654,6 +654,11 @@ export class TemplateConfigurationService {
       return a + b;
     });
 
+    // Helper para multiplicar números
+    Handlebars.registerHelper('multiply', function(a: number, b: number) {
+      return a * b;
+    });
+
     // Helper para obtener el nombre de visualización de una sección
     Handlebars.registerHelper('getSectionDisplayName', function(sectionId: string) {
       const displayNames = {
