@@ -1,180 +1,229 @@
-<section id="contact" class="py-20">
-    <div class="max-w-7xl mx-auto px-6">
+<section id="contact" class="py-20 relative overflow-hidden">
+    {{!-- Efectos de fondo animados --}}
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
         {{#if isMultiPage}}
-        <div class="mb-8">
+        <div class="mb-8 animate-fade-in-down">
             <a href="/api/v1/client-templates/{{../clientId}}/pages" 
-               class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300">
+               class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm text-gray-700 rounded-xl hover:bg-white/20 transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-105 shadow-lg">
                 <i class="fas fa-arrow-left mr-2"></i>
                 Volver al índice
             </a>
         </div>
         {{/if}}
-        
-        {{!-- Header de la sección --}}
-        <div class="text-center mb-16">
-            <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                {{data.title}}
+
+        {{!-- Header de la sección mejorado --}}
+        <div class="text-center mb-16 animate-fade-in-up">
+            <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-title">
+                <span class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    {{data.title}}
+                </span>
             </h2>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            {{#if data.subtitle}}
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
                 {{data.subtitle}}
             </p>
+            {{/if}}
         </div>
-        
+
+        {{!-- Contenido principal mejorado --}}
         <div class="grid lg:grid-cols-2 gap-16">
-            {{!-- Información de Contacto --}}
-            <div class="space-y-8">
-                <h3 class="text-3xl font-bold text-gray-900 mb-8">Información de Contacto</h3>
-                
-                <div class="space-y-6">
-                    {{!-- Dirección --}}
-                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-map-marker-alt text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Dirección</h4>
-                            <p class="text-gray-600">{{data.address}}</p>
-                        </div>
-                    </div>
+            {{!-- Información de contacto mejorada --}}
+            <div class="space-y-8 animate-fade-in-up animation-delay-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-info-circle mr-3 text-purple-600 animate-bounce"></i>
+                        Información de Contacto
+                    </h3>
                     
-                    {{!-- Teléfono --}}
-                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-phone text-white text-xl"></i>
+                    <div class="space-y-6">
+                        {{#if data.phone}}
+                        <div class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-purple-50 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-phone text-lg group-hover:animate-bounce"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors duration-300">Teléfono</h4>
+                                <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{data.phone}}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Teléfono</h4>
-                            <a href="tel:{{data.phone}}" class="text-gray-600 hover:text-purple-600 transition-colors duration-300">
-                                {{data.phone}}
-                            </a>
+                        {{/if}}
+
+                        {{#if data.email}}
+                        <div class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-purple-50 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-envelope text-lg group-hover:animate-bounce"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors duration-300">Email</h4>
+                                <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{data.email}}</p>
+                            </div>
                         </div>
+                        {{/if}}
+
+                        {{#if data.address}}
+                        <div class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-purple-50 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-map-marker-alt text-lg group-hover:animate-bounce"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors duration-300">Dirección</h4>
+                                <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{data.address}}</p>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        {{#if data.hours}}
+                        <div class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-purple-50 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                <i class="fas fa-clock text-lg group-hover:animate-bounce"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors duration-300">Horarios</h4>
+                                <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{data.hours}}</p>
+                            </div>
+                        </div>
+                        {{/if}}
                     </div>
-                    
-                    {{!-- Email --}}
-                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                        <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-envelope text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Email</h4>
-                            <a href="mailto:{{data.email}}" class="text-gray-600 hover:text-purple-600 transition-colors duration-300">
-                                {{data.email}}
-                            </a>
-                        </div>
-                    </div>
-                    
-                    {{!-- Horarios --}}
-                    {{#if data.info.hours}}
-                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                        <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-clock text-white text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Horarios</h4>
-                            <p class="text-gray-600">{{data.info.hours}}</p>
-                        </div>
-                    </div>
-                    {{/if}}
                 </div>
-                
-                {{!-- Redes Sociales --}}
+
+                {{!-- Redes sociales mejoradas --}}
                 {{#if data.socialMedia}}
-                <div class="pt-8">
-                    <h4 class="text-xl font-semibold text-gray-900 mb-6">Síguenos en Redes Sociales</h4>
-                    <div class="flex space-x-4">
+                <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-share-alt mr-3 text-purple-600 animate-pulse"></i>
+                        Síguenos en Redes Sociales
+                    </h3>
+                    
+                    <div class="flex flex-wrap gap-4">
                         {{#each data.socialMedia}}
                         <a href="{{url}}" 
-                           class="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white hover:from-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                            <i class="text-xl">{{icon}}</i>
+                           class="group w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white hover:from-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:scale-110">
+                            <i class="text-xl group-hover:animate-bounce">{{icon}}</i>
                         </a>
                         {{/each}}
                     </div>
                 </div>
                 {{/if}}
-                
-                {{!-- Mapa o información adicional --}}
+
+                {{!-- Mapa mejorado --}}
                 {{#if data.map}}
-                <div class="pt-8">
-                    <h4 class="text-xl font-semibold text-gray-900 mb-6">Ubicación</h4>
-                    <div class="bg-gray-100 rounded-2xl p-4 h-64 flex items-center justify-center">
-                        <div class="text-center">
-                            <i class="fas fa-map text-4xl text-gray-400 mb-4"></i>
-                            <p class="text-gray-600">Mapa interactivo</p>
-                        </div>
+                <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20 group hover:shadow-3xl transition-all duration-500">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-map mr-3 text-purple-600 group-hover:animate-bounce"></i>
+                        Ubicación
+                    </h3>
+                    
+                    <div class="aspect-video bg-gray-200 rounded-2xl overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                        <iframe src="{{data.map}}" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
                 {{/if}}
             </div>
-            
-            {{!-- Formulario de Contacto --}}
-            <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
-                <h3 class="text-3xl font-bold text-gray-900 mb-8">Envíanos un Mensaje</h3>
-                
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Nombre completo</label>
-                            <input type="text" 
-                                   class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
-                                   placeholder="Tu nombre">
+
+            {{!-- Formulario de contacto mejorado --}}
+            <div class="animate-fade-in-up animation-delay-400">
+                <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-paper-plane mr-3 text-purple-600 animate-float"></i>
+                        Envíanos un Mensaje
+                    </h3>
+                    
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="group">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                                    Nombre Completo
+                                </label>
+                                <input type="text" 
+                                       class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-purple-300" 
+                                       placeholder="Tu nombre completo">
+                            </div>
+                            
+                            <div class="group">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                                    Teléfono
+                                </label>
+                                <input type="tel" 
+                                       class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-purple-300" 
+                                       placeholder="Tu número de teléfono">
+                            </div>
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-3">Email</label>
+                        
+                        <div class="group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                                Email
+                            </label>
                             <input type="email" 
-                                   class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
+                                   class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-purple-300" 
                                    placeholder="tu@email.com">
                         </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Teléfono</label>
-                        <input type="tel" 
-                               class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
-                               placeholder="+1 (555) 123-4567">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Asunto</label>
-                        <select class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white">
-                            <option value="">Selecciona un asunto</option>
-                            <option value="consulta">Consulta general</option>
-                            <option value="servicios">Información de servicios</option>
-                            <option value="cotizacion">Cotización</option>
-                            <option value="soporte">Soporte técnico</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Mensaje</label>
-                        <textarea rows="6" 
-                                  class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white resize-none"
-                                  placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
-                    </div>
-                    
-                    <div class="flex items-center space-x-3">
-                        <input type="checkbox" id="privacy" class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                        <label for="privacy" class="text-sm text-gray-600">
-                            Acepto la <a href="#" class="text-purple-600 hover:underline">política de privacidad</a>
-                        </label>
-                    </div>
-                    
-                    <button type="submit" 
-                            class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
-                        <i class="fas fa-paper-plane mr-2"></i>
-                        Enviar Mensaje
-                    </button>
-                </form>
-                
+                        
+                        <div class="group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                                Asunto
+                            </label>
+                            <select class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-purple-300">
+                                <option value="">Selecciona un asunto</option>
+                                <option value="consulta">Consulta General</option>
+                                <option value="servicio">Solicitud de Servicio</option>
+                                <option value="cotizacion">Cotización</option>
+                                <option value="soporte">Soporte Técnico</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="group">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                                Mensaje
+                            </label>
+                            <textarea rows="6" 
+                                      class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white group-hover:border-purple-300 resize-none" 
+                                      placeholder="Escribe tu mensaje aquí..."></textarea>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3 group">
+                            <input type="checkbox" 
+                                   id="privacy" 
+                                   class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500 group-hover:border-purple-400 transition-colors duration-300">
+                            <label for="privacy" class="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Acepto la <a href="#" class="text-purple-600 hover:text-purple-700 underline">política de privacidad</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="group relative w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl overflow-hidden">
+                            {{!-- Efecto de brillo en hover --}}
+                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+                            <span class="relative z-10 flex items-center justify-center">
+                                <i class="fas fa-paper-plane mr-2 group-hover:animate-bounce"></i>
+                                Enviar Mensaje
+                            </span>
+                        </button>
+                    </form>
+                </div>
+
                 {{!-- Información adicional del formulario --}}
-                <div class="mt-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-info text-white"></i>
+                <div class="mt-8 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 animate-fade-in-up animation-delay-500">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="fas fa-clock text-lg animate-pulse"></i>
                         </div>
                         <div>
-                            <h4 class="font-semibold text-gray-900 mb-2">Respuesta rápida</h4>
-                            <p class="text-sm text-gray-600">Te responderemos en menos de 24 horas durante días laborables.</p>
+                            <h4 class="font-semibold text-gray-900">Respuesta rápida</h4>
+                            <p class="text-gray-600 text-sm">Te responderemos en menos de 24 horas</p>
                         </div>
                     </div>
                 </div>
@@ -182,4 +231,187 @@
         </div>
     </div>
 </section>
+
+<style>
+@keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-10px, -10px) scale(1.1); }
+    50% { transform: translate(10px, -5px) scale(0.9); }
+    75% { transform: translate(-5px, 10px) scale(1.05); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-10px) rotate(180deg); opacity: 1; }
+}
+
+@keyframes titleSlide {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    0% { transform: translateY(-30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-title {
+    animation: titleSlide 1s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.animate-shine {
+    animation: shine 2s ease-in-out infinite;
+}
+
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* Optimizaciones de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+    .animate-blob, .animate-float, .animate-title, .animate-fade-in-up, .animate-fade-in-down, .animate-shine {
+        animation: none;
+    }
+}
+
+/* Efectos de focus mejorados */
+input:focus, textarea:focus, select:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* Efectos de hover para botones */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Efectos de parallax para elementos de fondo
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.absolute.inset-0.overflow-hidden > div');
+        
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.3 + (index * 0.1);
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+    
+    // Efectos de hover mejorados para elementos de contacto
+    const contactElements = document.querySelectorAll('.group');
+    contactElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.02)';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Validación de formulario con efectos visuales
+    const form = document.querySelector('form');
+    const inputs = form.querySelectorAll('input, textarea, select');
+    
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('ring-2', 'ring-purple-500');
+        });
+        
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('ring-2', 'ring-purple-500');
+        });
+        
+        input.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                this.classList.add('border-green-500');
+                this.classList.remove('border-gray-200');
+            } else {
+                this.classList.remove('border-green-500');
+                this.classList.add('border-gray-200');
+            }
+        });
+    });
+    
+    // Efecto de envío del formulario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const submitButton = this.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        
+        // Efecto de carga
+        submitButton.innerHTML = `
+            <span class="relative z-10 flex items-center justify-center">
+                <i class="fas fa-spinner fa-spin mr-2"></i>
+                Enviando...
+            </span>
+        `;
+        submitButton.disabled = true;
+        
+        // Simular envío
+        setTimeout(() => {
+            submitButton.innerHTML = `
+                <span class="relative z-10 flex items-center justify-center">
+                    <i class="fas fa-check mr-2"></i>
+                    ¡Enviado!
+                </span>
+            `;
+            submitButton.classList.add('bg-green-600');
+            
+            // Resetear después de 3 segundos
+            setTimeout(() => {
+                submitButton.innerHTML = originalText;
+                submitButton.classList.remove('bg-green-600');
+                submitButton.disabled = false;
+                form.reset();
+            }, 3000);
+        }, 2000);
+    });
+    
+    // Efectos de animación para iconos de redes sociales
+    const socialIcons = document.querySelectorAll('.social-media a');
+    socialIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2) rotate(10deg)';
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+});
+</script>
 

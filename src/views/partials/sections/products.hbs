@@ -1,110 +1,394 @@
-<section id="products" class="py-24 {{#if (eq style 'clasico')}}bg-gradient-to-br from-pink-50 to-green-50{{/if}}{{#if (eq style 'moderno')}} bg-white{{/if}}{{#if (eq style 'minimalista')}} bg-gray-50{{/if}}{{#if (eq style 'colorido')}} rainbow-gradient{{/if}}">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="products" class="py-20 relative overflow-hidden">
+    {{!-- Efectos de fondo animados --}}
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
         {{#if isMultiPage}}
-        <div class="mb-6">
-            <a href="/api/v1/client-templates/{{../clientId}}/pages" class="btn btn-outline">← Índice</a>
+        <div class="mb-8 animate-fade-in-down">
+            <a href="/api/v1/client-templates/{{../clientId}}/pages" 
+               class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm text-gray-700 rounded-xl hover:bg-white/20 transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-105 shadow-lg">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver al índice
+            </a>
         </div>
         {{/if}}
-        <div class="text-center mb-20 section-header">
-            <h2 class="section-title">{{data.title}}</h2>
-            <p class="section-subtitle max-w-3xl mx-auto">
+
+        {{!-- Header de la sección mejorado --}}
+        <div class="text-center mb-16 animate-fade-in-up">
+            <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-title">
+                <span class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    {{data.title}}
+                </span>
+            </h2>
+            {{#if data.subtitle}}
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
                 {{data.subtitle}}
             </p>
+            {{/if}}
         </div>
 
-        {{#if data.featuredProducts}}
-        <div class="grid {{#if (eq style 'moderno')}}md:grid-cols-3 lg:grid-cols-4 gap-6 container-tight{{else if (eq style 'minimalista')}}md:grid-cols-1 lg:grid-cols-2 gap-10 minimal-container{{else if (eq style 'colorido')}}card-grid{{else}}md:grid-cols-2 lg:grid-cols-3 gap-10{{/if}} mb-20">
-            {{#each data.featuredProducts}}
-            <div class="{{#if (eq style 'clasico')}}flower-card{{/if}}{{#if (eq style 'moderno')}} modern-card glass-card{{/if}}{{#if (eq style 'minimalista')}} minimal-card md:flex items-start gap-6{{/if}}{{#if (eq style 'colorido')}} colorful-card card-padded gradient-border{{/if}} group">
-                <div class="relative overflow-hidden">
-                    <img src="{{image}}" alt="{{imageAlt}}" class="w-full {{#if (eq style 'minimalista')}}h-56 md:h-64{{else if (eq style 'moderno')}}h-56 md:h-64 lg:h-48{{else}}h-72{{/if}} object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-semibold text-[hsl(var(--primary))] {{#if (eq style 'colorido')}}shadow-glow{{/if}}">
-                        {{category}}
-                    </div>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">{{name}}</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        {{description}}
-                    </p>
-                    {{#if features}}
-                    <div class="space-y-3 mb-8">
-                        {{#each features}}
-                        <div class="flex items-center">
-                            <div class="w-2 h-2 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] rounded-full mr-3"></div>
-                            <span class="text-gray-700">{{this}}</span>
-                        </div>
-                        {{/each}}
-                    </div>
-                    {{/if}}
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold {{#if (eq style 'moderno')}}modern-text-gradient{{else if (eq style 'colorido')}}colorful-text{{else}}elegant-text{{/if}}">${{price}}</span>
-                        <a href="#contact" class="btn btn-primary">Pedir Ahora</a>
-                    </div>
-                </div>
-            </div>
+        {{!-- Filtros de categorías mejorados --}}
+        {{#if data.categories}}
+        <div class="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in-up animation-delay-300">
+            <button class="category-filter active px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg" data-category="all">
+                Todos
+            </button>
+            {{#each data.categories}}
+            <button class="category-filter px-6 py-3 bg-white/90 backdrop-blur-sm text-gray-700 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-gray-200" data-category="{{id}}">
+                {{name}}
+            </button>
             {{/each}}
         </div>
         {{/if}}
 
-        {{#if data.products}}
-        <!-- Todos los productos dinámicos -->
-        <div class="grid {{#if (eq style 'moderno')}}md:grid-cols-3 lg:grid-cols-4 gap-6 container-tight{{else if (eq style 'minimalista')}}md:grid-cols-1 lg:grid-cols-2 gap-10 minimal-container{{else if (eq style 'colorido')}}card-grid{{else}}md:grid-cols-2 lg:grid-cols-3 gap-10{{/if}} mb-20">
+        {{!-- Grid de productos mejorado --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up animation-delay-400">
             {{#each data.products}}
-            <div class="{{#if (eq style 'clasico')}}flower-card{{/if}}{{#if (eq style 'moderno')}} modern-card glass-card{{/if}}{{#if (eq style 'minimalista')}} minimal-card md:flex items-start gap-6{{/if}}{{#if (eq style 'colorido')}} colorful-card card-padded gradient-border{{/if}} group">
+            <div class="product-card group bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 overflow-hidden border border-white/20" data-category="{{category}}">
+                {{!-- Imagen del producto --}}
                 <div class="relative overflow-hidden">
                     {{#if image}}
-                    <img src="{{image}}" alt="{{name}}" class="w-full {{#if (eq style 'minimalista')}}h-56 md:h-64{{else if (eq style 'moderno')}}h-56 md:h-64 lg:h-48{{else}}h-72{{/if}} object-cover transition-transform duration-500 group-hover:scale-110">
+                    <img src="{{image}}" alt="{{name}}" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
                     {{else}}
-                    <div class="w-full {{#if (eq style 'minimalista')}}h-56 md:h-64{{else if (eq style 'moderno')}}h-56 md:h-64 lg:h-48{{else}}h-72{{/if}} bg-gray-200 flex items-center justify-center">
-                        <span class="text-gray-400 text-lg">Sin imagen</span>
+                    <div class="w-full h-64 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+                        <i class="fas fa-box text-6xl text-purple-400 group-hover:scale-125 transition-transform duration-500"></i>
                     </div>
                     {{/if}}
+                    
+                    {{!-- Badge de categoría --}}
                     {{#if category}}
-                    <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-semibold text-[hsl(var(--primary))] {{#if (eq style 'colorido')}}shadow-glow{{/if}}">
+                    <div class="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold rounded-full">
                         {{category}}
                     </div>
                     {{/if}}
+                    
+                    {{!-- Badge de oferta --}}
+                    {{#if onSale}}
+                    <div class="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-semibold rounded-full animate-pulse">
+                        ¡Oferta!
+                    </div>
+                    {{/if}}
+                    
+                    {{!-- Efecto de brillo en hover --}}
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">{{name}}</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
+
+                {{!-- Contenido del producto --}}
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                        {{name}}
+                    </h3>
+                    
+                    {{#if description}}
+                    <p class="text-gray-600 mb-4 line-clamp-2 group-hover:text-gray-700 transition-colors duration-300">
                         {{description}}
                     </p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-3xl font-bold {{#if (eq style 'moderno')}}modern-text-gradient{{else if (eq style 'colorido')}}colorful-text{{else}}elegant-text{{/if}}">${{price}}</span>
-                        <a href="#contact" class="btn btn-primary">Pedir Ahora</a>
-                    </div>
-                </div>
-            </div>
-            {{/each}}
-        </div>
-        {{/if}}
+                    {{/if}}
 
-        {{#if data.categories}}
-        <!-- Product Categories -->
-        {{#each data.categories}}
-        <div class="mb-20">
-            <h3 class="text-4xl font-bold text-gray-900 mb-12 text-center">{{name}}</h3>
-            <div class="grid md:grid-cols-2 gap-10">
-                {{#each products}}
-                <div class="flower-card group">
-                    <div class="relative overflow-hidden">
-                        <img src="{{image}}" alt="{{name}}" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                    {{!-- Características del producto --}}
+                    {{#if features}}
+                    <div class="mb-4">
+                        <ul class="space-y-1">
+                            {{#each features}}
+                            <li class="flex items-center text-sm text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2 group-hover:animate-bounce"></i>
+                                {{this}}
+                            </li>
+                            {{/each}}
+                        </ul>
                     </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-bold text-gray-900 mb-3">{{name}}</h4>
-                        <p class="text-gray-600 mb-4 leading-relaxed">{{description}}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-2xl font-bold elegant-text">${{price}}</span>
-                            <a href="#contact" class="btn btn-outline">Ver Detalles</a>
+                    {{/if}}
+
+                    {{!-- Precio y botones --}}
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            {{#if originalPrice}}
+                            <span class="text-lg font-bold text-purple-600">{{price}}</span>
+                            <span class="text-sm text-gray-400 line-through">{{originalPrice}}</span>
+                            {{else}}
+                            <span class="text-2xl font-bold text-purple-600">{{price}}</span>
+                            {{/if}}
+                        </div>
+                        
+                        <div class="flex space-x-2">
+                            {{#if data.showDetailsButton}}
+                            <button class="details-btn px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                                <i class="fas fa-eye mr-1"></i>
+                                Ver
+                            </button>
+                            {{/if}}
+                            
+                            {{#if data.showBuyButton}}
+                            <button class="buy-btn px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                                <i class="fas fa-shopping-cart mr-1"></i>
+                                Comprar
+                            </button>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
+
+                {{!-- Indicador de hover --}}
+                <div class="h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+            </div>
+            {{/each}}
+        </div>
+
+        {{!-- Paginación mejorada --}}
+        {{#if data.pagination}}
+        <div class="flex justify-center mt-12 animate-fade-in-up animation-delay-500">
+            <nav class="flex items-center space-x-2">
+                {{#if data.pagination.hasPrevious}}
+                <button class="px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-700 rounded-lg hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-gray-200">
+                    <i class="fas fa-chevron-left mr-1"></i>
+                    Anterior
+                </button>
+                {{/if}}
+                
+                {{#each data.pagination.pages}}
+                <button class="px-4 py-2 {{#if active}}bg-gradient-to-r from-purple-600 to-blue-600 text-white{{else}}bg-white/90 backdrop-blur-sm text-gray-700 hover:bg-purple-600 hover:text-white{{/if}} rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-gray-200">
+                    {{number}}
+                </button>
                 {{/each}}
+                
+                {{#if data.pagination.hasNext}}
+                <button class="px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-700 rounded-lg hover:bg-purple-600 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-gray-200">
+                    Siguiente
+                    <i class="fas fa-chevron-right ml-1"></i>
+                </button>
+                {{/if}}
+            </nav>
+        </div>
+        {{/if}}
+
+        {{!-- Sección de características adicionales --}}
+        {{#if data.features}}
+        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-12 animate-fade-in-up animation-delay-600 relative overflow-hidden">
+            {{!-- Efectos de fondo --}}
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-blue-100/50"></div>
+            <div class="relative z-10">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
+                    ¿Por qué elegir nuestros productos?
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {{#each data.features}}
+                    <div class="text-center group">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">{{title}}</h4>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{description}}</p>
+                    </div>
+                    {{/each}}
+                </div>
             </div>
         </div>
-        {{/each}}
         {{/if}}
     </div>
 </section>
+
+<style>
+@keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-10px, -10px) scale(1.1); }
+    50% { transform: translate(10px, -5px) scale(0.9); }
+    75% { transform: translate(-5px, 10px) scale(1.05); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-10px) rotate(180deg); opacity: 1; }
+}
+
+@keyframes titleSlide {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    0% { transform: translateY(-30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-title {
+    animation: titleSlide 1s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.animate-shine {
+    animation: shine 2s ease-in-out infinite;
+}
+
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* Optimizaciones de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+    .animate-blob, .animate-float, .animate-title, .animate-fade-in-up, .animate-fade-in-down, .animate-shine {
+        animation: none;
+    }
+}
+
+/* Efectos de filtros */
+.category-filter.active {
+    background: linear-gradient(to right, #9333ea, #3b82f6);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+/* Efectos de hover para botones */
+.details-btn:hover, .buy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+/* Line clamp para descripciones */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Efectos de parallax para elementos de fondo
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.absolute.inset-0.overflow-hidden > div');
+        
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.3 + (index * 0.1);
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+    
+    // Filtros de categorías
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const productCards = document.querySelectorAll('.product-card');
+    
+    categoryFilters.forEach(filter => {
+        filter.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Actualizar filtros activos
+            categoryFilters.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filtrar productos
+            productCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeInUp 0.5s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Efectos de hover mejorados para tarjetas de productos
+    productCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Efectos para botones de productos
+    const detailBtns = document.querySelectorAll('.details-btn');
+    const buyBtns = document.querySelectorAll('.buy-btn');
+    
+    detailBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Efecto de click
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Aquí puedes agregar lógica para mostrar detalles del producto
+            console.log('Ver detalles del producto');
+        });
+    });
+    
+    buyBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Efecto de click
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Aquí puedes agregar lógica para agregar al carrito
+            console.log('Agregar al carrito');
+        });
+    });
+    
+    // Animación de entrada escalonada para productos
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = `${index * 0.1}s`;
+                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    productCards.forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>

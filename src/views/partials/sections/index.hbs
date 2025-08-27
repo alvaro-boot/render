@@ -1,43 +1,54 @@
-<section id="index" class="py-16">
-    {{!-- Hero Section --}}
-    <div class="text-center mb-16">
-        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-semibold mb-8 shadow-lg">
-            <i class="fas fa-star mr-2"></i>
+<section id="index" class="py-16 relative overflow-hidden">
+    {{!-- Efectos de fondo animados --}}
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+
+    {{!-- Hero Section Mejorado --}}
+    <div class="text-center mb-16 relative z-10">
+        <div class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-semibold mb-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <i class="fas fa-star mr-2 animate-spin"></i>
             Sistema de Páginas Individuales
         </div>
         
-        <h1 class="text-5xl lg:text-7xl font-bold mb-8 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight">
+        <h1 class="text-5xl lg:text-7xl font-bold mb-8 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight animate-title">
             {{company.name}}
         </h1>
         
-        <p class="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
+        <p class="text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8 animate-fade-in">
             {{company.description}}
         </p>
         
         <div class="flex flex-wrap justify-center gap-4 mb-12">
-            <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-semibold shadow-lg">
+            <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-badge">
                 <i class="fas fa-palette mr-2"></i>
                 Estilo: {{style}}
             </span>
-            <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-semibold shadow-lg">
+            <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-semibold shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-badge animation-delay-200">
                 <i class="fas fa-layer-group mr-2"></i>
                 {{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}} Secciones Activas
             </span>
         </div>
     </div>
 
-    {{!-- Secciones Grid --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    {{!-- Secciones Grid Mejorado --}}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 relative z-10">
         {{#each allSections}}
             {{#if enabled}}
-            <div class="group">
+            <div class="group perspective-1000">
                 <a href="/api/v1/client-templates/{{../clientId}}/section/{{id}}" 
-                   class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                   class="block bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-y-12 border border-white/20 overflow-hidden relative animate-card"
+                   style="animation-delay: {{multiply @index 0.1}}s;">
                     
-                    {{!-- Header de la tarjeta --}}
+                    {{!-- Efecto de brillo en hover --}}
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    
+                    {{!-- Header de la tarjeta mejorado --}}
                     <div class="h-48 bg-gradient-to-br from-purple-100 via-blue-100 to-indigo-100 flex items-center justify-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10"></div>
-                        <div class="text-6xl opacity-90 group-hover:scale-125 transition-all duration-500 relative z-10">
+                        <div class="text-6xl opacity-90 group-hover:scale-125 transition-all duration-500 relative z-10 animate-icon">
                             {{#if (eq id "hero")}}🏠
                             {{else if (eq id "about")}}👥
                             {{else if (eq id "products")}}🛍️
@@ -51,15 +62,23 @@
                             {{else}}📄
                             {{/if}}
                         </div>
+                        
+                        {{!-- Efectos de partículas en la tarjeta --}}
+                        <div class="absolute inset-0">
+                            {{#times 5}}
+                            <div class="absolute w-2 h-2 bg-white/30 rounded-full animate-float" 
+                                 style="left: {{multiply @index 20}}%; top: {{multiply @index 15}}%; animation-delay: {{multiply @index 0.2}}s;"></div>
+                            {{/times}}
+                        </div>
                     </div>
                     
-                    {{!-- Contenido de la tarjeta --}}
-                    <div class="p-8">
+                    {{!-- Contenido de la tarjeta mejorado --}}
+                    <div class="p-8 relative">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
                                 {{getSectionDisplayName id}}
                             </h3>
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 animate-pulse">
                                 <i class="fas fa-check-circle mr-1"></i>
                                 Activa
                             </span>
@@ -96,34 +115,37 @@
                                 <i class="fas fa-sort-numeric-up mr-1"></i>
                                 Orden: {{order}}
                             </span>
-                            <span class="flex items-center">
+                            <span class="flex items-center group-hover:text-purple-600 transition-colors duration-300">
                                 <i class="fas fa-eye mr-1"></i>
                                 Ver página
                             </span>
                         </div>
                     </div>
                     
-                    {{!-- Indicador de hover --}}
+                    {{!-- Indicador de hover mejorado --}}
                     <div class="h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    
+                    {{!-- Efecto de borde brillante --}}
+                    <div class="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-purple-500/30 transition-all duration-500"></div>
                 </a>
             </div>
             {{/if}}
         {{/each}}
     </div>
 
-    {{!-- Panel de Información --}}
-    <div class="bg-white rounded-2xl shadow-xl p-10 mb-16">
+    {{!-- Panel de Información Mejorado --}}
+    <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-10 mb-16 relative z-10 border border-white/20">
         <div class="text-center mb-10">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                <i class="fas fa-chart-line text-purple-600 mr-3"></i>
+            <h2 class="text-4xl font-bold text-gray-800 mb-4 animate-title">
+                <i class="fas fa-chart-line text-purple-600 mr-3 animate-bounce"></i>
                 Información del Sitio
             </h2>
             <p class="text-gray-600 text-lg">Estadísticas y características de tu sitio web personalizado</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl">
-                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-stat">
+                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                     <i class="fas fa-chart-bar text-white text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Estadísticas</h3>
@@ -143,8 +165,8 @@
                 </div>
             </div>
             
-            <div class="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl">
-                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-stat animation-delay-200">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                     <i class="fas fa-palette text-white text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Personalización</h3>
@@ -164,8 +186,8 @@
                 </div>
             </div>
             
-            <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl">
-                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-stat animation-delay-400">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                     <i class="fas fa-cogs text-white text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Funcionalidades</h3>
@@ -187,25 +209,25 @@
         </div>
     </div>
 
-    {{!-- Navegación Rápida --}}
-    <div class="text-center">
-        <h3 class="text-3xl font-bold text-gray-800 mb-8">
-            <i class="fas fa-rocket text-purple-600 mr-3"></i>
+    {{!-- Navegación Rápida Mejorada --}}
+    <div class="text-center relative z-10">
+        <h3 class="text-3xl font-bold text-gray-800 mb-8 animate-title">
+            <i class="fas fa-rocket text-purple-600 mr-3 animate-bounce"></i>
             Acciones Rápidas
         </h3>
         <div class="flex flex-wrap justify-center gap-6">
             <a href="/api/v1/client-templates/{{clientId}}" 
-               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl animate-button">
                 <i class="fas fa-globe mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
                 <span class="text-lg font-semibold">Ver Sitio Completo</span>
             </a>
             <a href="/api/v1/client-templates/{{clientId}}/configuration" 
-               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-2xl hover:from-gray-700 hover:to-gray-800 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-2xl hover:from-gray-700 hover:to-gray-800 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl animate-button animation-delay-200">
                 <i class="fas fa-cog mr-3 text-xl group-hover:rotate-180 transition-transform duration-300"></i>
                 <span class="text-lg font-semibold">Configuración</span>
             </a>
             <a href="/api/v1/client-templates/{{clientId}}/pages-info" 
-               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl animate-button animation-delay-400">
                 <i class="fas fa-info-circle mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
                 <span class="text-lg font-semibold">Información API</span>
             </a>
@@ -213,29 +235,252 @@
     </div>
 </section>
 
+<style>
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.rotate-y-12 {
+    transform: rotateY(12deg);
+}
+
+.animate-title {
+    animation: titleSlide 1s ease-out;
+}
+
+@keyframes titleSlide {
+    from { 
+        opacity: 0; 
+        transform: translateY(-50px) scale(0.9); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.animate-badge {
+    animation: badgePop 0.6s ease-out 0.6s both;
+}
+
+@keyframes badgePop {
+    from { 
+        opacity: 0; 
+        transform: scale(0.5) rotate(-10deg); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) rotate(0deg); 
+    }
+}
+
+.animation-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animate-card {
+    animation: cardSlide 0.8s ease-out both;
+}
+
+@keyframes cardSlide {
+    from { 
+        opacity: 0; 
+        transform: translateY(50px) scale(0.9); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
+}
+
+.animate-icon {
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+    50% { transform: translateY(-15px) rotate(180deg); opacity: 1; }
+}
+
+.animate-stat {
+    animation: statSlide 0.8s ease-out both;
+}
+
+@keyframes statSlide {
+    from { 
+        opacity: 0; 
+        transform: translateX(-30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+.animation-delay-400 {
+    animation-delay: 0.4s;
+}
+
+.animate-button {
+    animation: buttonPop 0.6s ease-out both;
+}
+
+@keyframes buttonPop {
+    from { 
+        opacity: 0; 
+        transform: scale(0.8) rotate(-5deg); 
+    }
+    to { 
+        opacity: 1; 
+        transform: scale(1) rotate(0deg); 
+    }
+}
+
+/* Efectos de hover adicionales */
+.group:hover .group-hover\:rotate-y-12 {
+    transform: rotateY(12deg);
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .animate-blob,
+    .animate-title,
+    .animate-fade-in,
+    .animate-badge,
+    .animate-card,
+    .animate-icon,
+    .animate-float,
+    .animate-stat,
+    .animate-button {
+        animation: none;
+    }
+    
+    .group:hover .group-hover\:scale-110 {
+        transform: none;
+    }
+    
+    .group:hover .group-hover\:rotate-180 {
+        transform: none;
+    }
+}
+
+/* Efectos de brillo mejorados */
+.group:hover .group-hover\:scale-110 {
+    transform: scale(1.1);
+}
+
+.group:hover .group-hover\:rotate-180 {
+    transform: rotate(180deg);
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Efecto de entrada para las tarjetas
+    // Efecto de entrada para las tarjetas con stagger
     const cards = document.querySelectorAll('.group');
     cards.forEach((card, index) => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
+        card.style.transform = 'translateY(50px) scale(0.9)';
         
         setTimeout(() => {
-            card.style.transition = 'all 0.6s ease-out';
+            card.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
             card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
+            card.style.transform = 'translateY(0) scale(1)';
+        }, index * 150);
     });
     
     // Efecto de hover mejorado para las tarjetas
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
+            this.style.transform = 'translateY(-16px) rotateY(12deg) scale(1.02)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+            this.style.transform = 'translateY(0) rotateY(0) scale(1)';
+        });
+    });
+    
+    // Efecto de parallax suave para el fondo
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.absolute.inset-0.overflow-hidden');
+        if (parallax) {
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+    });
+    
+    // Animación de números en las estadísticas
+    const statNumbers = document.querySelectorAll('.font-semibold');
+    statNumbers.forEach(stat => {
+        const finalNumber = parseInt(stat.textContent);
+        if (!isNaN(finalNumber)) {
+            let currentNumber = 0;
+            const increment = finalNumber / 50;
+            const timer = setInterval(() => {
+                currentNumber += increment;
+                if (currentNumber >= finalNumber) {
+                    currentNumber = finalNumber;
+                    clearInterval(timer);
+                }
+                stat.textContent = Math.floor(currentNumber);
+            }, 50);
+        }
+    });
+    
+    // Efecto de partículas interactivas
+    const particles = document.querySelectorAll('.particle');
+    particles.forEach(particle => {
+        particle.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(2) rotate(360deg)';
+            this.style.opacity = '1';
+        });
+        
+        particle.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.opacity = '0.5';
         });
     });
     
