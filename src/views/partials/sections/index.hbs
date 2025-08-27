@@ -1,31 +1,54 @@
-<section id="index" class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-20">
-    <div class="container mx-auto px-4">
-        {{!-- Header del índice --}}
-        <div class="text-center mb-16">
-            <h1 class="text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+<section id="index" class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-20 relative overflow-hidden">
+    {{!-- Elementos decorativos de fondo --}}
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        {{!-- Header mejorado del índice --}}
+        <div class="text-center mb-20">
+            <div class="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg mb-8">
+                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                <span class="text-sm font-medium text-gray-700">Sistema de Páginas Individuales</span>
+            </div>
+            
+            <h1 class="text-6xl lg:text-8xl font-bold mb-8 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight">
                 {{company.name}}
             </h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            
+            <p class="text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
                 {{company.description}}
             </p>
-            <div class="mt-8">
-                <span class="inline-block px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
-                    🎨 Estilo: {{style}}
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm font-semibold shadow-lg">
+                    <i class="fas fa-palette mr-2"></i>
+                    Estilo: {{style}}
+                </span>
+                <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-semibold shadow-lg">
+                    <i class="fas fa-layer-group mr-2"></i>
+                    {{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}} Secciones Activas
                 </span>
             </div>
         </div>
 
-        {{!-- Grid de secciones --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {{!-- Grid mejorado de secciones --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-20">
             {{#each allSections}}
                 {{#if enabled}}
-                <div class="group">
+                <div class="group perspective-1000">
                     <a href="/api/v1/client-templates/{{../clientId}}/section/{{id}}" 
-                       class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                       class="block bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 hover:rotate-y-12 border border-white/20 overflow-hidden relative">
                         
-                        {{!-- Icono de la sección --}}
-                        <div class="h-48 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-                            <div class="text-6xl opacity-80 group-hover:scale-110 transition-transform duration-300">
+                        {{!-- Efecto de brillo en hover --}}
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        
+                        {{!-- Icono de la sección mejorado --}}
+                        <div class="h-56 bg-gradient-to-br from-purple-100 via-blue-100 to-indigo-100 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10"></div>
+                            <div class="text-7xl opacity-90 group-hover:scale-125 transition-all duration-500 relative z-10">
                                 {{#if (eq id "hero")}}🏠
                                 {{else if (eq id "about")}}👥
                                 {{else if (eq id "products")}}🛍️
@@ -41,123 +64,263 @@
                             </div>
                         </div>
                         
-                        {{!-- Contenido de la sección --}}
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
-                                {{getSectionDisplayName id}}
-                            </h3>
+                        {{!-- Contenido de la sección mejorado --}}
+                        <div class="p-8">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
+                                    {{getSectionDisplayName id}}
+                                </h3>
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                                    <i class="fas fa-check-circle mr-1"></i>
+                                    Activa
+                                </span>
+                            </div>
                             
                             {{!-- Descripción de la sección --}}
-                            <p class="text-gray-600 text-sm mb-4">
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6">
                                 {{#if (eq id "hero")}}
-                                    Página principal con información destacada de la empresa
+                                    Página principal con información destacada de la empresa y llamadas a la acción
                                 {{else if (eq id "about")}}
-                                    Conoce más sobre nosotros y nuestra historia
+                                    Conoce más sobre nosotros, nuestra historia y valores fundamentales
                                 {{else if (eq id "products")}}
-                                    Explora nuestro catálogo de productos
+                                    Explora nuestro catálogo completo de productos y servicios
                                 {{else if (eq id "services")}}
-                                    Descubre los servicios que ofrecemos
+                                    Descubre todos los servicios profesionales que ofrecemos
                                 {{else if (eq id "testimonials")}}
-                                    Opiniones y experiencias de nuestros clientes
+                                    Opiniones y experiencias reales de nuestros clientes satisfechos
                                 {{else if (eq id "gallery")}}
-                                    Galería de imágenes de nuestros trabajos
+                                    Galería visual de nuestros trabajos y proyectos destacados
                                 {{else if (eq id "contact")}}
-                                    Información de contacto y formularios
+                                    Información de contacto y formularios de comunicación
                                 {{else if (eq id "cart")}}
-                                    Carrito de compras y gestión de pedidos
+                                    Carrito de compras completo con gestión de pedidos
                                 {{else if (eq id "appointments")}}
-                                    Reserva de citas y agendamiento
+                                    Sistema de reserva de citas y agendamiento online
                                 {{else if (eq id "stats")}}
-                                    Estadísticas y logros de la empresa
+                                    Estadísticas, logros y métricas importantes de la empresa
                                 {{else}}
-                                    Contenido personalizado de la sección
+                                    Contenido personalizado y específico de la sección
                                 {{/if}}
                             </p>
                             
-                            {{!-- Estado de la sección --}}
-                            <div class="flex items-center justify-between">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                    ✅ Activa
-                                </span>
-                                <span class="text-xs text-gray-500">
+                            {{!-- Información adicional --}}
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span class="flex items-center">
+                                    <i class="fas fa-sort-numeric-up mr-1"></i>
                                     Orden: {{order}}
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-eye mr-1"></i>
+                                    Ver página
                                 </span>
                             </div>
                         </div>
                         
-                        {{!-- Indicador de hover --}}
-                        <div class="h-1 bg-gradient-to-r from-purple-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                        {{!-- Indicador de hover mejorado --}}
+                        <div class="h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                     </a>
                 </div>
                 {{/if}}
             {{/each}}
         </div>
 
-        {{!-- Información adicional --}}
-        <div class="mt-16 text-center">
-            <div class="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">📋 Información del Sitio</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                    <div>
-                        <div class="font-semibold text-gray-700 mb-2">📊 Estadísticas</div>
-                        <div class="text-gray-600">
-                            <div>• {{allSections.length}} secciones totales</div>
-                            <div>• {{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}} secciones activas</div>
-                            <div>• Estilo: {{style}}</div>
+        {{!-- Panel de información mejorado --}}
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-10 max-w-5xl mx-auto mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-chart-line text-purple-600 mr-3"></i>
+                    Información del Sitio
+                </h2>
+                <p class="text-gray-600 text-lg">Estadísticas y características de tu sitio web personalizado</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chart-bar text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Estadísticas</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex justify-between">
+                            <span>Total secciones:</span>
+                            <span class="font-semibold text-purple-600">{{allSections.length}}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Secciones activas:</span>
+                            <span class="font-semibold text-green-600">{{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Estilo actual:</span>
+                            <span class="font-semibold text-blue-600">{{style}}</span>
                         </div>
                     </div>
-                    <div>
-                        <div class="font-semibold text-gray-700 mb-2">🎨 Personalización</div>
-                        <div class="text-gray-600">
-                            <div>• Colores personalizados</div>
-                            <div>• Tipografías adaptadas</div>
-                            <div>• Diseño responsivo</div>
+                </div>
+                
+                <div class="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-palette text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Personalización</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Colores personalizados</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Tipografías adaptadas</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Diseño responsivo</span>
                         </div>
                     </div>
-                    <div>
-                        <div class="font-semibold text-gray-700 mb-2">🔧 Funcionalidades</div>
-                        <div class="text-gray-600">
-                            <div>• Navegación por teclado</div>
-                            <div>• Enlaces directos</div>
-                            <div>• Diseño optimizado</div>
+                </div>
+                
+                <div class="text-center p-6 bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Funcionalidades</h3>
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-keyboard text-orange-500 mr-2"></i>
+                            <span>Navegación por teclado</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-link text-orange-500 mr-2"></i>
+                            <span>Enlaces directos</span>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <i class="fas fa-mobile-alt text-orange-500 mr-2"></i>
+                            <span>Diseño optimizado</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        {{!-- Navegación rápida --}}
-        <div class="mt-12 text-center">
-            <div class="flex flex-wrap justify-center gap-4">
+        {{!-- Navegación rápida mejorada --}}
+        <div class="text-center">
+            <h3 class="text-2xl font-bold text-gray-800 mb-8">
+                <i class="fas fa-rocket text-purple-600 mr-3"></i>
+                Acciones Rápidas
+            </h3>
+            <div class="flex flex-wrap justify-center gap-6">
                 <a href="/api/v1/client-templates/{{clientId}}" 
-                   class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
-                    🌐 Ver sitio completo
+                   class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+                    <i class="fas fa-globe mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="text-lg font-semibold">Ver Sitio Completo</span>
                 </a>
                 <a href="/api/v1/client-templates/{{clientId}}/configuration" 
-                   class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                    ⚙️ Configuración
+                   class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-2xl hover:from-gray-700 hover:to-gray-800 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+                    <i class="fas fa-cog mr-3 text-xl group-hover:rotate-180 transition-transform duration-300"></i>
+                    <span class="text-lg font-semibold">Configuración</span>
+                </a>
+                <a href="/api/v1/client-templates/{{clientId}}/pages-info" 
+                   class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-2xl hover:from-green-700 hover:to-emerald-700 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl">
+                    <i class="fas fa-info-circle mr-3 text-xl group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="text-lg font-semibold">Información API</span>
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-{{!-- Ejemplo de cómo acceder a datos de secciones específicas --}}
+<style>
+@keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.rotate-y-12 {
+    transform: rotateY(12deg);
+}
+
+/* Efectos de hover adicionales */
+.group:hover .group-hover\:rotate-y-12 {
+    transform: rotateY(12deg);
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    .animate-blob {
+        animation: none;
+    }
+    
+    .group:hover .group-hover\:scale-110 {
+        transform: none;
+    }
+    
+    .group:hover .group-hover\:rotate-180 {
+        transform: none;
+    }
+}
+</style>
+
+{{!-- Script mejorado --}}
 <script>
-// Ejemplo de cómo acceder a todos los datos de las secciones desde JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Efecto de entrada para las tarjetas
+    const cards = document.querySelectorAll('.group');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease-out';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+    
+    // Efecto de hover mejorado para las tarjetas
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-16px) rotateY(12deg)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) rotateY(0)';
+        });
+    });
+    
     // Los datos de todas las secciones están disponibles en la variable global 'allSections'
-    console.log('Todas las secciones:', window.allSections);
+    console.log('🎨 Todas las secciones disponibles:', window.allSections);
     
     // Ejemplo: Obtener datos de una sección específica
     const heroSection = window.allSections?.find(section => section.id === 'hero');
     if (heroSection) {
-        console.log('Datos de Hero:', heroSection.data);
+        console.log('🏠 Datos de Hero:', heroSection.data);
     }
     
     // Ejemplo: Obtener todas las secciones deshabilitadas
     const disabledSections = window.allSections?.filter(section => !section.enabled);
-    console.log('Secciones deshabilitadas:', disabledSections);
+    console.log('❌ Secciones deshabilitadas:', disabledSections);
+    
+    // Mostrar información de navegación
+    console.log('🎮 Navegación por teclado disponible:');
+    console.log('   ← Flecha izquierda: Sección anterior');
+    console.log('   → Flecha derecha: Siguiente sección');
+    console.log('   Home: Volver al índice');
 });
 </script>
 

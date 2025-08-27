@@ -6,7 +6,8 @@
     <title>{{company.name}} | {{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}</title>
     <link rel="icon" href="{{company.favicon}}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     {{!-- Incluir estilos según el estilo elegido --}}
     {{#if (eq style "clasico")}}
@@ -20,147 +21,440 @@
     {{/if}}
 
     <style>
-        .section-navigation {
+        :root {
+            --primary-color: hsl({{#if (eq style "clasico")}}340 82% 52%{{else if (eq style "moderno")}}220 14% 96%{{else if (eq style "minimalista")}}220 9% 46%{{else if (eq style "colorido")}}45 93% 47%{{else}}340 82% 52%{{/if}});
+            --primary-foreground: hsl({{#if (eq style "clasico")}}0 0% 100%{{else if (eq style "moderno")}}220 9% 46%{{else if (eq style "minimalista")}}0 0% 100%{{else if (eq style "colorido")}}0 0% 100%{{else}}0 0% 100%{{/if}});
+            --accent-color: hsl({{#if (eq style "clasico")}}120 61% 34%{{else if (eq style "moderno")}}220 14% 96%{{else if (eq style "minimalista")}}220 9% 46%{{else if (eq style "colorido")}}280 84% 60%{{else}}120 61% 34%{{/if}});
+        }
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, 
+                rgba(139, 92, 246, 0.1) 0%, 
+                rgba(59, 130, 246, 0.1) 50%, 
+                rgba(16, 185, 129, 0.1) 100%);
+        }
+
+        .floating-nav {
             position: fixed;
             top: 50%;
-            right: 20px;
+            right: 30px;
             transform: translateY(-50%);
             z-index: 1000;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
         }
-        
-        .section-nav-item {
-            display: block;
-            padding: 8px 12px;
-            margin: 5px 0;
-            border-radius: 8px;
+
+        .floating-nav:hover {
+            transform: translateY(-50%) scale(1.02);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 8px 0;
+            border-radius: 12px;
             text-decoration: none;
-            color: #333;
+            color: #374151;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .section-nav-item:hover {
-            background: var(--primary-color, #8b5cf6);
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            transform: translateX(-5px);
+            transform: translateX(-8px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
         }
-        
-        .section-nav-item.active {
-            background: var(--primary-color, #8b5cf6);
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
         }
-        
-        .breadcrumb {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+        .nav-item i {
+            margin-right: 10px;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .enhanced-breadcrumb {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 30px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
-        
-        .breadcrumb a {
-            color: var(--primary-color, #8b5cf6);
+
+        .breadcrumb-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .breadcrumb-link:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .breadcrumb-separator {
+            margin: 0 15px;
+            color: #9CA3AF;
+            font-weight: 300;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin: 0;
+        }
+
+        .main-content {
+            min-height: calc(100vh - 200px);
+            padding: 40px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .enhanced-footer {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            color: white;
+            padding: 40px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .footer-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-link {
+            display: inline-flex;
+            align-items: center;
+            color: #60a5fa;
             text-decoration: none;
             font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.2);
         }
-        
-        .breadcrumb a:hover {
-            text-decoration: underline;
+
+        .footer-link:hover {
+            background: rgba(96, 165, 250, 0.2);
+            color: #93c5fd;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
         }
-        
-        .breadcrumb .separator {
-            margin: 0 10px;
-            color: #666;
+
+        .footer-link i {
+            margin-right: 8px;
         }
-        
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .loading-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
         @media (max-width: 768px) {
-            .section-navigation {
+            .floating-nav {
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
                 top: auto;
                 transform: none;
                 border-radius: 25px;
-                padding: 10px;
+                padding: 15px;
+                max-width: 200px;
             }
-            
-            .section-nav-item {
-                padding: 6px 10px;
+
+            .floating-nav:hover {
+                transform: scale(1.05);
+            }
+
+            .nav-item {
+                padding: 10px 12px;
+                font-size: 13px;
+                margin: 4px 0;
+            }
+
+            .nav-item i {
+                font-size: 14px;
+                margin-right: 8px;
+            }
+
+            .enhanced-breadcrumb {
+                padding: 15px 20px;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+
+            .main-content {
+                padding: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-nav {
+                right: 10px;
+                bottom: 10px;
+                padding: 12px;
+                max-width: 180px;
+            }
+
+            .nav-item {
+                padding: 8px 10px;
                 font-size: 12px;
-                margin: 3px 0;
             }
+
+            .nav-item i {
+                font-size: 12px;
+                margin-right: 6px;
+            }
+        }
+
+        /* Efectos de hover mejorados */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
         }
     </style>
 </head>
-<body class="font-body">
+<body class="font-body antialiased">
     <div class="min-h-screen flex flex-col">
-        {{!-- Breadcrumb de navegación --}}
-        <div class="breadcrumb">
-            <a href="/api/v1/client-templates/{{clientId}}/pages">🏠 Inicio</a>
-            <span class="separator">/</span>
-            <span>{{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}</span>
+        {{!-- Breadcrumb mejorado --}}
+        <div class="enhanced-breadcrumb">
+            <div class="container mx-auto flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="/api/v1/client-templates/{{clientId}}/pages" class="breadcrumb-link hover-lift">
+                        <i class="fas fa-home mr-2"></i>
+                        Inicio
+                    </a>
+                    <span class="breadcrumb-separator">/</span>
+                    <h1 class="page-title">{{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">
+                        <i class="fas fa-keyboard mr-1"></i>
+                        Navegación por teclado disponible
+                    </span>
+                </div>
+            </div>
         </div>
         
-        {{!-- Navegación lateral de secciones --}}
-        <div class="section-navigation">
-            <div style="font-weight: bold; margin-bottom: 10px; text-align: center; font-size: 12px; color: #666;">
-                Secciones
+        {{!-- Navegación flotante mejorada --}}
+        <div class="floating-nav slide-in-right">
+            <div class="text-center mb-4">
+                <div class="text-xs font-bold text-gray-600 mb-2">
+                    <i class="fas fa-compass mr-1"></i>
+                    Navegación
+                </div>
+                <div class="w-8 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full"></div>
             </div>
             {{#each allSections}}
                 {{#if enabled}}
                 <a href="/api/v1/client-templates/{{../clientId}}/section/{{id}}" 
-                   class="section-nav-item {{#if (eq id ../currentSectionId)}}active{{/if}}">
+                   class="nav-item {{#if (eq id ../currentSectionId)}}active{{/if}} hover-lift">
+                    <span class="section-icon" style="background: {{#if (eq id ../currentSectionId)}}rgba(255,255,255,0.2){{else}}rgba(139, 92, 246, 0.1){{/if}};">
+                        {{#if (eq id "hero")}}🏠
+                        {{else if (eq id "about")}}👥
+                        {{else if (eq id "products")}}🛍️
+                        {{else if (eq id "services")}}⚙️
+                        {{else if (eq id "testimonials")}}💬
+                        {{else if (eq id "gallery")}}🖼️
+                        {{else if (eq id "contact")}}📞
+                        {{else if (eq id "cart")}}🛒
+                        {{else if (eq id "appointments")}}📅
+                        {{else if (eq id "stats")}}📊
+                        {{else}}📄
+                        {{/if}}
+                    </span>
                     {{getSectionDisplayName id}}
                 </a>
                 {{/if}}
             {{/each}}
         </div>
         
-        <main class="flex-1">
-            {{!-- Renderizar SOLO la sección actual --}}
-            {{#each sections}}
-                {{#if (eq id "hero")}}
-                    {{> sections/hero data=data}}
-                {{else if (eq id "about")}}
-                    {{> sections/about data=data}}
-                {{else if (eq id "products")}}
-                    {{> sections/products data=data}}
-                {{else if (eq id "services")}}
-                    {{> sections/services data=data}}
-                {{else if (eq id "testimonials")}}
-                    {{> sections/testimonials data=data}}
-                {{else if (eq id "gallery")}}
-                    {{> sections/gallery data=data}}
-                {{else if (eq id "contact")}}
-                    {{> sections/contact data=data}}
-                {{else if (eq id "cart")}}
-                    {{> sections/cart data=data}}
-                {{else if (eq id "appointments")}}
-                    {{> sections/appointments data=data}}
-                {{else if (eq id "stats")}}
-                    {{> sections/stats data=data}}
-                {{/if}}
-            {{/each}}
+        {{!-- Contenido principal --}}
+        <main class="main-content fade-in">
+            <div class="container mx-auto px-4">
+                {{!-- Renderizar SOLO la sección actual --}}
+                {{#each sections}}
+                    {{#if (eq id "hero")}}
+                        {{> sections/hero data=data}}
+                    {{else if (eq id "about")}}
+                        {{> sections/about data=data}}
+                    {{else if (eq id "products")}}
+                        {{> sections/products data=data}}
+                    {{else if (eq id "services")}}
+                        {{> sections/services data=data}}
+                    {{else if (eq id "testimonials")}}
+                        {{> sections/testimonials data=data}}
+                    {{else if (eq id "gallery")}}
+                        {{> sections/gallery data=data}}
+                    {{else if (eq id "contact")}}
+                        {{> sections/contact data=data}}
+                    {{else if (eq id "cart")}}
+                        {{> sections/cart data=data}}
+                    {{else if (eq id "appointments")}}
+                        {{> sections/appointments data=data}}
+                    {{else if (eq id "stats")}}
+                        {{> sections/stats data=data}}
+                    {{/if}}
+                {{/each}}
+            </div>
         </main>
         
-        {{!-- Footer simplificado para páginas individuales --}}
-        <footer class="bg-gray-900 text-white py-8">
-            <div class="container mx-auto px-4 text-center">
-                <p>&copy; {{currentYear}} {{company.name}}. Todos los derechos reservados.</p>
-                <div class="mt-4">
-                    <a href="/api/v1/client-templates/{{clientId}}/pages" class="text-blue-400 hover:text-blue-300">
-                        ← Volver al índice
-                    </a>
+        {{!-- Footer mejorado --}}
+        <footer class="enhanced-footer">
+            <div class="container mx-auto px-4">
+                <div class="footer-content">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold mb-2">{{company.name}}</h3>
+                        <p class="text-gray-300 text-sm">{{company.description}}</p>
+                    </div>
+                    
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">{{allSections.length}}</div>
+                            <div class="text-xs text-gray-400">Secciones</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-400">{{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}}</div>
+                            <div class="text-xs text-gray-400">Activas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-400">{{style}}</div>
+                            <div class="text-xs text-gray-400">Estilo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-6">
+                        <p class="text-gray-400 text-sm mb-4">
+                            &copy; {{currentYear}} {{company.name}}. Todos los derechos reservados.
+                        </p>
+                        <a href="/api/v1/client-templates/{{clientId}}/pages" class="footer-link hover-lift">
+                            <i class="fas fa-arrow-left"></i>
+                            Volver al índice
+                        </a>
+                    </div>
                 </div>
             </div>
         </footer>
@@ -177,7 +471,7 @@
         {{> scripts/colorido}}
     {{/if}}
     
-    {{!-- Script para funcionalidad de navegación --}}
+    {{!-- Script mejorado para funcionalidad de navegación --}}
     <script>
     // Datos globales
     window.allSections = {{{json allSections}}};
@@ -202,22 +496,58 @@
         return displayNames[sectionId] || sectionId;
     };
     
-    // Navegación con teclado
+    // Navegación con teclado mejorada
     document.addEventListener('keydown', function(e) {
         const enabledSections = window.allSections.filter(s => s.enabled);
         const currentIndex = enabledSections.findIndex(s => s.id === window.currentSectionId);
         
+        // Mostrar indicador visual de navegación
+        const showNavigationHint = (direction) => {
+            const hint = document.createElement('div');
+            hint.className = 'fixed top-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            hint.innerHTML = `<i class="fas fa-arrow-${direction} mr-2"></i>Navegando...`;
+            document.body.appendChild(hint);
+            
+            setTimeout(() => {
+                hint.remove();
+            }, 1000);
+        };
+        
         if (e.key === 'ArrowLeft' && currentIndex > 0) {
-            // Navegar a la sección anterior
-            const prevSection = enabledSections[currentIndex - 1];
-            window.location.href = `/api/v1/client-templates/${window.clientId}/section/${prevSection.id}`;
+            showNavigationHint('left');
+            setTimeout(() => {
+                const prevSection = enabledSections[currentIndex - 1];
+                window.location.href = `/api/v1/client-templates/${window.clientId}/section/${prevSection.id}`;
+            }, 300);
         } else if (e.key === 'ArrowRight' && currentIndex < enabledSections.length - 1) {
-            // Navegar a la siguiente sección
-            const nextSection = enabledSections[currentIndex + 1];
-            window.location.href = `/api/v1/client-templates/${window.clientId}/section/${nextSection.id}`;
+            showNavigationHint('right');
+            setTimeout(() => {
+                const nextSection = enabledSections[currentIndex + 1];
+                window.location.href = `/api/v1/client-templates/${window.clientId}/section/${nextSection.id}`;
+            }, 300);
         } else if (e.key === 'Home') {
-            // Ir al índice
-            window.location.href = `/api/v1/client-templates/${window.clientId}/pages`;
+            showNavigationHint('up');
+            setTimeout(() => {
+                window.location.href = `/api/v1/client-templates/${window.clientId}/pages`;
+            }, 300);
+        }
+    });
+    
+    // Efectos de entrada
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animar elementos al cargar
+        const animatedElements = document.querySelectorAll('.fade-in, .slide-in-right');
+        animatedElements.forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.1}s`;
+        });
+        
+        // Efecto de carga para la navegación
+        const nav = document.querySelector('.floating-nav');
+        if (nav) {
+            nav.classList.add('loading-animation');
+            setTimeout(() => {
+                nav.classList.remove('loading-animation');
+            }, 1000);
         }
     });
     
@@ -226,6 +556,23 @@
     console.log('   ← Flecha izquierda: Sección anterior');
     console.log('   → Flecha derecha: Siguiente sección');
     console.log('   Home: Volver al índice');
+    
+    // Tooltip para navegación
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap z-50';
+            tooltip.textContent = this.textContent.trim();
+            this.style.position = 'relative';
+            this.appendChild(tooltip);
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            const tooltip = this.querySelector('div');
+            if (tooltip) tooltip.remove();
+        });
+    });
     </script>
 </body>
 </html>
