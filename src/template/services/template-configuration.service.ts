@@ -343,9 +343,6 @@ export class TemplateConfigurationService {
       const config = await this.loadClientConfiguration(clientId);
       const uploadedImages: UploadedImage[] = await this.imageStorageService.getClientImages(clientId);
 
-      // Layout por estilo
-      const layoutTemplate = await this.loadLayoutTemplateForStyle(config.style);
-
       // Buscar sección solicitada. Si no existe, error.
       const section = config.sections.find(s => s.id === sectionId);
       if (!section) {
@@ -390,6 +387,9 @@ export class TemplateConfigurationService {
       };
 
       await this.registerPartials();
+      
+      // Usar el layout específico para páginas de secciones individuales
+      const layoutTemplate = await this.loadLayoutTemplate('section-page');
       const template = Handlebars.compile(layoutTemplate);
       return template(mergedData);
     } catch (error) {
@@ -648,6 +648,28 @@ export class TemplateConfigurationService {
       }
       return result;
     });
+
+    // Helper para sumar números
+    Handlebars.registerHelper('add', function(a: number, b: number) {
+      return a + b;
+    });
+
+    // Helper para obtener el nombre de visualización de una sección
+    Handlebars.registerHelper('getSectionDisplayName', function(sectionId: string) {
+      const displayNames = {
+        hero: "Inicio",
+        about: "Nosotros",
+        products: "Productos",
+        services: "Servicios",
+        testimonials: "Testimonios",
+        gallery: "Galería",
+        contact: "Contacto",
+        cart: "Carrito",
+        appointments: "Citas",
+        stats: "Estadísticas"
+      };
+      return displayNames[sectionId] || sectionId;
+    });
     
     console.log(`🔧 Handlebars helpers registered`);
     
@@ -672,7 +694,6 @@ export class TemplateConfigurationService {
   async renderClientMultipageIndex(clientId: string): Promise<string> {
     const config = await this.loadClientConfiguration(clientId);
     const uploadedImages: UploadedImage[] = await this.imageStorageService.getClientImages(clientId);
-    const layoutTemplate = await this.loadLayoutTemplateForStyle(config.style);
 
     // Procesar SOLO las secciones habilitadas para tener todos los datos disponibles
     const enabledSections = config.sections
@@ -688,14 +709,19 @@ export class TemplateConfigurationService {
 
     const processedCompany = await this.processImagesInData(config.company, clientId, uploadedImages);
 
-    // Construir una "sección" índice simple con links
+    // Construir una "sección" índice con datos mejorados
     const indexSection = {
       id: 'index',
       enabled: true,
       order: 0,
       data: {
         title: 'Secciones',
-        links: enabledSections.map(s => ({ id: s.id, href: `/api/v1/client-templates/${clientId}/section/${s.id}` }))
+        description: 'Navega por las diferentes secciones de ' + config.company.name,
+        links: enabledSections.map(s => ({ 
+          id: s.id, 
+          href: `/api/v1/client-templates/${clientId}/section/${s.id}`,
+          name: this.getSectionDisplayName(s.id)
+        }))
       }
     } as any;
 
@@ -714,6 +740,9 @@ export class TemplateConfigurationService {
     };
 
     await this.registerPartials();
+    
+    // Usar el layout específico para páginas de secciones individuales
+    const layoutTemplate = await this.loadLayoutTemplate('section-page');
     const template = Handlebars.compile(layoutTemplate);
     return template(mergedData);
   }
