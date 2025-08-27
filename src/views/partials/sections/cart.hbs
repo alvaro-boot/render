@@ -1,91 +1,569 @@
-<section id="cart" class="py-24 {{#if (eq style 'minimalista')}}bg-gray-50{{else}}bg-white{{/if}}">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-20">
-            <h2 class="text-5xl font-bold text-gray-900 mb-6">{{data.title}}</h2>
-            <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+<section id="cart" class="py-20 relative overflow-hidden">
+    {{!-- Efectos de fondo animados --}}
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        {{#if isMultiPage}}
+        <div class="mb-8 animate-fade-in-down">
+            <a href="/api/v1/client-templates/{{../clientId}}/pages" 
+               class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm text-gray-700 rounded-xl hover:bg-white/20 transition-all duration-300 border border-gray-200 hover:border-gray-300 hover:scale-105 shadow-lg">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver al índice
+            </a>
+        </div>
+        {{/if}}
+
+        {{!-- Header de la sección mejorado --}}
+        <div class="text-center mb-16 animate-fade-in-up">
+            <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-title">
+                <span class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    {{data.title}}
+                </span>
+            </h2>
+            {{#if data.subtitle}}
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
                 {{data.subtitle}}
             </p>
+            {{/if}}
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-12">
-            <!-- Carrito de Compras -->
-            <div class="lg:col-span-2">
-                <div class="{{#if (eq style 'moderno')}}glass-card{{else}}bg-white{{/if}} rounded-3xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Tu Carrito</h3>
-                    
-                    {{#if data.items}}
-                    <div class="space-y-6">
-                        {{#each data.items}}
-                        <div class="flex items-center space-x-4 p-4 border border-gray-200 rounded-2xl">
-                            <img src="{{image}}" alt="{{name}}" class="w-20 h-20 object-cover rounded-xl">
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-gray-900">{{name}}</h4>
-                                <p class="text-gray-600 text-sm">{{description}}</p>
-                                <div class="flex items-center space-x-4 mt-2">
-                                    <div class="flex items-center space-x-2">
-                                        <button class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">-</button>
-                                        <span class="w-8 text-center">{{quantity}}</span>
-                                        <button class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors">+</button>
-                                    </div>
-                                    <span class="text-lg font-bold {{#if (eq style 'moderno')}}modern-text-gradient{{else if (eq style 'colorido')}}colorful-text{{else}}elegant-text{{/if}}">${{price}}</span>
+        {{!-- Contenido principal del carrito --}}
+        <div class="grid lg:grid-cols-3 gap-8 animate-fade-in-up animation-delay-300">
+            {{!-- Lista de productos en el carrito --}}
+            <div class="lg:col-span-2 space-y-6">
+                {{#if data.items}}
+                    {{#each data.items}}
+                    <div class="cart-item group bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20 overflow-hidden">
+                        {{!-- Efecto de brillo en hover --}}
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                        
+                        <div class="relative z-10 flex items-center space-x-6">
+                            {{!-- Imagen del producto --}}
+                            <div class="flex-shrink-0">
+                                {{#if image}}
+                                <img src="{{image}}" alt="{{name}}" class="w-24 h-24 object-cover rounded-2xl group-hover:scale-110 transition-transform duration-300">
+                                {{else}}
+                                <div class="w-24 h-24 bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-box text-3xl text-purple-400 group-hover:animate-bounce"></i>
                                 </div>
+                                {{/if}}
                             </div>
-                            <button class="text-red-500 hover:text-red-700 transition-colors">
-                                <i class="text-xl">🗑️</i>
+
+                            {{!-- Información del producto --}}
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
+                                    {{name}}
+                                </h3>
+                                {{#if description}}
+                                <p class="text-gray-600 mt-1 group-hover:text-gray-700 transition-colors duration-300">
+                                    {{description}}
+                                </p>
+                                {{/if}}
+                                {{#if category}}
+                                <span class="inline-block px-3 py-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 text-sm font-semibold rounded-full mt-2">
+                                    {{category}}
+                                </span>
+                                {{/if}}
+                            </div>
+
+                            {{!-- Controles de cantidad --}}
+                            <div class="flex items-center space-x-3">
+                                <button class="quantity-btn w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 text-white rounded-xl flex items-center justify-center hover:from-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg" data-action="decrease">
+                                    <i class="fas fa-minus text-sm"></i>
+                                </button>
+                                <span class="quantity-display w-12 h-10 bg-gray-50 border border-gray-200 rounded-xl flex items-center justify-center font-semibold text-gray-900">
+                                    {{quantity}}
+                                </span>
+                                <button class="quantity-btn w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 text-white rounded-xl flex items-center justify-center hover:from-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg" data-action="increase">
+                                    <i class="fas fa-plus text-sm"></i>
+                                </button>
+                            </div>
+
+                            {{!-- Precio --}}
+                            <div class="text-right">
+                                <div class="text-2xl font-bold text-purple-600 group-hover:text-purple-700 transition-colors duration-300">
+                                    {{price}}
+                                </div>
+                                {{#if originalPrice}}
+                                <div class="text-sm text-gray-400 line-through">
+                                    {{originalPrice}}
+                                </div>
+                                {{/if}}
+                            </div>
+
+                            {{!-- Botón eliminar --}}
+                            <button class="remove-btn w-10 h-10 bg-gradient-to-br from-red-500 to-pink-500 text-white rounded-xl flex items-center justify-center hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-110 hover:shadow-lg" data-item-id="{{id}}">
+                                <i class="fas fa-trash text-sm"></i>
                             </button>
                         </div>
-                        {{/each}}
                     </div>
-                    {{else}}
-                    <div class="text-center py-12">
-                        <i class="text-6xl mb-4">🛒</i>
-                        <p class="text-gray-600 text-lg">Tu carrito está vacío</p>
-                        <a href="#products" class="btn btn-primary mt-4">Ver Productos</a>
+                    {{/each}}
+                {{else}}
+                    {{!-- Carrito vacío mejorado --}}
+                    <div class="text-center py-16 animate-fade-in-up">
+                        <div class="w-32 h-32 bg-gradient-to-br from-purple-100 to-blue-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-float">
+                            <i class="fas fa-shopping-cart text-4xl text-purple-400 animate-bounce"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Tu carrito está vacío</h3>
+                        <p class="text-gray-600 mb-8">Agrega algunos productos para comenzar tu compra</p>
+                        <a href="/api/v1/client-templates/{{../clientId}}/section/products" 
+                           class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl font-semibold text-lg overflow-hidden">
+                            {{!-- Efecto de brillo en hover --}}
+                            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+                            <span class="relative z-10 flex items-center">
+                                <i class="fas fa-shopping-bag mr-2 group-hover:animate-bounce"></i>
+                                Ver Productos
+                            </span>
+                        </a>
                     </div>
-                    {{/if}}
-                </div>
+                {{/if}}
             </div>
 
-            <!-- Resumen del Pedido -->
-            <div class="lg:col-span-1">
-                <div class="bg-gradient-to-br from-pink-50 to-green-50 rounded-3xl p-8 sticky top-8">
-                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Resumen del Pedido</h3>
+            {{!-- Resumen del carrito --}}
+            <div class="space-y-6">
+                {{!-- Resumen de compra --}}
+                <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/20">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-receipt mr-3 text-purple-600 animate-bounce"></i>
+                        Resumen de Compra
+                    </h3>
                     
-                    <div class="space-y-4 mb-6">
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Subtotal</span>
-                            <span class="font-semibold">${{data.subtotal}}</span>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-600">Subtotal ({{data.itemCount}} items)</span>
+                            <span class="font-semibold text-gray-900">{{data.subtotal}}</span>
                         </div>
-                        <div class="flex justify-between">
+                        
+                        {{#if data.discount}}
+                        <div class="flex justify-between items-center text-green-600">
+                            <span>Descuento</span>
+                            <span class="font-semibold">-{{data.discount}}</span>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if data.shipping}}
+                        <div class="flex justify-between items-center">
                             <span class="text-gray-600">Envío</span>
-                            <span class="font-semibold">${{data.shipping}}</span>
+                            <span class="font-semibold text-gray-900">{{data.shipping}}</span>
                         </div>
-                        <div class="flex justify-between">
+                        {{/if}}
+                        
+                        {{#if data.tax}}
+                        <div class="flex justify-between items-center">
                             <span class="text-gray-600">Impuestos</span>
-                            <span class="font-semibold">${{data.taxes}}</span>
+                            <span class="font-semibold text-gray-900">{{data.tax}}</span>
                         </div>
-                        <div class="border-t pt-4">
-                            <div class="flex justify-between">
-                                <span class="text-xl font-bold">Total</span>
-                                <span class="text-2xl font-bold elegant-text">${{data.total}}</span>
+                        {{/if}}
+                        
+                        <div class="border-t border-gray-200 pt-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold text-gray-900">Total</span>
+                                <span class="text-2xl font-bold text-purple-600">{{data.total}}</span>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <button class="w-full btn btn-primary btn-lg mb-4">
-                        Proceder al Pago
-                    </button>
+                {{!-- Cupón de descuento --}}
+                {{#if data.showCoupon}}
+                <div class="bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-2xl border border-white/20">
+                    <h4 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-tag mr-2 text-purple-600 animate-pulse"></i>
+                        Cupón de Descuento
+                    </h4>
                     
-                    <div class="text-center">
-                        <p class="text-sm text-gray-600">Pago seguro con</p>
-                        <div class="flex justify-center space-x-2 mt-2">
-                            <i class="text-2xl">💳</i>
-                            <i class="text-2xl">🔒</i>
-                            <i class="text-2xl">🛡️</i>
-                        </div>
+                    <div class="flex space-x-2">
+                        <input type="text" 
+                               placeholder="Código de cupón" 
+                               class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white">
+                        <button class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold">
+                            Aplicar
+                        </button>
                     </div>
+                </div>
+                {{/if}}
+
+                {{!-- Botón de checkout --}}
+                {{#if data.items}}
+                <button class="checkout-btn group relative w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 px-8 rounded-2xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl font-semibold text-lg overflow-hidden">
+                    {{!-- Efecto de brillo en hover --}}
+                    <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+                    <span class="relative z-10 flex items-center justify-center">
+                        <i class="fas fa-credit-card mr-2 group-hover:animate-bounce"></i>
+                        Proceder al Pago
+                    </span>
+                </button>
+                {{/if}}
+
+                {{!-- Información adicional --}}
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 border border-purple-100">
+                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                        <i class="fas fa-shield-alt mr-2 text-purple-600 animate-float"></i>
+                        Compra Segura
+                    </h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Pago seguro con SSL
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Garantía de devolución
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            Envío rápido
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+
+        {{!-- Productos recomendados --}}
+        {{#if data.recommendations}}
+        <div class="mt-20 animate-fade-in-up animation-delay-500">
+            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
+                Productos Recomendados
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {{#each data.recommendations}}
+                <div class="recommendation-card group bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 overflow-hidden border border-white/20">
+                    {{!-- Imagen del producto --}}
+                    <div class="relative overflow-hidden">
+                        {{#if image}}
+                        <img src="{{image}}" alt="{{name}}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
+                        {{else}}
+                        <div class="w-full h-48 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+                            <i class="fas fa-box text-4xl text-purple-400 group-hover:scale-125 transition-transform duration-500"></i>
+                        </div>
+                        {{/if}}
+                        
+                        {{!-- Efecto de brillo en hover --}}
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                    </div>
+                    
+                    {{!-- Contenido del producto --}}
+                    <div class="p-6">
+                        <h4 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">
+                            {{name}}
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 group-hover:text-gray-700 transition-colors duration-300">
+                            {{description}}
+                        </p>
+                        
+                        <div class="flex items-center justify-between">
+                            <div class="text-xl font-bold text-purple-600">{{price}}</div>
+                            <button class="add-to-cart-btn px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                                <i class="fas fa-plus mr-1"></i>
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
     </div>
 </section>
+
+<style>
+@keyframes blob {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-10px, -10px) scale(1.1); }
+    50% { transform: translate(10px, -5px) scale(0.9); }
+    75% { transform: translate(-5px, 10px) scale(1.05); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+    50% { transform: translateY(-10px) rotate(180deg); opacity: 1; }
+}
+
+@keyframes titleSlide {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    0% { transform: translateY(-30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) skewX(-12deg); }
+    100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-blob {
+    animation: blob 7s infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-title {
+    animation: titleSlide 1s ease-out;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.animate-shine {
+    animation: shine 2s ease-in-out infinite;
+}
+
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }
+
+/* Optimizaciones de rendimiento */
+@media (prefers-reduced-motion: reduce) {
+    .animate-blob, .animate-float, .animate-title, .animate-fade-in-up, .animate-fade-in-down, .animate-shine {
+        animation: none;
+    }
+}
+
+/* Efectos de hover para elementos del carrito */
+.cart-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+}
+
+/* Efectos para botones de cantidad */
+.quantity-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Efectos para botón eliminar */
+.remove-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Line clamp para descripciones */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Efectos de hover para tarjetas de recomendación */
+.recommendation-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.15);
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Efectos de parallax para elementos de fondo
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.absolute.inset-0.overflow-hidden > div');
+        
+        parallaxElements.forEach((element, index) => {
+            const speed = 0.3 + (index * 0.1);
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+    
+    // Controles de cantidad
+    const quantityBtns = document.querySelectorAll('.quantity-btn');
+    quantityBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            const quantityDisplay = this.parentElement.querySelector('.quantity-display');
+            let currentQuantity = parseInt(quantityDisplay.textContent);
+            
+            if (action === 'increase') {
+                currentQuantity++;
+            } else if (action === 'decrease' && currentQuantity > 1) {
+                currentQuantity--;
+            }
+            
+            quantityDisplay.textContent = currentQuantity;
+            
+            // Efecto de animación
+            quantityDisplay.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                quantityDisplay.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Actualizar totales (simulado)
+            updateCartTotals();
+        });
+    });
+    
+    // Botón eliminar
+    const removeBtns = document.querySelectorAll('.remove-btn');
+    removeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const cartItem = this.closest('.cart-item');
+            
+            // Efecto de eliminación
+            cartItem.style.transform = 'translateX(100%)';
+            cartItem.style.opacity = '0';
+            
+            setTimeout(() => {
+                cartItem.remove();
+                updateCartTotals();
+                
+                // Verificar si el carrito está vacío
+                const remainingItems = document.querySelectorAll('.cart-item');
+                if (remainingItems.length === 0) {
+                    showEmptyCart();
+                }
+            }, 300);
+        });
+    });
+    
+    // Botón de checkout
+    const checkoutBtn = document.querySelector('.checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            
+            // Efecto de carga
+            this.innerHTML = `
+                <span class="relative z-10 flex items-center justify-center">
+                    <i class="fas fa-spinner fa-spin mr-2"></i>
+                    Procesando...
+                </span>
+            `;
+            this.disabled = true;
+            
+            // Simular procesamiento
+            setTimeout(() => {
+                this.innerHTML = `
+                    <span class="relative z-10 flex items-center justify-center">
+                        <i class="fas fa-check mr-2"></i>
+                        ¡Redirigiendo!
+                    </span>
+                `;
+                this.classList.add('bg-green-600');
+                
+                // Simular redirección
+                setTimeout(() => {
+                    alert('Redirigiendo al checkout...');
+                    this.innerHTML = originalText;
+                    this.classList.remove('bg-green-600');
+                    this.disabled = false;
+                }, 2000);
+            }, 2000);
+        });
+    }
+    
+    // Botones de agregar al carrito (recomendaciones)
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            
+            // Efecto de agregado
+            this.innerHTML = `
+                <i class="fas fa-check mr-1"></i>
+                Agregado
+            `;
+            this.classList.add('bg-green-600');
+            
+            setTimeout(() => {
+                this.innerHTML = originalText;
+                this.classList.remove('bg-green-600');
+            }, 1500);
+        });
+    });
+    
+    // Función para actualizar totales (simulada)
+    function updateCartTotals() {
+        const quantities = document.querySelectorAll('.quantity-display');
+        let totalItems = 0;
+        
+        quantities.forEach(qty => {
+            totalItems += parseInt(qty.textContent);
+        });
+        
+        // Actualizar contador de items
+        const itemCountElement = document.querySelector('.text-gray-600');
+        if (itemCountElement) {
+            itemCountElement.textContent = `Subtotal (${totalItems} items)`;
+        }
+    }
+    
+    // Función para mostrar carrito vacío
+    function showEmptyCart() {
+        const cartContainer = document.querySelector('.lg\\:col-span-2');
+        cartContainer.innerHTML = `
+            <div class="text-center py-16 animate-fade-in-up">
+                <div class="w-32 h-32 bg-gradient-to-br from-purple-100 to-blue-100 rounded-full flex items-center justify-center mx-auto mb-8 animate-float">
+                    <i class="fas fa-shopping-cart text-4xl text-purple-400 animate-bounce"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Tu carrito está vacío</h3>
+                <p class="text-gray-600 mb-8">Agrega algunos productos para comenzar tu compra</p>
+                <a href="/api/v1/client-templates/{{../clientId}}/section/products" 
+                   class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl font-semibold text-lg overflow-hidden">
+                    <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
+                    <span class="relative z-10 flex items-center">
+                        <i class="fas fa-shopping-bag mr-2 group-hover:animate-bounce"></i>
+                        Ver Productos
+                    </span>
+                </a>
+            </div>
+        `;
+    }
+    
+    // Animación de entrada escalonada
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                entry.target.style.animationDelay = `${index * 0.1}s`;
+                entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    const allElements = document.querySelectorAll('.cart-item, .recommendation-card');
+    allElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // Efectos de hover mejorados
+    const hoverElements = document.querySelectorAll('.cart-item, .recommendation-card');
+    hoverElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-4px) scale(1.02)';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+</script>

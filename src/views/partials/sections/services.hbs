@@ -35,91 +35,75 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up animation-delay-300">
             {{#each data.services}}
             <div class="service-card group bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 overflow-hidden border border-white/20">
-                {{!-- Imagen del servicio --}}
-                <div class="relative overflow-hidden">
-                    {{#if image}}
-                    <img src="{{image}}" alt="{{name}}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500">
-                    {{else}}
-                    <div class="w-full h-48 bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
-                        <i class="fas fa-cogs text-6xl text-purple-400 group-hover:scale-125 transition-transform duration-500"></i>
-                    </div>
-                    {{/if}}
-                    
-                    {{!-- Badge de categoría --}}
-                    {{#if category}}
-                    <div class="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-semibold rounded-full">
-                        {{category}}
-                    </div>
-                    {{/if}}
-                    
-                    {{!-- Badge de popular --}}
-                    {{#if popular}}
-                    <div class="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-sm font-semibold rounded-full animate-pulse">
-                        Popular
-                    </div>
-                    {{/if}}
-                    
-                    {{!-- Efecto de brillo en hover --}}
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                </div>
-
-                {{!-- Contenido del servicio --}}
-                <div class="p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                            <i class="text-xl text-white group-hover:animate-bounce">{{icon}}</i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
-                            {{name}}
-                        </h3>
+                {{!-- Efecto de brillo en hover --}}
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
+                {{!-- Header del servicio --}}
+                <div class="relative p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
                     </div>
                     
-                    {{#if description}}
-                    <p class="text-gray-600 mb-4 line-clamp-3 group-hover:text-gray-700 transition-colors duration-300">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors duration-300">
+                        {{title}}
+                    </h3>
+                    
+                    <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                         {{description}}
                     </p>
-                    {{/if}}
+                </div>
 
-                    {{!-- Características del servicio --}}
-                    {{#if features}}
-                    <div class="mb-4">
-                        <ul class="space-y-1">
-                            {{#each features}}
-                            <li class="flex items-center text-sm text-gray-600">
-                                <i class="fas fa-check text-green-500 mr-2 group-hover:animate-bounce"></i>
-                                {{this}}
-                            </li>
-                            {{/each}}
-                        </ul>
+                {{!-- Características del servicio --}}
+                {{#if features}}
+                <div class="px-8 pb-6">
+                    <ul class="space-y-3">
+                        {{#each features}}
+                        <li class="flex items-center text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            <i class="fas fa-check text-green-500 mr-3 group-hover:animate-bounce"></i>
+                            {{this}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+
+                {{!-- Precio y CTA --}}
+                <div class="px-8 pb-8">
+                    {{#if price}}
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <span class="text-3xl font-bold text-purple-600 group-hover:text-purple-700 transition-colors duration-300">
+                                {{price}}
+                            </span>
+                            {{#if originalPrice}}
+                            <span class="text-lg text-gray-400 line-through ml-2">
+                                {{originalPrice}}
+                            </span>
+                            {{/if}}
+                        </div>
+                        {{#if badge}}
+                        <span class="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full animate-pulse">
+                            {{badge}}
+                        </span>
+                        {{/if}}
                     </div>
                     {{/if}}
 
-                    {{!-- Precio y botones --}}
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            {{#if originalPrice}}
-                            <span class="text-lg font-bold text-purple-600">{{price}}</span>
-                            <span class="text-sm text-gray-400 line-through">{{originalPrice}}</span>
-                            {{else}}
-                            <span class="text-2xl font-bold text-purple-600">{{price}}</span>
-                            {{/if}}
-                        </div>
+                    {{!-- Botones de acción --}}
+                    <div class="flex space-x-3">
+                        {{#if showDetailsButton}}
+                        <button class="service-details-btn flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            Ver Detalles
+                        </button>
+                        {{/if}}
                         
-                        <div class="flex space-x-2">
-                            {{#if data.showDetailsButton}}
-                            <button class="details-btn px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
-                                <i class="fas fa-eye mr-1"></i>
-                                Ver
-                            </button>
-                            {{/if}}
-                            
-                            {{#if data.showContactButton}}
-                            <button class="contact-btn px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
-                                <i class="fas fa-phone mr-1"></i>
-                                Contactar
-                            </button>
-                            {{/if}}
-                        </div>
+                        {{#if showBookButton}}
+                        <button class="service-book-btn flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                            <i class="fas fa-calendar-check mr-2"></i>
+                            Reservar
+                        </button>
+                        {{/if}}
                     </div>
                 </div>
 
@@ -129,27 +113,21 @@
             {{/each}}
         </div>
 
-        {{!-- Sección de proceso de trabajo --}}
-        {{#if data.process}}
-        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-12 animate-fade-in-up animation-delay-400 relative overflow-hidden">
+        {{!-- Sección de características adicionales --}}
+        {{#if data.features}}
+        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-12 animate-fade-in-up animation-delay-500 relative overflow-hidden">
             {{!-- Efectos de fondo --}}
             <div class="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-blue-100/50"></div>
             <div class="relative z-10">
                 <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
-                    Nuestro Proceso de Trabajo
+                    ¿Por qué elegir nuestros servicios?
                 </h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    {{#each data.process}}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {{#each data.features}}
                     <div class="text-center group">
-                        <div class="relative mb-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                                <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
-                            </div>
-                            {{!-- Número del paso --}}
-                            <div class="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                {{add @index 1}}
-                            </div>
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
                         </div>
                         <h4 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">{{title}}</h4>
                         <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{description}}</p>
@@ -162,7 +140,7 @@
 
         {{!-- Sección de testimonios de servicios --}}
         {{#if data.testimonials}}
-        <div class="mt-20 animate-fade-in-up animation-delay-500">
+        <div class="mt-20 animate-fade-in-up animation-delay-600">
             <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
                 Lo que dicen nuestros clientes
             </h3>
@@ -180,7 +158,7 @@
                         {{/if}}
                         <div>
                             <h4 class="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">{{name}}</h4>
-                            <p class="text-sm text-gray-600">{{position}}</p>
+                            <p class="text-sm text-gray-600">{{service}}</p>
                         </div>
                     </div>
                     
@@ -190,9 +168,7 @@
                         {{#times rating}}
                         <i class="fas fa-star text-yellow-400 mr-1 group-hover:animate-bounce"></i>
                         {{/times}}
-                        {{#times (subtract 5 rating)}}
-                        <i class="fas fa-star text-gray-300 mr-1"></i>
-                        {{/times}}
+                        <span class="ml-2 text-sm text-gray-500">({{rating}}/5)</span>
                     </div>
                 </div>
                 {{/each}}
@@ -200,24 +176,24 @@
         </div>
         {{/if}}
 
-        {{!-- Sección de características adicionales --}}
-        {{#if data.features}}
-        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-12 animate-fade-in-up animation-delay-600 relative overflow-hidden">
+        {{!-- Sección de estadísticas --}}
+        {{#if data.stats}}
+        <div class="mt-20 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 text-white animate-fade-in-up animation-delay-700 relative overflow-hidden">
             {{!-- Efectos de fondo --}}
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-blue-100/50"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-700/50 to-blue-700/50"></div>
             <div class="relative z-10">
-                <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
-                    ¿Por qué elegir nuestros servicios?
+                <h3 class="text-3xl font-bold mb-8 text-center">
+                    Nuestros Números
                 </h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {{#each data.features}}
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    {{#each data.stats}}
                     <div class="text-center group">
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
                         </div>
-                        <h4 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">{{title}}</h4>
-                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{description}}</p>
+                        <div class="text-3xl font-bold mb-2 counter" data-target="{{number}}">0</div>
+                        <div class="text-white/90 group-hover:text-white transition-colors duration-300">{{label}}</div>
                     </div>
                     {{/each}}
                 </div>
@@ -227,15 +203,15 @@
 
         {{!-- CTA final --}}
         {{#if data.cta}}
-        <div class="mt-20 text-center animate-fade-in-up animation-delay-700">
-            <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 text-white relative overflow-hidden">
+        <div class="mt-20 text-center animate-fade-in-up animation-delay-800">
+            <div class="bg-gradient-to-r from-green-500 to-emerald-500 rounded-3xl p-12 text-white relative overflow-hidden">
                 {{!-- Efectos de fondo --}}
-                <div class="absolute inset-0 bg-gradient-to-br from-purple-700/50 to-blue-700/50"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-green-600/50 to-emerald-600/50"></div>
                 <div class="relative z-10">
                     <h3 class="text-3xl font-bold mb-4">{{data.cta.title}}</h3>
                     <p class="text-xl mb-8 opacity-90">{{data.cta.description}}</p>
                     <a href="{{data.cta.button.href}}" 
-                       class="group relative inline-flex items-center px-8 py-4 bg-white text-purple-600 rounded-2xl hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl font-semibold text-lg overflow-hidden">
+                       class="group relative inline-flex items-center px-8 py-4 bg-white text-green-600 rounded-2xl hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl font-semibold text-lg overflow-hidden">
                         {{!-- Efecto de brillo en hover --}}
                         <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
                         <span class="relative z-10">{{data.cta.button.text}}</span>
@@ -311,6 +287,7 @@
 .animation-delay-500 { animation-delay: 0.5s; }
 .animation-delay-600 { animation-delay: 0.6s; }
 .animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }
 
@@ -321,18 +298,16 @@
     }
 }
 
-/* Efectos de hover para botones */
-.details-btn:hover, .contact-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+/* Efectos de hover para tarjetas de servicio */
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.15);
 }
 
-/* Line clamp para descripciones */
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+/* Efectos de hover para botones de servicio */
+.service-details-btn:hover, .service-book-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
 }
 </style>
 
@@ -349,53 +324,104 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Efectos de hover mejorados para tarjetas de servicios
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02)';
+    // Botones de detalles de servicio
+    const detailsBtns = document.querySelectorAll('.service-details-btn');
+    detailsBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceCard = this.closest('.service-card');
+            const serviceTitle = serviceCard.querySelector('h3').textContent;
+            
+            // Efecto de click
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Simular apertura de detalles
+            showNotification(`Abriendo detalles de ${serviceTitle}...`, 'info');
+        });
+    });
+    
+    // Botones de reserva de servicio
+    const bookBtns = document.querySelectorAll('.service-book-btn');
+    bookBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const serviceCard = this.closest('.service-card');
+            const serviceTitle = serviceCard.querySelector('h3').textContent;
+            
+            // Efecto de click
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Simular redirección a reserva
+            showNotification(`Redirigiendo a reserva de ${serviceTitle}...`, 'success');
+        });
+    });
+    
+    // Función de notificación
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 px-6 py-3 rounded-xl text-white font-semibold z-50 transform translate-x-full transition-transform duration-300`;
+        
+        switch(type) {
+            case 'success':
+                notification.style.background = 'linear-gradient(to right, #10b981, #059669)';
+                break;
+            case 'info':
+                notification.style.background = 'linear-gradient(to right, #3b82f6, #2563eb)';
+                break;
+            default:
+                notification.style.background = 'linear-gradient(to right, #6b7280, #4b5563)';
+        }
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+    
+    // Animación de contadores
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const increment = target / 100;
+        let current = 0;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current);
+                setTimeout(updateCounter, 20);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        
+        // Iniciar animación cuando el elemento sea visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
         });
         
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
+        observer.observe(counter);
     });
     
-    // Efectos para botones de servicios
-    const detailBtns = document.querySelectorAll('.details-btn');
-    const contactBtns = document.querySelectorAll('.contact-btn');
-    
-    detailBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Efecto de click
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-            
-            // Aquí puedes agregar lógica para mostrar detalles del servicio
-            console.log('Ver detalles del servicio');
-        });
-    });
-    
-    contactBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Efecto de click
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-            
-            // Aquí puedes agregar lógica para contactar
-            console.log('Contactar servicio');
-        });
-    });
-    
-    // Animación de entrada escalonada para servicios
+    // Animación de entrada escalonada
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -411,19 +437,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    serviceCards.forEach(card => {
-        observer.observe(card);
+    const allElements = document.querySelectorAll('.service-card, .testimonial-card');
+    allElements.forEach(element => {
+        observer.observe(element);
     });
     
-    // Efectos para testimonios
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    testimonialCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-4px) scale(1.02)';
+    // Efectos de hover mejorados
+    const hoverElements = document.querySelectorAll('.service-card, .testimonial-card');
+    hoverElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
         });
         
-        card.addEventListener('mouseleave', function() {
+        element.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+    
+    // Efectos de estrellas animadas
+    const stars = document.querySelectorAll('.fa-star');
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseenter', function() {
+            this.style.animation = 'bounce 0.6s ease-in-out';
+        });
+        
+        star.addEventListener('animationend', function() {
+            this.style.animation = '';
+        });
+    });
+    
+    // Efectos de click para tarjetas de servicio
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // No activar si se hizo clic en un botón
+            if (e.target.closest('button')) return;
+            
+            const title = this.querySelector('h3').textContent;
+            showNotification(`Vista previa de ${title}`, 'info');
         });
     });
 });

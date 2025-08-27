@@ -35,57 +35,65 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up animation-delay-300">
             {{#each data.testimonials}}
             <div class="testimonial-card group bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 overflow-hidden border border-white/20">
+                {{!-- Efecto de brillo en hover --}}
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
                 {{!-- Header del testimonio --}}
-                <div class="p-6">
-                    <div class="flex items-center mb-4">
-                        {{#if avatar}}
-                        <img src="{{avatar}}" alt="{{name}}" class="w-16 h-16 rounded-full mr-4 group-hover:scale-110 transition-transform duration-300 border-4 border-purple-100 group-hover:border-purple-300">
-                        {{else}}
-                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                            <i class="fas fa-user text-2xl text-white group-hover:animate-bounce"></i>
-                        </div>
-                        {{/if}}
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">{{name}}</h3>
-                            {{#if position}}
-                            <p class="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{{position}}</p>
-                            {{/if}}
-                            {{#if company}}
-                            <p class="text-xs text-purple-500 font-semibold">{{company}}</p>
-                            {{/if}}
-                        </div>
+                <div class="relative p-8">
+                    {{!-- Comillas decorativas --}}
+                    <div class="absolute top-6 left-6 text-4xl text-purple-200 group-hover:text-purple-300 transition-colors duration-300">
+                        <i class="fas fa-quote-left"></i>
                     </div>
-
+                    
                     {{!-- Contenido del testimonio --}}
-                    <div class="mb-4">
-                        <div class="flex items-center mb-3">
-                            {{#times rating}}
-                            <i class="fas fa-star text-yellow-400 mr-1 group-hover:animate-bounce" style="animation-delay: {{multiply @index 0.1}}s;"></i>
-                            {{/times}}
-                            {{#times (subtract 5 rating)}}
-                            <i class="fas fa-star text-gray-300 mr-1"></i>
-                            {{/times}}
-                            <span class="ml-2 text-sm text-gray-500">({{rating}}/5)</span>
+                    <div class="mt-8">
+                        <p class="text-gray-700 leading-relaxed italic group-hover:text-gray-800 transition-colors duration-300">
+                            "{{content}}"
+                        </p>
+                    </div>
+                </div>
+
+                {{!-- Información del cliente --}}
+                <div class="px-8 pb-8">
+                    <div class="flex items-center space-x-4">
+                        {{!-- Avatar del cliente --}}
+                        <div class="flex-shrink-0">
+                            {{#if avatar}}
+                            <img src="{{avatar}}" alt="{{name}}" class="w-16 h-16 rounded-full object-cover group-hover:scale-110 transition-transform duration-300 border-4 border-white shadow-lg">
+                            {{else}}
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border-4 border-white shadow-lg">
+                                <i class="fas fa-user text-2xl text-white group-hover:animate-bounce"></i>
+                            </div>
+                            {{/if}}
                         </div>
                         
-                        <blockquote class="text-gray-700 italic leading-relaxed group-hover:text-gray-800 transition-colors duration-300">
-                            "{{content}}"
-                        </blockquote>
+                        {{!-- Información del cliente --}}
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors duration-300">
+                                {{name}}
+                            </h4>
+                            {{#if position}}
+                            <p class="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                {{position}}
+                            </p>
+                            {{/if}}
+                            {{#if company}}
+                            <p class="text-sm text-purple-600 font-semibold group-hover:text-purple-700 transition-colors duration-300">
+                                {{company}}
+                            </p>
+                            {{/if}}
+                        </div>
                     </div>
-
-                    {{!-- Fecha y categoría --}}
-                    <div class="flex items-center justify-between text-sm text-gray-500">
-                        {{#if date}}
-                        <span class="flex items-center">
-                            <i class="fas fa-calendar mr-1 group-hover:animate-pulse"></i>
-                            {{date}}
-                        </span>
-                        {{/if}}
-                        {{#if category}}
-                        <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-xs font-semibold group-hover:bg-purple-200 transition-colors duration-300">
-                            {{category}}
-                        </span>
-                        {{/if}}
+                    
+                    {{!-- Calificación con estrellas --}}
+                    <div class="flex items-center mt-4">
+                        {{#times rating}}
+                        <i class="fas fa-star text-yellow-400 mr-1 group-hover:animate-bounce transition-all duration-300"></i>
+                        {{/times}}
+                        {{#times (subtract 5 rating)}}
+                        <i class="fas fa-star text-gray-300 mr-1"></i>
+                        {{/times}}
+                        <span class="ml-2 text-sm text-gray-500 font-semibold">({{rating}}/5)</span>
                     </div>
                 </div>
 
@@ -95,23 +103,23 @@
             {{/each}}
         </div>
 
-        {{!-- Estadísticas de satisfacción --}}
+        {{!-- Sección de estadísticas de satisfacción --}}
         {{#if data.stats}}
-        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-12 animate-fade-in-up animation-delay-400 relative overflow-hidden">
+        <div class="mt-20 bg-gradient-to-r from-purple-50 to-blue-50 rounded-3xl p-12 animate-fade-in-up animation-delay-500 relative overflow-hidden">
             {{!-- Efectos de fondo --}}
             <div class="absolute inset-0 bg-gradient-to-br from-purple-100/50 to-blue-100/50"></div>
             <div class="relative z-10">
                 <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
-                    Estadísticas de Satisfacción
+                    Nuestros Números de Satisfacción
                 </h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {{#each data.stats}}
                     <div class="text-center group">
-                        <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                            <i class="text-3xl text-white group-hover:animate-bounce">{{icon}}</i>
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                            <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
                         </div>
-                        <div class="text-4xl font-bold text-purple-600 mb-2 counter" data-target="{{number}}">0</div>
+                        <div class="text-3xl font-bold text-purple-600 mb-2 counter" data-target="{{number}}">0</div>
                         <div class="text-gray-600 group-hover:text-purple-600 transition-colors duration-300">{{label}}</div>
                     </div>
                     {{/each}}
@@ -120,32 +128,36 @@
         </div>
         {{/if}}
 
-        {{!-- Sección de clientes destacados --}}
-        {{#if data.featuredClients}}
-        <div class="mt-20 animate-fade-in-up animation-delay-500">
+        {{!-- Sección de características destacadas --}}
+        {{#if data.features}}
+        <div class="mt-20 animate-fade-in-up animation-delay-600">
             <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
-                Nuestros Clientes Destacados
+                ¿Por qué nuestros clientes nos eligen?
             </h3>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-                {{#each data.featuredClients}}
-                <div class="client-logo group bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20">
-                    {{#if logo}}
-                    <img src="{{logo}}" alt="{{name}}" class="w-full h-12 object-contain group-hover:scale-110 transition-transform duration-300">
-                    {{else}}
-                    <div class="w-full h-12 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-building text-2xl text-purple-400 group-hover:animate-pulse"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {{#each data.features}}
+                <div class="feature-card group bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
                     </div>
-                    {{/if}}
+                    
+                    <h4 class="text-xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors duration-300">
+                        {{title}}
+                    </h4>
+                    
+                    <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                        {{description}}
+                    </p>
                 </div>
                 {{/each}}
             </div>
         </div>
         {{/if}}
 
-        {{!-- CTA para dejar testimonio --}}
+        {{!-- Sección de CTA para dejar testimonio --}}
         {{#if data.cta}}
-        <div class="mt-20 text-center animate-fade-in-up animation-delay-600">
+        <div class="mt-20 text-center animate-fade-in-up animation-delay-700">
             <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 text-white relative overflow-hidden">
                 {{!-- Efectos de fondo --}}
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-700/50 to-blue-700/50"></div>
@@ -160,6 +172,61 @@
                         <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300 relative z-10"></i>
                     </a>
                 </div>
+            </div>
+        </div>
+        {{/if}}
+
+        {{!-- Sección de testimonios destacados --}}
+        {{#if data.featured}}
+        <div class="mt-20 animate-fade-in-up animation-delay-800">
+            <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center animate-title">
+                Testimonios Destacados
+            </h3>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {{#each data.featured}}
+                <div class="featured-testimonial group bg-gradient-to-br from-purple-600 to-blue-600 rounded-3xl p-8 text-white shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden">
+                    {{!-- Efectos de fondo --}}
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-700/50 to-blue-700/50"></div>
+                    <div class="relative z-10">
+                        {{!-- Comillas decorativas --}}
+                        <div class="text-6xl text-white/20 mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        
+                        {{!-- Contenido --}}
+                        <p class="text-lg leading-relaxed mb-6 group-hover:text-white/90 transition-colors duration-300">
+                            "{{content}}"
+                        </p>
+                        
+                        {{!-- Información del cliente --}}
+                        <div class="flex items-center space-x-4">
+                            {{#if avatar}}
+                            <img src="{{avatar}}" alt="{{name}}" class="w-12 h-12 rounded-full object-cover group-hover:scale-110 transition-transform duration-300 border-2 border-white/50">
+                            {{else}}
+                            <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border-2 border-white/50">
+                                <i class="fas fa-user text-white"></i>
+                            </div>
+                            {{/if}}
+                            
+                            <div>
+                                <h4 class="font-bold group-hover:text-white transition-colors duration-300">{{name}}</h4>
+                                {{#if position}}
+                                <p class="text-sm text-white/80 group-hover:text-white/90 transition-colors duration-300">{{position}}</p>
+                                {{/if}}
+                            </div>
+                        </div>
+                        
+                        {{!-- Calificación --}}
+                        <div class="flex items-center mt-4">
+                            {{#times rating}}
+                            <i class="fas fa-star text-yellow-300 mr-1 group-hover:animate-bounce"></i>
+                            {{/times}}
+                            <span class="ml-2 text-sm text-white/80">({{rating}}/5)</span>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
             </div>
         </div>
         {{/if}}
@@ -228,6 +295,8 @@
 .animation-delay-400 { animation-delay: 0.4s; }
 .animation-delay-500 { animation-delay: 0.5s; }
 .animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
 .animation-delay-2000 { animation-delay: 2s; }
 .animation-delay-4000 { animation-delay: 4s; }
 
@@ -238,16 +307,22 @@
     }
 }
 
-/* Efectos de hover para testimonios */
+/* Efectos de hover para tarjetas de testimonio */
 .testimonial-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(139, 92, 246, 0.15);
 }
 
-/* Efectos para logos de clientes */
-.client-logo:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 15px 30px rgba(139, 92, 246, 0.15);
+/* Efectos de hover para tarjetas de características */
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+}
+
+/* Efectos de hover para testimonios destacados */
+.featured-testimonial:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 60px rgba(139, 92, 246, 0.2);
 }
 </style>
 
@@ -294,31 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(counter);
     });
     
-    // Efectos de hover mejorados para testimonios
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    testimonialCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // Efectos para logos de clientes
-    const clientLogos = document.querySelectorAll('.client-logo');
-    clientLogos.forEach(logo => {
-        logo.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-4px) scale(1.05)';
-        });
-        
-        logo.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-        });
-    });
-    
-    // Animación de entrada escalonada para testimonios
+    // Animación de entrada escalonada
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -334,8 +385,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    testimonialCards.forEach(card => {
-        observer.observe(card);
+    const allElements = document.querySelectorAll('.testimonial-card, .feature-card, .featured-testimonial');
+    allElements.forEach(element => {
+        observer.observe(element);
+    });
+    
+    // Efectos de hover mejorados
+    const hoverElements = document.querySelectorAll('.testimonial-card, .feature-card, .featured-testimonial');
+    hoverElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
     });
     
     // Efectos de estrellas animadas
@@ -347,6 +411,75 @@ document.addEventListener('DOMContentLoaded', function() {
         
         star.addEventListener('animationend', function() {
             this.style.animation = '';
+        });
+    });
+    
+    // Efectos de click para tarjetas de testimonio
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    testimonialCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const name = this.querySelector('h4').textContent;
+            const content = this.querySelector('p').textContent;
+            
+            // Simular apertura de testimonio completo
+            showNotification(`Vista previa del testimonio de ${name}`, 'info');
+        });
+    });
+    
+    // Función de notificación
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 px-6 py-3 rounded-xl text-white font-semibold z-50 transform translate-x-full transition-transform duration-300`;
+        
+        switch(type) {
+            case 'success':
+                notification.style.background = 'linear-gradient(to right, #10b981, #059669)';
+                break;
+            case 'info':
+                notification.style.background = 'linear-gradient(to right, #3b82f6, #2563eb)';
+                break;
+            default:
+                notification.style.background = 'linear-gradient(to right, #6b7280, #4b5563)';
+        }
+        
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+    
+    // Efectos de hover para avatares
+    const avatars = document.querySelectorAll('img[src*="avatar"], .w-16.h-16, .w-12.h-12');
+    avatars.forEach(avatar => {
+        avatar.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+        });
+        
+        avatar.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+    
+    // Efectos de hover para comillas
+    const quotes = document.querySelectorAll('.fa-quote-left');
+    quotes.forEach(quote => {
+        quote.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.2) rotate(-10deg)';
+            this.style.color = 'rgba(139, 92, 246, 0.4)';
+        });
+        
+        quote.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+            this.style.color = '';
         });
     });
 });
