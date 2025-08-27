@@ -3,8 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{company.name}} | {{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}</title>
+    
+    {{!-- Meta Tags SEO Dinámicos --}}
+    <title>{{#if data.title}}{{data.title}} | {{company.name}}{{else}}{{company.name}} | {{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}{{/if}}</title>
+    <meta name="description" content="{{#if data.description}}{{data.description}}{{else}}{{company.description}}{{/if}}">
+    <meta name="keywords" content="{{#if data.keywords}}{{data.keywords}}{{else}}{{company.name}}, {{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}sitio web{{/if}}{{/if}}">
+    <meta name="author" content="{{company.name}}">
+    <meta name="robots" content="index, follow">
+    
+    {{!-- Open Graph / Facebook --}}
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{#if data.canonicalUrl}}{{data.canonicalUrl}}{{else}}https://{{company.domain}}/{{#if currentSectionId}}{{currentSectionId}}{{else}}pages{{/if}}{{/if}}">
+    <meta property="og:title" content="{{#if data.title}}{{data.title}}{{else}}{{company.name}}{{/if}}">
+    <meta property="og:description" content="{{#if data.description}}{{data.description}}{{else}}{{company.description}}{{/if}}">
+    <meta property="og:image" content="{{#if data.ogImage}}{{data.ogImage}}{{else}}{{company.logo}}{{/if}}">
+    <meta property="og:site_name" content="{{company.name}}">
+    
+    {{!-- Twitter --}}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{#if data.canonicalUrl}}{{data.canonicalUrl}}{{else}}https://{{company.domain}}/{{#if currentSectionId}}{{currentSectionId}}{{else}}pages{{/if}}{{/if}}">
+    <meta property="twitter:title" content="{{#if data.title}}{{data.title}}{{else}}{{company.name}}{{/if}}">
+    <meta property="twitter:description" content="{{#if data.description}}{{data.description}}{{else}}{{company.description}}{{/if}}">
+    <meta property="twitter:image" content="{{#if data.ogImage}}{{data.ogImage}}{{else}}{{company.logo}}{{/if}}">
+    
+    {{!-- Canonical URL --}}
+    <link rel="canonical" href="{{#if data.canonicalUrl}}{{data.canonicalUrl}}{{else}}https://{{company.domain}}/{{#if currentSectionId}}{{currentSectionId}}{{else}}pages{{/if}}{{/if}}">
+    
+    {{!-- Favicon y Iconos --}}
     <link rel="icon" href="{{company.favicon}}">
+    <link rel="apple-touch-icon" href="{{company.favicon}}">
+    
+    {{!-- Preconnect para mejor performance --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    {{!-- Fuentes y CSS --}}
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,6 +55,42 @@
         {{> styles/colorido}}
     {{/if}}
 
+    {{!-- Schema.org Structured Data --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "{{#if (eq currentSectionId "products")}}Product{{else if (eq currentSectionId "services")}}Service{{else}}WebPage{{/if}}",
+        "name": "{{#if data.title}}{{data.title}}{{else}}{{company.name}}{{/if}}",
+        "description": "{{#if data.description}}{{data.description}}{{else}}{{company.description}}{{/if}}",
+        "url": "{{#if data.canonicalUrl}}{{data.canonicalUrl}}{{else}}https://{{company.domain}}/{{#if currentSectionId}}{{currentSectionId}}{{else}}pages{{/if}}{{/if}}",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "{{company.name}}",
+            "description": "{{company.description}}",
+            "url": "https://{{company.domain}}",
+            "logo": "{{company.logo}}",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "{{#if company.phone}}{{company.phone}}{{else}}+1-555-123-4567{{/if}}",
+                "contactType": "customer service"
+            }
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{company.name}}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{company.logo}}"
+            }
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://{{company.domain}}/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
     <style>
         :root {
             --primary-color: hsl({{#if (eq style "clasico")}}340 82% 52%{{else if (eq style "moderno")}}220 14% 96%{{else if (eq style "minimalista")}}220 9% 46%{{else if (eq style "colorido")}}45 93% 47%{{else}}340 82% 52%{{/if}});
@@ -31,33 +102,96 @@
             scroll-behavior: smooth;
         }
 
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.1);
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        /* Header y Navegación */
+        .main-header {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
-        .gradient-bg {
-            background: linear-gradient(135deg, 
-                rgba(139, 92, 246, 0.1) 0%, 
-                rgba(59, 130, 246, 0.1) 50%, 
-                rgba(16, 185, 129, 0.1) 100%);
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb-link:hover {
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .breadcrumb-separator {
+            color: #9CA3AF;
+            font-weight: 300;
+        }
+
+        .page-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin: 0;
+        }
+
+        /* Navegación Flotante */
         .floating-nav {
             position: fixed;
             top: 50%;
-            right: 30px;
+            right: 2rem;
             transform: translateY(-50%);
             z-index: 1000;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
+            max-width: 280px;
         }
 
         .floating-nav:hover {
@@ -65,18 +199,44 @@
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
         }
 
+        .nav-header {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-divider {
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin: 0 auto;
+            border-radius: 1px;
+        }
+
+        .nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
         .nav-item {
             display: flex;
             align-items: center;
-            padding: 12px 16px;
-            margin: 8px 0;
-            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
             text-decoration: none;
             color: #374151;
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: 500;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
             position: relative;
             overflow: hidden;
         }
@@ -99,7 +259,7 @@
         .nav-item:hover {
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: white;
-            transform: translateX(-8px);
+            transform: translateX(-4px);
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
         }
 
@@ -109,68 +269,52 @@
             box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
         }
 
-        .nav-item i {
-            margin-right: 10px;
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .enhanced-breadcrumb {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 20px 30px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .breadcrumb-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            display: inline-flex;
+        .nav-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            display: flex;
             align-items: center;
-        }
-
-        .breadcrumb-link:hover {
+            justify-content: center;
+            border-radius: 0.375rem;
+            margin-right: 0.75rem;
+            font-size: 0.875rem;
             background: rgba(139, 92, 246, 0.1);
-            transform: translateY(-2px);
         }
 
-        .breadcrumb-separator {
-            margin: 0 15px;
-            color: #9CA3AF;
-            font-weight: 300;
+        .nav-item.active .nav-icon {
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        .page-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1F2937;
-            margin: 0;
-        }
-
+        /* Contenido Principal */
         .main-content {
             min-height: calc(100vh - 200px);
-            padding: 40px 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 3rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }
 
-        .enhanced-footer {
+        .content-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        .main-footer {
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             color: white;
-            padding: 40px 0 20px;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
             position: relative;
             overflow: hidden;
         }
 
-        .enhanced-footer::before {
+        .main-footer::before {
             content: '';
             position: absolute;
             top: 0;
@@ -181,56 +325,101 @@
         }
 
         .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
             text-align: center;
             position: relative;
             z-index: 1;
         }
 
+        .footer-header {
+            margin-bottom: 2rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-description {
+            color: #D1D5DB;
+            font-size: 0.875rem;
+        }
+
+        .footer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-number.blue { color: #60A5FA; }
+        .stat-number.green { color: #34D399; }
+        .stat-number.purple { color: #A78BFA; }
+
+        .footer-divider {
+            border-top: 1px solid #374151;
+            margin: 2rem 0;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copyright {
+            color: #9CA3AF;
+            font-size: 0.875rem;
+        }
+
         .footer-link {
             display: inline-flex;
             align-items: center;
-            color: #60a5fa;
+            color: #60A5FA;
             text-decoration: none;
             font-weight: 500;
-            padding: 12px 24px;
-            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
             transition: all 0.3s ease;
-            margin-top: 20px;
             background: rgba(96, 165, 250, 0.1);
             border: 1px solid rgba(96, 165, 250, 0.2);
         }
 
         .footer-link:hover {
             background: rgba(96, 165, 250, 0.2);
-            color: #93c5fd;
+            color: #93C5FD;
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(96, 165, 250, 0.3);
         }
 
         .footer-link i {
-            margin-right: 8px;
+            margin-right: 0.5rem;
         }
 
-        .section-icon {
-            width: 24px;
-            height: 24px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 6px;
-            margin-right: 10px;
-            font-size: 12px;
-        }
-
-        .loading-animation {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
+        /* Animaciones */
         .fade-in {
             animation: fadeIn 0.6s ease-in-out;
         }
@@ -249,15 +438,38 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
+        .loading-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .floating-nav {
+                right: 1rem;
+                max-width: 240px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
             .floating-nav {
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
+                bottom: 1rem;
+                right: 1rem;
                 top: auto;
                 transform: none;
-                border-radius: 25px;
-                padding: 15px;
+                border-radius: 1.25rem;
+                padding: 1rem;
                 max-width: 200px;
             }
 
@@ -265,57 +477,91 @@
                 transform: scale(1.05);
             }
 
+            .nav-list {
+                gap: 0.25rem;
+            }
+
             .nav-item {
-                padding: 10px 12px;
-                font-size: 13px;
-                margin: 4px 0;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.75rem;
             }
 
-            .nav-item i {
-                font-size: 14px;
-                margin-right: 8px;
-            }
-
-            .enhanced-breadcrumb {
-                padding: 15px 20px;
-            }
-
-            .page-title {
-                font-size: 1.25rem;
+            .nav-icon {
+                width: 1.25rem;
+                height: 1.25rem;
+                font-size: 0.75rem;
+                margin-right: 0.5rem;
             }
 
             .main-content {
-                padding: 20px 0;
+                padding: 2rem 1rem;
+            }
+
+            .content-wrapper {
+                padding: 2rem 1.5rem;
+            }
+
+            .footer-stats {
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
             .floating-nav {
-                right: 10px;
-                bottom: 10px;
-                padding: 12px;
+                right: 0.5rem;
+                bottom: 0.5rem;
+                padding: 0.75rem;
                 max-width: 180px;
             }
 
             .nav-item {
-                padding: 8px 10px;
-                font-size: 12px;
+                padding: 0.375rem 0.5rem;
+                font-size: 0.6875rem;
             }
 
-            .nav-item i {
-                font-size: 12px;
-                margin-right: 6px;
+            .nav-icon {
+                width: 1rem;
+                height: 1rem;
+                font-size: 0.625rem;
+                margin-right: 0.375rem;
+            }
+
+            .content-wrapper {
+                padding: 1.5rem 1rem;
+            }
+
+            .footer-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
             }
         }
 
-        /* Efectos de hover mejorados */
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* SEO Optimizations */
+        .seo-content {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
 
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        .sitemap-links {
+            display: none;
+        }
+
+        @media print {
+            .floating-nav,
+            .main-header {
+                display: none !important;
+            }
         }
 
         /* Scrollbar personalizada */
@@ -337,64 +583,77 @@
         }
     </style>
 </head>
-<body class="font-body antialiased">
+<body class="antialiased">
+    {{!-- Sitemap Links para SEO (ocultos visualmente) --}}
+    <div class="sitemap-links">
+        {{#each allSections}}
+            {{#if enabled}}
+            <a href="/api/v1/client-templates/{{../clientId}}/section/{{id}}">{{getSectionDisplayName id}}</a>
+            {{/if}}
+        {{/each}}
+    </div>
+
     <div class="min-h-screen flex flex-col">
-        {{!-- Breadcrumb mejorado --}}
-        <div class="enhanced-breadcrumb">
-            <div class="container mx-auto flex items-center justify-between">
-                <div class="flex items-center">
-                    <a href="/api/v1/client-templates/{{clientId}}/pages" class="breadcrumb-link hover-lift">
-                        <i class="fas fa-home mr-2"></i>
+        {{!-- Header mejorado --}}
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="/api/v1/client-templates/{{clientId}}/pages" class="logo">
+                        {{company.name}}
+                    </a>
+                </div>
+                
+                <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                    <a href="/api/v1/client-templates/{{clientId}}/pages" class="breadcrumb-link">
+                        <i class="fas fa-home"></i>
                         Inicio
                     </a>
                     <span class="breadcrumb-separator">/</span>
-                    <h1 class="page-title">{{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}</h1>
-                </div>
-                <div class="hidden md:flex items-center space-x-4">
-                    <span class="text-sm text-gray-500">
-                        <i class="fas fa-keyboard mr-1"></i>
-                        Navegación por teclado disponible
-                    </span>
-                </div>
+                    <span class="page-title">{{#if currentSectionId}}{{getSectionDisplayName currentSectionId}}{{else}}Sección{{/if}}</span>
+                </nav>
             </div>
-        </div>
+        </header>
         
         {{!-- Navegación flotante mejorada --}}
-        <div class="floating-nav slide-in-right">
-            <div class="text-center mb-4">
-                <div class="text-xs font-bold text-gray-600 mb-2">
-                    <i class="fas fa-compass mr-1"></i>
+        <nav class="floating-nav slide-in-right" role="navigation" aria-label="Navegación de secciones">
+            <div class="nav-header">
+                <div class="nav-title">
+                    <i class="fas fa-compass"></i>
                     Navegación
                 </div>
-                <div class="w-8 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full"></div>
+                <div class="nav-divider"></div>
             </div>
-            {{#each allSections}}
-                {{#if enabled}}
-                <a href="/api/v1/client-templates/{{../clientId}}/section/{{id}}" 
-                   class="nav-item {{#if (eq id ../currentSectionId)}}active{{/if}} hover-lift">
-                    <span class="section-icon" style="background: {{#if (eq id ../currentSectionId)}}rgba(255,255,255,0.2){{else}}rgba(139, 92, 246, 0.1){{/if}};">
-                        {{#if (eq id "hero")}}🏠
-                        {{else if (eq id "about")}}👥
-                        {{else if (eq id "products")}}🛍️
-                        {{else if (eq id "services")}}⚙️
-                        {{else if (eq id "testimonials")}}💬
-                        {{else if (eq id "gallery")}}🖼️
-                        {{else if (eq id "contact")}}📞
-                        {{else if (eq id "cart")}}🛒
-                        {{else if (eq id "appointments")}}📅
-                        {{else if (eq id "stats")}}📊
-                        {{else}}📄
-                        {{/if}}
-                    </span>
-                    {{getSectionDisplayName id}}
-                </a>
-                {{/if}}
-            {{/each}}
-        </div>
+            
+            <div class="nav-list">
+                {{#each allSections}}
+                    {{#if enabled}}
+                    <a href="/api/v1/client-templates/{{../clientId}}/section/{{id}}" 
+                       class="nav-item {{#if (eq id ../currentSectionId)}}active{{/if}}"
+                       aria-label="Ir a sección {{getSectionDisplayName id}}">
+                        <span class="nav-icon">
+                            {{#if (eq id "hero")}}🏠
+                            {{else if (eq id "about")}}👥
+                            {{else if (eq id "products")}}🛍️
+                            {{else if (eq id "services")}}⚙️
+                            {{else if (eq id "testimonials")}}💬
+                            {{else if (eq id "gallery")}}🖼️
+                            {{else if (eq id "contact")}}📞
+                            {{else if (eq id "cart")}}🛒
+                            {{else if (eq id "appointments")}}📅
+                            {{else if (eq id "stats")}}📊
+                            {{else}}📄
+                            {{/if}}
+                        </span>
+                        {{getSectionDisplayName id}}
+                    </a>
+                    {{/if}}
+                {{/each}}
+            </div>
+        </nav>
         
         {{!-- Contenido principal --}}
-        <main class="main-content fade-in">
-            <div class="container mx-auto px-4">
+        <main class="main-content fade-in" role="main">
+            <div class="content-wrapper">
                 {{!-- Renderizar SOLO la sección actual --}}
                 {{#each sections}}
                     {{#if (eq id "hero")}}
@@ -423,38 +682,38 @@
         </main>
         
         {{!-- Footer mejorado --}}
-        <footer class="enhanced-footer">
-            <div class="container mx-auto px-4">
-                <div class="footer-content">
-                    <div class="mb-6">
-                        <h3 class="text-xl font-bold mb-2">{{company.name}}</h3>
-                        <p class="text-gray-300 text-sm">{{company.description}}</p>
+        <footer class="main-footer" role="contentinfo">
+            <div class="footer-content">
+                <div class="footer-header">
+                    <h3 class="footer-title">{{company.name}}</h3>
+                    <p class="footer-description">{{company.description}}</p>
+                </div>
+                
+                <div class="footer-stats">
+                    <div class="stat-item">
+                        <div class="stat-number blue">{{allSections.length}}</div>
+                        <div class="stat-label">Secciones</div>
                     </div>
-                    
-                    <div class="flex flex-wrap justify-center gap-4 mb-6">
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-blue-400">{{allSections.length}}</div>
-                            <div class="text-xs text-gray-400">Secciones</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-green-400">{{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}}</div>
-                            <div class="text-xs text-gray-400">Activas</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl font-bold text-purple-400">{{style}}</div>
-                            <div class="text-xs text-gray-400">Estilo</div>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-number green">{{#each allSections}}{{#if enabled}}{{add @index 1}}{{/if}}{{/each}}</div>
+                        <div class="stat-label">Activas</div>
                     </div>
-                    
-                    <div class="border-t border-gray-700 pt-6">
-                        <p class="text-gray-400 text-sm mb-4">
-                            &copy; {{currentYear}} {{company.name}}. Todos los derechos reservados.
-                        </p>
-                        <a href="/api/v1/client-templates/{{clientId}}/pages" class="footer-link hover-lift">
-                            <i class="fas fa-arrow-left"></i>
-                            Volver al índice
-                        </a>
+                    <div class="stat-item">
+                        <div class="stat-number purple">{{style}}</div>
+                        <div class="stat-label">Estilo</div>
                     </div>
+                </div>
+                
+                <div class="footer-divider"></div>
+                
+                <div class="footer-bottom">
+                    <p class="footer-copyright">
+                        &copy; {{currentYear}} {{company.name}}. Todos los derechos reservados.
+                    </p>
+                    <a href="/api/v1/client-templates/{{clientId}}/pages" class="footer-link">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al índice
+                    </a>
                 </div>
             </div>
         </footer>

@@ -1,33 +1,108 @@
-<section id="hero" class="relative min-h-screen flex items-center justify-center text-white" 
-         style="background-image: url('{{data.backgroundImage}}'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 {{#if (eq style 'clasico')}}hero-romantic{{/if}}{{#if (eq style 'moderno')}} hero-modern{{/if}}{{#if (eq style 'minimalista')}} hero-minimal{{/if}}{{#if (eq style 'colorido')}} hero-colorful{{/if}}"></div>
-    <div class="relative z-10 text-center space-y-8 max-w-5xl mx-auto px-4">
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    {{!-- Background con overlay --}}
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+        {{#if data.backgroundImage}}
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" 
+             style="background-image: url('{{data.backgroundImage}}');"></div>
+        {{/if}}
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-900/80 via-blue-900/80 to-indigo-900/80"></div>
+    </div>
+    
+    {{!-- Elementos decorativos --}}
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl animate-pulse animation-delay-4000"></div>
+    </div>
+    
+    {{!-- Contenido principal --}}
+    <div class="relative z-10 text-center space-y-12 max-w-6xl mx-auto px-6">
         {{#if isMultiPage}}
-        <div class="mb-6">
-            <a href="/api/v1/client-templates/{{clientId}}/pages" class="btn btn-outline">← Volver al índice</a>
+        <div class="mb-8">
+            <a href="/api/v1/client-templates/{{clientId}}/pages" 
+               class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-full hover:bg-white/20 transition-all duration-300 border border-white/20">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver al índice
+            </a>
         </div>
         {{/if}}
-        <div class="{{#if (eq style 'moderno')}}floating-animation{{else}}floating-element{{/if}}">
-            <h1 class="text-7xl lg:text-9xl font-black leading-tight">
-                <span class="{{#if (eq style 'moderno')}}modern-text-gradient{{else if (eq style 'colorido')}}colorful-text{{else}}elegant-text{{/if}}">{{data.title}}</span>
+        
+        {{!-- Título principal --}}
+        <div class="space-y-6">
+            <h1 class="text-6xl lg:text-8xl xl:text-9xl font-black leading-tight">
+                <span class="bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+                    {{data.title}}
+                </span>
             </h1>
+            
+            {{!-- Subtítulo --}}
+            <p class="text-xl lg:text-3xl text-gray-200 max-w-4xl mx-auto font-light leading-relaxed">
+                {{data.subtitle}}
+            </p>
         </div>
-        <p class="text-2xl lg:text-3xl text-gray-100 max-w-3xl mx-auto font-light">
-            {{data.subtitle}}
-        </p>
+        
+        {{!-- Botones de llamada a la acción --}}
         {{#if data.ctaButtons}}
-        <div class="flex flex-col sm:flex-row gap-6 justify-center pt-12">
+        <div class="flex flex-col sm:flex-row gap-6 justify-center pt-8">
             {{#each data.ctaButtons}}
-            <a href="{{href}}" class="btn btn-lg btn-primary group">
+            <a href="{{href}}" 
+               class="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl font-semibold text-lg">
                 {{text}}
+                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
             </a>
             {{/each}}
         </div>
         {{/if}}
+        
+        {{!-- Información adicional --}}
+        {{#if data.features}}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16">
+            {{#each data.features}}
+            <div class="text-center space-y-4">
+                <div class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto">
+                    <i class="text-2xl text-white">{{icon}}</i>
+                </div>
+                <h3 class="text-xl font-semibold text-white">{{title}}</h3>
+                <p class="text-gray-300">{{description}}</p>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
     </div>
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div class="{{#if (eq style 'moderno')}}floating-animation{{else}}floating-element{{/if}}">
-            <i class="text-3xl">🌺</i>
+    
+    {{!-- Scroll indicator --}}
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center">
+            <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
         </div>
     </div>
 </section>
+
+<style>
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.animate-pulse {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+@media (max-width: 768px) {
+    #hero h1 {
+        font-size: 3rem;
+    }
+    
+    #hero p {
+        font-size: 1.125rem;
+    }
+}
+</style>

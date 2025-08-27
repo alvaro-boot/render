@@ -1,104 +1,185 @@
-{{!-- Sección de Contacto --}}
-<section id="contact" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-gray-900 mb-4">{{data.title}}</h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">{{data.subtitle}}</p>
+<section id="contact" class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+        {{#if isMultiPage}}
+        <div class="mb-8">
+            <a href="/api/v1/client-templates/{{../clientId}}/pages" 
+               class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Volver al índice
+            </a>
+        </div>
+        {{/if}}
+        
+        {{!-- Header de la sección --}}
+        <div class="text-center mb-16">
+            <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                {{data.title}}
+            </h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                {{data.subtitle}}
+            </p>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Información de Contacto -->
-            <div>
-                <h3 class="text-2xl font-semibold text-gray-900 mb-6">Información de Contacto</h3>
+        <div class="grid lg:grid-cols-2 gap-16">
+            {{!-- Información de Contacto --}}
+            <div class="space-y-8">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8">Información de Contacto</h3>
+                
                 <div class="space-y-6">
-                    <!-- Dirección -->
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">📍</span>
+                    {{!-- Dirección --}}
+                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-map-marker-alt text-white text-xl"></i>
                         </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold text-gray-900">Dirección</h4>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Dirección</h4>
                             <p class="text-gray-600">{{data.address}}</p>
                         </div>
                     </div>
                     
-                    <!-- Teléfono -->
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">📞</span>
+                    {{!-- Teléfono --}}
+                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-phone text-white text-xl"></i>
                         </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold text-gray-900">Teléfono</h4>
-                            <p class="text-gray-600">{{data.phone}}</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Email -->
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">📧</span>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold text-gray-900">Email</h4>
-                            <p class="text-gray-600">{{data.email}}</p>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Teléfono</h4>
+                            <a href="tel:{{data.phone}}" class="text-gray-600 hover:text-purple-600 transition-colors duration-300">
+                                {{data.phone}}
+                            </a>
                         </div>
                     </div>
                     
+                    {{!-- Email --}}
+                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Email</h4>
+                            <a href="mailto:{{data.email}}" class="text-gray-600 hover:text-purple-600 transition-colors duration-300">
+                                {{data.email}}
+                            </a>
+                        </div>
+                    </div>
+                    
+                    {{!-- Horarios --}}
                     {{#if data.info.hours}}
-                    <!-- Horarios -->
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                            <span class="text-2xl">🕒</span>
+                    <div class="flex items-start space-x-4 p-6 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-clock text-white text-xl"></i>
                         </div>
-                        <div class="ml-4">
-                            <h4 class="text-lg font-semibold text-gray-900">Horarios</h4>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-2">Horarios</h4>
                             <p class="text-gray-600">{{data.info.hours}}</p>
                         </div>
                     </div>
                     {{/if}}
                 </div>
                 
+                {{!-- Redes Sociales --}}
                 {{#if data.socialMedia}}
-                <div class="mt-8">
-                    <h4 class="text-lg font-semibold text-gray-900 mb-4">Síguenos</h4>
+                <div class="pt-8">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-6">Síguenos en Redes Sociales</h4>
                     <div class="flex space-x-4">
                         {{#each data.socialMedia}}
-                        <a href="{{url}}" class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-200">
-                            <span class="text-xl">{{icon}}</span>
+                        <a href="{{url}}" 
+                           class="w-14 h-14 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white hover:from-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                            <i class="text-xl">{{icon}}</i>
                         </a>
                         {{/each}}
                     </div>
                 </div>
                 {{/if}}
+                
+                {{!-- Mapa o información adicional --}}
+                {{#if data.map}}
+                <div class="pt-8">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-6">Ubicación</h4>
+                    <div class="bg-gray-100 rounded-2xl p-4 h-64 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-map text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600">Mapa interactivo</p>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
             </div>
             
-            <!-- Formulario de Contacto -->
-            <div>
-                <h3 class="text-2xl font-semibold text-gray-900 mb-6">Envíanos un Mensaje</h3>
+            {{!-- Formulario de Contacto --}}
+            <div class="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8">Envíanos un Mensaje</h3>
+                
                 <form class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Nombre completo</label>
+                            <input type="text" 
+                                   class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
+                                   placeholder="Tu nombre">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Email</label>
+                            <input type="email" 
+                                   class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
+                                   placeholder="tu@email.com">
                         </div>
                     </div>
+                    
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Asunto</label>
-                        <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Teléfono</label>
+                        <input type="tel" 
+                               class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white"
+                               placeholder="+1 (555) 123-4567">
                     </div>
+                    
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
-                        <textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Asunto</label>
+                        <select class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white">
+                            <option value="">Selecciona un asunto</option>
+                            <option value="consulta">Consulta general</option>
+                            <option value="servicios">Información de servicios</option>
+                            <option value="cotizacion">Cotización</option>
+                            <option value="soporte">Soporte técnico</option>
+                            <option value="otro">Otro</option>
+                        </select>
                     </div>
-                    <button type="submit" class="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-dark transition-colors duration-200">
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Mensaje</label>
+                        <textarea rows="6" 
+                                  class="w-full px-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 bg-gray-50 focus:bg-white resize-none"
+                                  placeholder="Cuéntanos cómo podemos ayudarte..."></textarea>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" id="privacy" class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                        <label for="privacy" class="text-sm text-gray-600">
+                            Acepto la <a href="#" class="text-purple-600 hover:underline">política de privacidad</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                        <i class="fas fa-paper-plane mr-2"></i>
                         Enviar Mensaje
                     </button>
                 </form>
+                
+                {{!-- Información adicional del formulario --}}
+                <div class="mt-8 p-6 bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-info text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Respuesta rápida</h4>
+                            <p class="text-sm text-gray-600">Te responderemos en menos de 24 horas durante días laborables.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
