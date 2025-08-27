@@ -20,7 +20,7 @@
         {{!-- Header de la sección mejorado --}}
         <div class="text-center mb-16 animate-fade-in-up">
             <h2 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 animate-title">
-                <span class="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                <span class="bg-gradient-to-r from-[hsl(var(--primary))] via-[hsl(var(--accent))] to-[hsl(var(--secondary))] bg-clip-text text-transparent">
                     {{data.title}}
                 </span>
             </h2>
@@ -40,7 +40,7 @@
                 
                 {{!-- Header del servicio --}}
                 <div class="relative p-8">
-                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <div class="w-16 h-16 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--secondary))] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                         <i class="text-2xl text-white group-hover:animate-bounce">{{icon}}</i>
                     </div>
                     
@@ -82,7 +82,7 @@
                             {{/if}}
                         </div>
                         {{#if badge}}
-                        <span class="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-full animate-pulse">
+                        <span class="px-3 py-1 bg-gradient-to-r from-[hsl(var(--accent))] to-[hsl(var(--secondary))] text-white text-sm font-semibold rounded-full animate-pulse">
                             {{badge}}
                         </span>
                         {{/if}}
@@ -92,14 +92,14 @@
                     {{!-- Botones de acción --}}
                     <div class="flex space-x-3">
                         {{#if showDetailsButton}}
-                        <button class="service-details-btn flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                        <button class="service-details-btn flex-1 px-4 py-3 bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--secondary))] text-white rounded-xl hover:from-[hsl(var(--primary)/1.2)] hover:to-[hsl(var(--secondary)/1.2)] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
                             <i class="fas fa-info-circle mr-2"></i>
                             Ver Detalles
                         </button>
                         {{/if}}
                         
                         {{#if showBookButton}}
-                        <button class="service-book-btn flex-1 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
+                        <button class="service-book-btn flex-1 px-4 py-3 bg-gradient-to-r from-[hsl(var(--accent))] to-[hsl(var(--secondary))] text-white rounded-xl hover:from-[hsl(var(--accent)/1.2)] hover:to-[hsl(var(--secondary)/1.2)] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-semibold text-sm">
                             <i class="fas fa-calendar-check mr-2"></i>
                             Reservar
                         </button>
